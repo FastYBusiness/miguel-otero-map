@@ -9,7 +9,7 @@
 <style>
 body {
   margin: 0;
-  background: #111827;
+  background: #f8fafc; /* fondo claro profesional */
 }
 
 #mindmap {
@@ -17,20 +17,32 @@ body {
   height: 100vh;
 }
 
+/* TEXTO */
 .markmap text {
-  fill: #f9fafb !important;
-  font-size: 15px !important;
-  font-weight: 500;
+  fill: #111827 !important;
+  font-size: 16px !important;
+  font-weight: 600;
 }
 
+/* LÍNEAS */
 .markmap path {
-  stroke: #60a5fa !important;
+  stroke: #2563eb !important;
   stroke-width: 2.5;
 }
 
+/* NODOS */
 .markmap circle {
-  fill: #3b82f6 !important;
+  fill: #1d4ed8 !important;
   r: 6;
+}
+
+/* HOVER */
+.markmap-node:hover > circle {
+  fill: #dc2626 !important;
+}
+
+.markmap-node:hover > text {
+  fill: #dc2626 !important;
 }
 </style>
 </head>
