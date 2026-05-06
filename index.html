@@ -2,12 +2,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TEST</title>
+<title>Mapa Profesional Miguel Otero</title>
+
+<style>
+body { margin: 0; background: #111; }
+#mindmap { width: 100vw; height: 100vh; }
+</style>
+
 </head>
+<body>
 
-<body style="background:black; color:white; font-size:40px;">
+<svg id="mindmap"></svg>
 
-MAPA FUNCIONANDO
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
+
+<script>
+const { Markmap } = window.markmap;
+
+const data = {
+  content: "Miguel Otero Cabaleiro",
+  children: [
+    {
+      content: "Núcleo Profesional",
+      children: [
+        { content: "+30 años experiencia operativa" },
+        { content: "Ejecución → organización → optimización" },
+        { content: "Ordenar sistemas y equipos" }
+      ]
+    },
+    {
+      content: "Perfil Operativo",
+      children: [
+        { content: "Maquinaria pesada hasta 64T" },
+        { content: "Logística y transporte" },
+        { content: "Resolución de incidencias" }
+      ]
+    },
+    {
+      content: "Perfil Organizativo",
+      children: [
+        { content: "Coordinación de equipos" },
+        { content: "Gestión de asociaciones" },
+        { content: "Optimización de procesos" }
+      ]
+    },
+    {
+      content: "Perfil Estratégico",
+      children: [
+        { content: "IA aplicada (en formación)" },
+        { content: "Automatización de procesos" },
+        { content: "Mejora de decisiones" }
+      ]
+    }
+  ]
+};
+
+Markmap.create("#mindmap", {}, data);
+</script>
 
 </body>
 </html>
