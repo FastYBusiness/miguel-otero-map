@@ -15,20 +15,17 @@ body {
   height: 100vh;
 }
 
-/* Texto visible */
 .markmap text {
   fill: #ffffff !important;
   font-size: 16px;
   font-weight: 500;
 }
 
-/* Líneas visibles */
 .markmap path {
   stroke: #38bdf8 !important;
   stroke-width: 2;
 }
 
-/* Nodos */
 .markmap circle {
   fill: #38bdf8 !important;
 }
@@ -47,53 +44,105 @@ body {
 const { Markmap } = window.markmap;
 
 const data = {
-  content: "Miguel Otero Cabaleiro",
+  content: "Miguel Otero Cabaleiro – Operador Sistémico",
   children: [
+
     {
-      content: "Núcleo Profesional",
+      content: "NÚCLEO (LO QUE HAGO)",
       children: [
-        { content: "+30 años experiencia operativa" },
-        { content: "Ordeno sistemas, alineo equipos y elimino fricción" },
-        { content: "Visión estructural con ejecución real" }
+        { content: "Ordeno sistemas que no funcionan" },
+        { content: "Alineo equipos y operaciones" },
+        { content: "Detecto fricción y la elimino" },
+        { content: "Ejecuto con criterio, no solo tarea" }
       ]
     },
+
     {
-      content: "Perfil Operativo (Físico)",
+      content: "CAPACIDADES TRANSFERIBLES",
       children: [
-        { content: "Maquinaria pesada hasta 64T (obra civil, cantera, AVE)" },
-        { content: "Transporte y logística (camión + grúa, rutas, entregas)" },
-        { content: "Resolución de incidencias en campo en tiempo real" },
-        { content: "Mantenimiento preventivo y correctivo" }
+        {
+          content: "Operativas",
+          children: [
+            { content: "Ejecución en entornos exigentes" },
+            { content: "Resolución de incidencias reales" },
+            { content: "Mantenimiento y continuidad operativa" }
+          ]
+        },
+        {
+          content: "Organizativas",
+          children: [
+            { content: "Coordinación de equipos" },
+            { content: "Estructuración de procesos" },
+            { content: "Reducción de errores y fricción" }
+          ]
+        },
+        {
+          content: "Decisión",
+          children: [
+            { content: "Priorizar bajo presión" },
+            { content: "Visión global del sistema" },
+            { content: "Adaptación rápida a contexto" }
+          ]
+        }
       ]
     },
+
     {
-      content: "Perfil Organizativo (Mental)",
+      content: "EXPERIENCIA REAL (CONTEXTOS)",
       children: [
-        { content: "Coordinación de equipos y estructuras" },
-        { content: "Presidencia federación empresarial (hasta 100 asociados)" },
-        { content: "Gestión institucional y subvenciones públicas" },
-        { content: "Optimización de procesos y reducción de fricción" }
+        {
+          content: "Maquinaria y obra",
+          children: [
+            { content: "Giratorias hasta 64T, bulldozer, explanación" },
+            { content: "Obra civil, cantera, AVE" }
+          ]
+        },
+        {
+          content: "Logística y transporte",
+          children: [
+            { content: "Camión + grúa" },
+            { content: "Rutas, entregas, incidencias" }
+          ]
+        },
+        {
+          content: "Estructuras empresariales",
+          children: [
+            { content: "Federación (100 asociados)" },
+            { content: "Coordinación de comercios" },
+            { content: "Subvenciones y administración" }
+          ]
+        },
+        {
+          content: "Negocio propio",
+          children: [
+            { content: "Herbolario (gestión completa)" },
+            { content: "Cliente, stock, ventas" }
+          ]
+        }
       ]
     },
+
     {
-      content: "Perfil Estratégico (Evolución)",
+      content: "EVOLUCIÓN ACTUAL",
       children: [
-        { content: "IA aplicada a procesos productivos (en desarrollo)" },
-        { content: "Automatización de tareas (RPA)" },
-        { content: "Análisis de datos operativos" },
-        { content: "Optimización de sistemas y toma de decisiones" }
+        { content: "IA aplicada a procesos (en desarrollo)" },
+        { content: "Automatización de tareas" },
+        { content: "Optimización basada en datos" }
       ]
     },
+
     {
-      content: "Aplicación Profesional Directa",
+      content: "APLICACIÓN ABIERTA",
       children: [
-        { content: "Jefe de equipo / capataz" },
-        { content: "Responsable de operaciones" },
-        { content: "Logística y transporte" },
-        { content: "Comercial técnico (industrial / HORECA)" },
-        { content: "Docente técnico-operativo" }
+        { content: "Operaciones / logística" },
+        { content: "Coordinación de equipos" },
+        { content: "Mejora de procesos" },
+        { content: "Soporte técnico / comercial" },
+        { content: "Docencia práctica" },
+        { content: "Nuevos entornos en transición" }
       ]
     }
+
   ]
 };
 
