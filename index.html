@@ -1,183 +1,171 @@
-{
-  "content": "Miguel Otero Cabaleiro – Operador Sistémico",
-  "children": [
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Miguel Otero – Mapa Profesional Forense</title>
+
+<style>
+* { margin: 0; padding: 0; }
+html { font-family: system-ui, sans-serif; }
+#mindmap { width: 100vw; height: 100vh; }
+</style>
+
+</head>
+<body>
+
+<svg id="mindmap"></svg>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view"></script>
+
+<script>
+const data = {
+  content: "Miguel Otero Cabaleiro – Operador Sistémico",
+  children: [
 
     {
-      "content": "Núcleo Profesional",
-      "children": [
-        { "content": "Más de 35 años en entornos operativos exigentes" },
-        { "content": "Evolución: ejecución → coordinación → optimización → IA aplicada" },
-        { "content": "Propuesta: ordenar sistemas, alinear equipos y eliminar fricción operativa" }
+      content: "NÚCLEO PROFESIONAL",
+      children: [
+        { content: "+30 años en entornos operativos exigentes" },
+        { content: "Evolución: ejecución → coordinación → optimización → IA" },
+        { content: "Ordeno sistemas, alineo equipos y hago que funcionen sin fricción" }
       ]
     },
 
     {
-      "content": "CV 1 – Perfil Operativo (Físico)",
-      "children": [
-
+      content: "EJECUCIÓN OPERATIVA (REAL)",
+      children: [
         {
-          "content": "Maquinaria y obra civil",
-          "children": [
-            { "content": "Giratorias hasta 64T" },
-            { "content": "Bulldozer, retroexcavadoras y explanación" },
-            { "content": "Canteras, obra pública y plataformas ferroviarias" },
-            { "content": "Lectura de terreno y ejecución técnica precisa" }
+          content: "Maquinaria pesada",
+          children: [
+            { content: "Giratorias hasta 64T" },
+            { content: "Bulldozer, retroexcavadoras, explanación" },
+            { content: "Cantera y obra civil ferroviaria (AVE)" }
           ]
         },
-
         {
-          "content": "Logística y transporte",
-          "children": [
-            { "content": "Camión rígido y grúa (hasta 18T / 10T)" },
-            { "content": "Planificación de rutas y entregas" },
-            { "content": "Carga, descarga y control documental" },
-            { "content": "Coordinación con almacén y cliente final" }
+          content: "Logística y transporte",
+          children: [
+            { content: "Camión rígido + grúa (hasta 18T)" },
+            { content: "Rutas, entregas, planificación operativa" },
+            { content: "Carga, descarga y control documental" }
           ]
         },
-
         {
-          "content": "Mantenimiento y soporte técnico",
-          "children": [
-            { "content": "Diagnóstico mecánico básico" },
-            { "content": "Electricidad básica aplicada" },
-            { "content": "Mantenimiento preventivo y correctivo" }
+          content: "Mantenimiento y soporte",
+          children: [
+            { content: "Diagnóstico mecánico básico" },
+            { content: "Electricidad aplicada" },
+            { content: "Mantenimiento preventivo y correctivo" }
           ]
         },
-
         {
-          "content": "Base rural y resistencia operativa",
-          "children": [
-            { "content": "Agricultura, ganadería y tareas estacionales" },
-            { "content": "Gestión de recursos y continuidad de trabajo" },
-            { "content": "Disciplina física y constancia" }
+          content: "Base rural",
+          children: [
+            { content: "Agricultura, ganadería, tareas estacionales" },
+            { content: "Gestión de recursos y continuidad de trabajo" },
+            { content: "Disciplina física y constancia" }
           ]
         }
       ]
     },
 
     {
-      "content": "CV 2 – Perfil Organizativo (Mental)",
-      "children": [
-
+      content: "CAPACIDAD ORGANIZATIVA",
+      children: [
         {
-          "content": "Dirección y coordinación",
-          "children": [
-            { "content": "Presidente Federación Rías Baixas (hasta 100 asociados)" },
-            { "content": "Coordinación de 65 comercios locales" },
-            { "content": "Organización de campañas y eventos" }
+          content: "Dirección y coordinación",
+          children: [
+            { content: "Presidente Federación Rías Baixas (100 asociados)" },
+            { content: "Coordinación de 65 comercios locales" },
+            { content: "Organización de campañas y eventos" }
           ]
         },
-
         {
-          "content": "Gestión institucional",
-          "children": [
-            { "content": "Relación con administraciones públicas" },
-            { "content": "Gestión y justificación de subvenciones" },
-            { "content": "Representación sectorial" }
+          content: "Gestión institucional",
+          children: [
+            { content: "Relación con administraciones públicas" },
+            { content: "Gestión y justificación de subvenciones" },
+            { content: "Representación sectorial" }
           ]
         },
-
         {
-          "content": "Gestión operativa",
-          "children": [
-            { "content": "Organización de equipos de trabajo" },
-            { "content": "Resolución de incidencias operativas" },
-            { "content": "Optimización de procesos y flujos" }
+          content: "Gestión operativa",
+          children: [
+            { content: "Organización de equipos de trabajo" },
+            { content: "Resolución de incidencias reales" },
+            { content: "Optimización de procesos y flujos" }
           ]
         },
-
         {
-          "content": "Negocio y cliente",
-          "children": [
-            { "content": "Gestión integral de herbolario propio" },
-            { "content": "Atención y asesoramiento al cliente" },
-            { "content": "Control de stock y ventas" }
+          content: "Negocio y cliente",
+          children: [
+            { content: "Gestión integral de herbolario propio" },
+            { content: "Atención y asesoramiento técnico" },
+            { content: "Control de stock, ventas y operativa diaria" }
           ]
         }
       ]
     },
 
     {
-      "content": "CV 3 – Perfil Estratégico (IA y evolución)",
-      "children": [
-
+      content: "PROYECCIÓN (IA Y OPTIMIZACIÓN)",
+      children: [
         {
-          "content": "Formación actual",
-          "children": [
-            { "content": "Máster en IA aplicada y optimización de procesos (en curso)" }
+          content: "Formación actual",
+          children: [
+            { content: "Máster IA aplicada a procesos productivos" }
           ]
         },
-
         {
-          "content": "Aplicación práctica",
-          "children": [
-            { "content": "Automatización de procesos (RPA)" },
-            { "content": "Análisis de datos operativos" },
-            { "content": "Optimización de flujos logísticos y productivos" }
+          content: "Aplicación práctica",
+          children: [
+            { content: "Automatización de procesos (RPA)" },
+            { content: "Análisis de datos operativos" },
+            { content: "Optimización logística y productiva" }
           ]
         },
-
         {
-          "content": "Valor diferencial",
-          "children": [
-            { "content": "Puente entre operativa real y tecnología" },
-            { "content": "Aplicación práctica de IA en entornos reales" },
-            { "content": "Mejora de toma de decisiones" }
+          content: "Valor diferencial",
+          children: [
+            { content: "Puente entre campo real y tecnología" },
+            { content: "Aplicación directa, no teórica" },
+            { content: "Mejora de toma de decisiones" }
           ]
         }
       ]
     },
 
     {
-      "content": "Competencias Clave (basadas en experiencia real)",
-      "children": [
-        { "content": "Ejecución operativa en entornos exigentes" },
-        { "content": "Autonomía y resolución de incidencias" },
-        { "content": "Coordinación de equipos y estructuras" },
-        { "content": "Optimización de procesos reales" },
-        { "content": "Fiabilidad y continuidad operativa" },
-        { "content": "Adaptación a múltiples sectores" }
+      content: "COMPETENCIAS CLAVE",
+      children: [
+        { content: "Ejecución en entornos exigentes" },
+        { content: "Autonomía operativa" },
+        { content: "Resolución de incidencias" },
+        { content: "Coordinación de equipos" },
+        { content: "Optimización de procesos" },
+        { content: "Fiabilidad y continuidad operativa" }
       ]
     },
 
     {
-      "content": "Ejes Transversales",
-      "children": [
-        {
-          "content": "Físico",
-          "children": [
-            { "content": "Ejecución real en campo" },
-            { "content": "Resistencia y disciplina" }
-          ]
-        },
-        {
-          "content": "Mental",
-          "children": [
-            { "content": "Análisis sistémico" },
-            { "content": "Organización estructural" }
-          ]
-        },
-        {
-          "content": "Estratégico",
-          "children": [
-            { "content": "IA aplicada a operaciones" },
-            { "content": "Optimización continua" }
-          ]
-        }
-      ]
-    },
-
-    {
-      "content": "Salidas Profesionales Directas",
-      "children": [
-        { "content": "Jefe de equipo / capataz" },
-        { "content": "Responsable operativo" },
-        { "content": "Logística y transporte" },
-        { "content": "Comercial técnico (industrial / HORECA)" },
-        { "content": "Docente técnico-operativo" },
-        { "content": "Consultor de procesos (nivel inicial)" }
+      content: "SALIDAS PROFESIONALES ACTIVAS",
+      children: [
+        { content: "Jefe de equipo / capataz" },
+        { content: "Responsable operativo" },
+        { content: "Logística y transporte" },
+        { content: "Comercial técnico (industrial / HORECA)" },
+        { content: "Docente técnico-operativo" },
+        { content: "Soporte en formación subvencionada" }
       ]
     }
 
   ]
-}
+};
+
+markmap.Markmap.create("svg#mindmap", {}, data);
+</script>
+
+</body>
+</html>
