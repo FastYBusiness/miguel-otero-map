@@ -15,15 +15,22 @@ body {
   height: 100vh;
 }
 
-text {
-  fill: #ffffff;
+/* Texto visible */
+.markmap text {
+  fill: #ffffff !important;
   font-size: 16px;
   font-weight: 500;
 }
 
-path {
-  stroke: #38bdf8;
+/* Líneas visibles */
+.markmap path {
+  stroke: #38bdf8 !important;
   stroke-width: 2;
+}
+
+/* Nodos */
+.markmap circle {
+  fill: #38bdf8 !important;
 }
 </style>
 
@@ -46,32 +53,45 @@ const data = {
       content: "Núcleo Profesional",
       children: [
         { content: "+30 años experiencia operativa" },
-        { content: "Ordeno sistemas y equipos" },
-        { content: "Mejora continua sin fricción" }
+        { content: "Ordeno sistemas, alineo equipos y elimino fricción" },
+        { content: "Visión estructural con ejecución real" }
       ]
     },
     {
-      content: "Perfil Operativo",
+      content: "Perfil Operativo (Físico)",
       children: [
-        { content: "Maquinaria pesada hasta 64T" },
+        { content: "Maquinaria pesada hasta 64T (obra civil, cantera, AVE)" },
+        { content: "Transporte y logística (camión + grúa, rutas, entregas)" },
+        { content: "Resolución de incidencias en campo en tiempo real" },
+        { content: "Mantenimiento preventivo y correctivo" }
+      ]
+    },
+    {
+      content: "Perfil Organizativo (Mental)",
+      children: [
+        { content: "Coordinación de equipos y estructuras" },
+        { content: "Presidencia federación empresarial (hasta 100 asociados)" },
+        { content: "Gestión institucional y subvenciones públicas" },
+        { content: "Optimización de procesos y reducción de fricción" }
+      ]
+    },
+    {
+      content: "Perfil Estratégico (Evolución)",
+      children: [
+        { content: "IA aplicada a procesos productivos (en desarrollo)" },
+        { content: "Automatización de tareas (RPA)" },
+        { content: "Análisis de datos operativos" },
+        { content: "Optimización de sistemas y toma de decisiones" }
+      ]
+    },
+    {
+      content: "Aplicación Profesional Directa",
+      children: [
+        { content: "Jefe de equipo / capataz" },
+        { content: "Responsable de operaciones" },
         { content: "Logística y transporte" },
-        { content: "Resolución de incidencias en campo" }
-      ]
-    },
-    {
-      content: "Perfil Organizativo",
-      children: [
-        { content: "Coordinación de equipos" },
-        { content: "Gestión de estructuras empresariales" },
-        { content: "Optimización de procesos" }
-      ]
-    },
-    {
-      content: "Perfil Estratégico",
-      children: [
-        { content: "IA aplicada (en formación)" },
-        { content: "Automatización de tareas" },
-        { content: "Mejora de decisiones operativas" }
+        { content: "Comercial técnico (industrial / HORECA)" },
+        { content: "Docente técnico-operativo" }
       ]
     }
   ]
