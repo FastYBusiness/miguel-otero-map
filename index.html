@@ -1,13 +1,11 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Miguel Otero – Mapa Profesional Forense</title>
+<meta charset="UTF-8">
+<title>Mapa Miguel</title>
 
 <style>
-* { margin: 0; padding: 0; }
-html { font-family: system-ui, sans-serif; }
+body { margin: 0; }
 #mindmap { width: 100vw; height: 100vh; }
 </style>
 
@@ -21,150 +19,14 @@ html { font-family: system-ui, sans-serif; }
 
 <script>
 const data = {
-  content: "Miguel Otero Cabaleiro – Operador Sistémico",
+  content: "Miguel Otero",
   children: [
-
-    {
-      content: "NÚCLEO PROFESIONAL",
-      children: [
-        { content: "+30 años en entornos operativos exigentes" },
-        { content: "Evolución: ejecución → coordinación → optimización → IA" },
-        { content: "Ordeno sistemas, alineo equipos y hago que funcionen sin fricción" }
-      ]
-    },
-
-    {
-      content: "EJECUCIÓN OPERATIVA (REAL)",
-      children: [
-        {
-          content: "Maquinaria pesada",
-          children: [
-            { content: "Giratorias hasta 64T" },
-            { content: "Bulldozer, retroexcavadoras, explanación" },
-            { content: "Cantera y obra civil ferroviaria (AVE)" }
-          ]
-        },
-        {
-          content: "Logística y transporte",
-          children: [
-            { content: "Camión rígido + grúa (hasta 18T)" },
-            { content: "Rutas, entregas, planificación operativa" },
-            { content: "Carga, descarga y control documental" }
-          ]
-        },
-        {
-          content: "Mantenimiento y soporte",
-          children: [
-            { content: "Diagnóstico mecánico básico" },
-            { content: "Electricidad aplicada" },
-            { content: "Mantenimiento preventivo y correctivo" }
-          ]
-        },
-        {
-          content: "Base rural",
-          children: [
-            { content: "Agricultura, ganadería, tareas estacionales" },
-            { content: "Gestión de recursos y continuidad de trabajo" },
-            { content: "Disciplina física y constancia" }
-          ]
-        }
-      ]
-    },
-
-    {
-      content: "CAPACIDAD ORGANIZATIVA",
-      children: [
-        {
-          content: "Dirección y coordinación",
-          children: [
-            { content: "Presidente Federación Rías Baixas (100 asociados)" },
-            { content: "Coordinación de 65 comercios locales" },
-            { content: "Organización de campañas y eventos" }
-          ]
-        },
-        {
-          content: "Gestión institucional",
-          children: [
-            { content: "Relación con administraciones públicas" },
-            { content: "Gestión y justificación de subvenciones" },
-            { content: "Representación sectorial" }
-          ]
-        },
-        {
-          content: "Gestión operativa",
-          children: [
-            { content: "Organización de equipos de trabajo" },
-            { content: "Resolución de incidencias reales" },
-            { content: "Optimización de procesos y flujos" }
-          ]
-        },
-        {
-          content: "Negocio y cliente",
-          children: [
-            { content: "Gestión integral de herbolario propio" },
-            { content: "Atención y asesoramiento técnico" },
-            { content: "Control de stock, ventas y operativa diaria" }
-          ]
-        }
-      ]
-    },
-
-    {
-      content: "PROYECCIÓN (IA Y OPTIMIZACIÓN)",
-      children: [
-        {
-          content: "Formación actual",
-          children: [
-            { content: "Máster IA aplicada a procesos productivos" }
-          ]
-        },
-        {
-          content: "Aplicación práctica",
-          children: [
-            { content: "Automatización de procesos (RPA)" },
-            { content: "Análisis de datos operativos" },
-            { content: "Optimización logística y productiva" }
-          ]
-        },
-        {
-          content: "Valor diferencial",
-          children: [
-            { content: "Puente entre campo real y tecnología" },
-            { content: "Aplicación directa, no teórica" },
-            { content: "Mejora de toma de decisiones" }
-          ]
-        }
-      ]
-    },
-
-    {
-      content: "COMPETENCIAS CLAVE",
-      children: [
-        { content: "Ejecución en entornos exigentes" },
-        { content: "Autonomía operativa" },
-        { content: "Resolución de incidencias" },
-        { content: "Coordinación de equipos" },
-        { content: "Optimización de procesos" },
-        { content: "Fiabilidad y continuidad operativa" }
-      ]
-    },
-
-    {
-      content: "SALIDAS PROFESIONALES ACTIVAS",
-      children: [
-        { content: "Jefe de equipo / capataz" },
-        { content: "Responsable operativo" },
-        { content: "Logística y transporte" },
-        { content: "Comercial técnico (industrial / HORECA)" },
-        { content: "Docente técnico-operativo" },
-        { content: "Soporte en formación subvencionada" }
-      ]
-    }
-
+    { content: "PRUEBA FUNCIONA" },
+    { content: "Si ves esto → todo correcto" }
   ]
 };
 
-markmap.Markmap.create("svg#mindmap", {}, data);
+markmap.Markmap.create("#mindmap", {}, data);
 </script>
 
 </body>
