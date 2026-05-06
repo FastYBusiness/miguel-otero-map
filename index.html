@@ -5,11 +5,30 @@
 <title>Mapa Profesional Miguel Otero</title>
 
 <style>
-body { margin: 0; background: #111; }
-#mindmap { width: 100vw; height: 100vh; }
+body {
+  margin: 0;
+  background: #0f172a;
+}
+
+#mindmap {
+  width: 100vw;
+  height: 100vh;
+}
+
+text {
+  fill: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+path {
+  stroke: #38bdf8;
+  stroke-width: 2;
+}
 </style>
 
 </head>
+
 <body>
 
 <svg id="mindmap"></svg>
@@ -27,8 +46,8 @@ const data = {
       content: "Núcleo Profesional",
       children: [
         { content: "+30 años experiencia operativa" },
-        { content: "Ejecución → organización → optimización" },
-        { content: "Ordenar sistemas y equipos" }
+        { content: "Ordeno sistemas y equipos" },
+        { content: "Mejora continua sin fricción" }
       ]
     },
     {
@@ -36,14 +55,14 @@ const data = {
       children: [
         { content: "Maquinaria pesada hasta 64T" },
         { content: "Logística y transporte" },
-        { content: "Resolución de incidencias" }
+        { content: "Resolución de incidencias en campo" }
       ]
     },
     {
       content: "Perfil Organizativo",
       children: [
         { content: "Coordinación de equipos" },
-        { content: "Gestión de asociaciones" },
+        { content: "Gestión de estructuras empresariales" },
         { content: "Optimización de procesos" }
       ]
     },
@@ -51,14 +70,17 @@ const data = {
       content: "Perfil Estratégico",
       children: [
         { content: "IA aplicada (en formación)" },
-        { content: "Automatización de procesos" },
-        { content: "Mejora de decisiones" }
+        { content: "Automatización de tareas" },
+        { content: "Mejora de decisiones operativas" }
       ]
     }
   ]
 };
 
-Markmap.create("#mindmap", {}, data);
+Markmap.create("#mindmap", {
+  autoFit: true,
+  initialExpandLevel: 2
+}, data);
 </script>
 
 </body>
