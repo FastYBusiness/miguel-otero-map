@@ -2,39 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mapa Profesional Miguel Otero</title>
+<title>Mapa de Impacto - Miguel Otero</title>
 
 <style>
-body {
-  margin: 0;
-  background: #0f172a;
-}
-
-#mindmap {
-  width: 100vw;
-  height: 100vh;
-}
+body { margin:0; background:#0f172a; }
+#mindmap { width:100vw; height:100vh; }
 
 .markmap text {
-  fill: #ffffff !important;
-  font-size: 16px;
-  font-weight: 500;
+  fill:#ffffff !important;
+  font-size:14px;
 }
 
 .markmap path {
-  stroke: #38bdf8 !important;
-  stroke-width: 2;
+  stroke:#38bdf8 !important;
+  stroke-width:2;
 }
 
 .markmap circle {
-  fill: #38bdf8 !important;
+  fill:#38bdf8 !important;
 }
 </style>
-
 </head>
 
 <body>
-
 <svg id="mindmap"></svg>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -44,111 +34,87 @@ body {
 const { Markmap } = window.markmap;
 
 const data = {
-  content: "Miguel Otero Cabaleiro – Operador Sistémico",
-  children: [
+content: "Miguel Otero – Operador de Sistemas Reales",
+children: [
 
-    {
-      content: "NÚCLEO (LO QUE HAGO)",
-      children: [
-        { content: "Ordeno sistemas que no funcionan" },
-        { content: "Alineo equipos y operaciones" },
-        { content: "Detecto fricción y la elimino" },
-        { content: "Ejecuto con criterio, no solo tarea" }
-      ]
-    },
+{
+content: "IDENTIDAD OPERATIVA",
+children: [
+{ content: "Entro en entornos donde hay fricción o desorden" },
+{ content: "Analizo cómo funciona realmente (no lo teórico)" },
+{ content: "Ordeno procesos, tareas y roles" },
+{ content: "Alineo ejecución y equipo" },
+{ content: "Mantengo continuidad operativa sin dependencia constante" }
+]
+},
 
-    {
-      content: "CAPACIDADES TRANSFERIBLES",
-      children: [
-        {
-          content: "Operativas",
-          children: [
-            { content: "Ejecución en entornos exigentes" },
-            { content: "Resolución de incidencias reales" },
-            { content: "Mantenimiento y continuidad operativa" }
-          ]
-        },
-        {
-          content: "Organizativas",
-          children: [
-            { content: "Coordinación de equipos" },
-            { content: "Estructuración de procesos" },
-            { content: "Reducción de errores y fricción" }
-          ]
-        },
-        {
-          content: "Decisión",
-          children: [
-            { content: "Priorizar bajo presión" },
-            { content: "Visión global del sistema" },
-            { content: "Adaptación rápida a contexto" }
-          ]
-        }
-      ]
-    },
+{
+content: "PROBLEMAS QUE RESUELVO",
+children: [
+{ content: "Operaciones que no fluyen o generan incidencias" },
+{ content: "Equipos desalineados o sin estructura clara" },
+{ content: "Procesos improvisados o poco eficientes" },
+{ content: "Falta de control en logística, tiempos o ejecución" },
+{ content: "Dependencia excesiva de supervisión externa" }
+]
+},
 
-    {
-      content: "EXPERIENCIA REAL (CONTEXTOS)",
-      children: [
-        {
-          content: "Maquinaria y obra",
-          children: [
-            { content: "Giratorias hasta 64T, bulldozer, explanación" },
-            { content: "Obra civil, cantera, AVE" }
-          ]
-        },
-        {
-          content: "Logística y transporte",
-          children: [
-            { content: "Camión + grúa" },
-            { content: "Rutas, entregas, incidencias" }
-          ]
-        },
-        {
-          content: "Estructuras empresariales",
-          children: [
-            { content: "Federación (100 asociados)" },
-            { content: "Coordinación de comercios" },
-            { content: "Subvenciones y administración" }
-          ]
-        },
-        {
-          content: "Negocio propio",
-          children: [
-            { content: "Herbolario (gestión completa)" },
-            { content: "Cliente, stock, ventas" }
-          ]
-        }
-      ]
-    },
+{
+content: "PRUEBA REAL",
+children: [
+{ content: "Maquinaria pesada y obra civil (hasta 64T)" },
+{ content: "Logística y transporte con incidencias reales" },
+{ content: "Gestión de federación empresarial (+100 asociados)" },
+{ content: "Coordinación de equipos y estructuras" },
+{ content: "Negocio propio (herbolario)" },
+{ content: "Mantenimiento técnico y resolución práctica" }
+]
+},
 
-    {
-      content: "EVOLUCIÓN ACTUAL",
-      children: [
-        { content: "IA aplicada a procesos (en desarrollo)" },
-        { content: "Automatización de tareas" },
-        { content: "Optimización basada en datos" }
-      ]
-    },
+{
+content: "CAPACIDAD DIFERENCIAL",
+children: [
+{ content: "Visión completa del sistema" },
+{ content: "Decisión operativa con criterio" },
+{ content: "Adaptación rápida a nuevos entornos" },
+{ content: "Detección del problema real" }
+]
+},
 
-    {
-      content: "APLICACIÓN ABIERTA",
-      children: [
-        { content: "Operaciones / logística" },
-        { content: "Coordinación de equipos" },
-        { content: "Mejora de procesos" },
-        { content: "Soporte técnico / comercial" },
-        { content: "Docencia práctica" },
-        { content: "Nuevos entornos en transición" }
-      ]
-    }
+{
+content: "EVOLUCIÓN",
+children: [
+{ content: "IA aplicada a procesos (en desarrollo)" },
+{ content: "Automatización y optimización" }
+]
+},
 
-  ]
+{
+content: "APLICACIÓN ABIERTA",
+children: [
+{ content: "Operaciones / logística" },
+{ content: "Equipos / coordinación" },
+{ content: "Entornos productivos" },
+{ content: "Soporte técnico / comercial" },
+{ content: "Docencia práctica" }
+]
+},
+
+{
+content: "PREGUNTA CLAVE",
+children: [
+{ content: "¿Dónde estáis perdiendo más energía, dinero o claridad en vuestra operativa actual?" },
+{ content: "¿Cuánto os está costando mantener ese punto sin resolver?" },
+{ content: "¿Qué cambiaría si eso funcionase sin fricción?" }
+]
+}
+
+]
 };
 
 Markmap.create("#mindmap", {
-  autoFit: true,
-  initialExpandLevel: 2
+autoFit: true,
+initialExpandLevel: 1
 }, data);
 </script>
 
