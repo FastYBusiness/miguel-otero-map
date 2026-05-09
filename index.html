@@ -1,220 +1,583 @@
 <!doctype html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Miguel Otero | Operador Transversal de Estabilización y Optimización</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Operador híbrido de sistemas reales especializado en estabilización operativa, optimización de procesos, coordinación humana y organización funcional en entornos de alta exigencia.">
+<title>Miguel Otero Cabaleiro | Arquitectura Profesional V5</title>
+
+<meta name="description" content="Mapa interactivo profesional de Miguel Otero Cabaleiro: operaciones, organización, liderazgo, actividad autónoma, IA aplicada, logística, transformación y factor humano.">
 
 <style>
-body {
-  margin: 0;
-  background: #f8fafc;
+
+html, body{
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+overflow:hidden;
+background:#f4f7fb;
+font-family:Arial, sans-serif;
 }
 
-#mindmap {
-  width: 100vw;
-  height: 100vh;
+#mindmap{
+width:100vw;
+height:100vh;
+background:#f4f7fb;
 }
 
-/* TEXTO */
-.markmap text {
-  fill: #111827 !important;
-  font-size: 16px !important;
-  font-weight: 600;
+/* Texto */
+.markmap text{
+fill:#111827 !important;
+font-size:15px !important;
+font-weight:600;
 }
 
-/* LÍNEAS */
-.markmap path {
-  stroke: #2563eb !important;
-  stroke-width: 2.5;
+/* Líneas */
+.markmap path{
+stroke:#2563eb !important;
+stroke-width:2.2 !important;
 }
 
-/* NODOS */
-.markmap circle {
-  fill: #1d4ed8 !important;
-  r: 6;
+/* Nodos */
+.markmap circle{
+fill:#1d4ed8 !important;
+r:6;
 }
 
-/* HOVER */
-.markmap-node:hover > circle {
-  fill: #dc2626 !important;
+/* Hover */
+.markmap-node:hover > circle{
+fill:#dc2626 !important;
 }
 
-.markmap-node:hover > text {
-  fill: #dc2626 !important;
+.markmap-node:hover > text{
+fill:#dc2626 !important;
 }
+
 </style>
 </head>
 
 <body>
+
 <svg id="mindmap"></svg>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
 
 <script>
+
 const { Markmap } = window.markmap;
 
 const data = {
-content: "Miguel Otero – Operador Transversal de Estabilización y Optimización",
+
+content: "Miguel Otero Cabaleiro | Operador Transversal de Sistemas Reales",
+
+children: [
+
+/* ========================================================= */
+/* CAPA 1 */
+/* ========================================================= */
+
+{
+
+content: "OPERACIONES",
+
 children: [
 
 {
-content: "PERFIL NÚCLEO",
+content: "Infraestructura y obra civil",
+
 children: [
-{ content: "Operador híbrido de sistemas reales" },
-{ content: "Integración de ejecución técnica, organización operativa y optimización sistémica" },
-{ content: "Trayectoria forense auditada con confiabilidad muy alta" },
-{ content: "Cero contradicciones activas y trazabilidad estructural validada" },
-{ content: "Intervención sobre sistemas reales, no teóricos" }
+
+{ content:"Excanando S.A. | AVE | Giratorias 64T | Bulldozer | 2005–2008" },
+
+{ content:"Fomento de Áridos y Obras | Cantera 50T | 2005–2008" },
+
+{ content:"Excavaciones Dena S.L. | Muros, viñedos y desmontes | 1994–1998" },
+
+{ content:"Construcciones Carro S.L. | Explanaciones y nivelación | 1998–1999" },
+
+{ content:"Excavaciones Alimaos S.L. | Canalizaciones y obra civil | 2000–2004" },
+
+{ content:"CyC Piñeiro / Fenosa | Fibra óptica y canalizaciones | 2000–2004" },
+
+{ content:"Acad Viaria / Obras y Viales / Nocar | Firmes, biondas y compactación | 2002–2004" }
+
 ]
 },
 
 {
-content: "MÉTODO OPERATIVO",
+content: "Logística y transporte",
+
 children: [
-{ content: "Detectar fricción estructural" },
-{ content: "Simplificar complejidad innecesaria" },
-{ content: "Organizar funcionamiento estable" },
-{ content: "Alinear personas, procesos y operación" },
-{ content: "Optimizar continuidad y eficiencia" },
-{ content: "Intervenir en sistemas complejos sin añadir ruido operativo" }
+
+{ content:"Transportes Inmediatos Personalizados | Distribución alimentaria | Carrefour, Froiz, Mercadona" },
+
+{ content:"Planthispania | Camión rígido y grúa | 2025–2026" },
+
+{ content:"José Fernández y Elena Fer | Camión 12T y apoyo obra | 2000–2001" }
+
 ]
 },
 
 {
-content: "CASOS DE IMPACTO",
+content: "Mantenimiento y soporte técnico",
+
 children: [
-{ content: "Reorganización operativa de redes comerciales (65+ empresarios)" },
-{ content: "Liderazgo institucional validado oficialmente (DOG)" },
-{ content: "Operativa simultánea en logística pesada y obra crítica" },
-{ content: "Gestión bajo presión en entornos industriales y crisis económicas" },
-{ content: "Coordinación de estructuras humanas y operativas en escenarios de transición" },
-{ content: "Continuidad funcional en contextos de alta exigencia" }
+
+{ content:"FP2 Mecánica y Electricidad del Automóvil | IES Villalonga | 1993" },
+
+{ content:"Mecánica general y desmontaje motores" },
+
+{ content:"Electricidad básica aplicada" },
+
+{ content:"Diagnóstico funcional y mantenimiento preventivo" }
+
 ]
 },
 
 {
-content: "KPIs",
-children: [
-{ content: "+50.000 horas operativas" },
-{ content: "+35 años de experiencia real" },
-{ content: "+30 certificaciones técnicas y humanas" },
-{ content: "Gestión de redes de hasta 100 personas" },
-{ content: "4 grandes reconfiguraciones profesionales completadas" },
-{ content: "Adaptación transversal a múltiples sectores y entornos críticos" }
-]
-},
+content: "Agricultura y entorno rural",
 
-{
-content: "OPERACIONES Y MAQUINARIA",
 children: [
-{ content: "Giratorias hasta 64T, bulldozer y retroexcavadoras" },
-{ content: "Infraestructuras, cantera y plataformas ferroviarias" },
-{ content: "Cumplimiento PRL y trabajo en entorno crítico" },
-{ content: "Coordinación con equipos de obra" },
-{ content: "Decisión bajo presión y responsabilidad operativa" }
-]
-},
 
-{
-content: "LOGÍSTICA Y TRANSPORTE",
-children: [
-{ content: "Camión rígido y grúa (18T + grúa 10T)" },
-{ content: "Planificación y ejecución de rutas" },
-{ content: "Carga, descarga y control documental" },
-{ content: "Resolución de incidencias en tiempo real" },
-{ content: "Coordinación con almacén, operativa y cliente" }
-]
-},
+{ content:"Labranza, poda, vendimia y mantenimiento rural" },
 
-{
-content: "MANTENIMIENTO Y SOPORTE TÉCNICO",
-children: [
-{ content: "Mecánica avanzada y desmontaje de motores" },
-{ content: "Electricidad básica aplicada" },
-{ content: "Mantenimiento preventivo y correctivo" },
-{ content: "Diagnóstico funcional de fallos" },
-{ content: "Continuidad operativa y autonomía técnica" }
-]
-},
+{ content:"Cuidado continuado de animales" },
 
-{
-content: "ORGANIZACIÓN Y COORDINACIÓN",
-children: [
-{ content: "Presidencia y representación institucional" },
-{ content: "Coordinación de redes comerciales y asociativas" },
-{ content: "Gestión de subvenciones públicas" },
-{ content: "Relación institucional y administrativa" },
-{ content: "Organización de campañas y estructuras funcionales" }
-]
-},
+{ content:"Trabajo físico y autonomía desde infancia" }
 
-{
-content: "IA Y OPTIMIZACIÓN",
-children: [
-{ content: "IA aplicada a optimización operativa" },
-{ content: "Automatización de procesos (RPA)" },
-{ content: "Optimización basada en datos" },
-{ content: "Integración humano-proceso-tecnología" },
-{ content: "Escalabilidad digital de operaciones y servicios" }
-]
-},
-
-{
-content: "ÁREAS DONDE GENERA MÁS VALOR",
-children: [
-{ content: "Optimización de procesos" },
-{ content: "Coordinación operativa" },
-{ content: "Entornos de alta exigencia" },
-{ content: "Logística y operaciones" },
-{ content: "Relación institucional y administrativa" },
-{ content: "Estabilización de estructuras funcionales" }
-]
-},
-
-{
-content: "APLICACIÓN ESTRATÉGICA",
-children: [
-{ content: "¿Dónde existen fricciones operativas que consumen tiempo y energía?" },
-{ content: "¿Qué procesos dependen demasiado de personas concretas?" },
-{ content: "¿Dónde se pierde eficiencia sin medir el impacto real?" },
-{ content: "¿Qué operaciones podrían estabilizarse simplificando complejidad?" },
-{ content: "¿Qué sucede cuando dirección, operación y equipo dejan de estar alineados?" }
-]
-},
-
-{
-content: "MARCO HUMANO Y FILOSÓFICO",
-children: [
-{ content: "Vedanta Advaita (No-Dualidad)" },
-{ content: "Regulación emocional y presencia" },
-{ content: "Integración entre presión operativa y claridad mental" },
-{ content: "Trabajo continuado sobre consciencia y comportamiento humano" },
-{ content: "Comprensión sistémica de dinámicas humanas y organizativas" }
-]
-},
-
-{
-content: "SÍNTESIS ESTRUCTURAL",
-children: [
-{ content: "Capacidad de entrar en sistemas complejos" },
-{ content: "Detectar fricción real" },
-{ content: "Ordenar funcionamiento operativo" },
-{ content: "Alinear personas y operación" },
-{ content: "Estabilizar estructuras sin complejidad innecesaria" }
 ]
 }
 
 ]
+},
+
+/* ========================================================= */
+
+{
+
+content: "ORGANIZACIÓN",
+
+children: [
+
+{
+content: "Liderazgo institucional",
+
+children: [
+
+{ content:"Presidente Federación Rías Baixas | DOG 18/08/2014" },
+
+{ content:"Gestión subvenciones y representación autonómica" },
+
+{ content:"Coordinación empresarial y campañas comerciales" }
+
+]
+},
+
+{
+content: "Asociaciones y redes",
+
+children: [
+
+{ content:"O Corazón de Meaño | 65+ empresarios coordinados" },
+
+{ content:"Redes MLM y equipos de hasta 100 personas" },
+
+{ content:"Organización operativa y alineación humana" }
+
+]
+},
+
+{
+content: "Administración y gestión",
+
+children: [
+
+{ content:"Operaciones auxiliares administrativas | Xunta | 473h | 2019" },
+
+{ content:"Prácticas administrativas | 160h | Academia MAPA" },
+
+{ content:"Gestión documental y organización funcional" }
+
+]
+},
+
+{
+content: "Capacidades organizativas",
+
+children: [
+
+{ content:"Detección de fricción estructural" },
+
+{ content:"Optimización de procesos y continuidad funcional" },
+
+{ content:"Capacidad simultánea en múltiples entornos" },
+
+{ content:"Resolución práctica de problemas reales" }
+
+]
+}
+
+]
+},
+
+/* ========================================================= */
+
+{
+
+content: "IA APLICADA Y TRANSFORMACIÓN",
+
+children: [
+
+{
+content: "Formación IA",
+
+children: [
+
+{ content:"Máster IA Aplicada y Optimización Procesos Productivos" },
+
+{ content:"UTAMED | Online | Andalucía | 2026–Actualidad" },
+
+{ content:"30 ECTS | ~420h teoría + práctica" }
+
+]
+},
+
+{
+content: "Aplicación operativa",
+
+children: [
+
+{ content:"Automatización de tareas y procesos" },
+
+{ content:"Análisis de datos para decisiones" },
+
+{ content:"Optimización logística y organizativa" },
+
+{ content:"Integración humano-proceso-tecnología" }
+
+]
+},
+
+{
+content: "Learning Agility",
+
+children: [
+
+{ content:"Adaptación transversal a múltiples sectores" },
+
+{ content:"Aprendizaje por inmersión práctica" },
+
+{ content:"Reconfiguración profesional continua" }
+
+]
+}
+
+]
+},
+
+/* ========================================================= */
+/* NUEVA RAMA AUTÓNOMA */
+/* ========================================================= */
+
+{
+
+content: "ACTIVIDAD AUTÓNOMA Y PROYECTOS PROPIOS",
+
+children: [
+
+{
+content: "Maquinaria y obra civil autónoma",
+
+children: [
+
+{ content:"c. 1992–1993 | Galicia" },
+
+{ content:"Movimientos de tierra y nivelación" },
+
+{ content:"Pequeños trabajos de excavación y obra civil" },
+
+{ content:"Maquinaria ligera y media" },
+
+{ content:"Inicio temprano de actividad independiente" }
+
+]
+},
+
+{
+content: "Socio Autónomo | Bocatería Messura",
+
+children: [
+
+{ content:"c. 2009–2012 | Galicia" },
+
+{ content:"Gestión operativa integral" },
+
+{ content:"Compras, caja y atención cliente" },
+
+{ content:"Organización funcional diaria" }
+
+]
+},
+
+{
+content: "Club de Tenis Vilanova de Arousa",
+
+children: [
+
+{ content:"2017 | Autónomo independiente" },
+
+{ content:"Cafetería y comedor social" },
+
+{ content:"Atención cliente y organización diaria" },
+
+{ content:"Mantenimiento funcional del club" }
+
+]
+},
+
+{
+content: "Herbolario y actividad holística",
+
+children: [
+
+{ content:"c. 2010–2013 | Galicia" },
+
+{ content:"Venta y asesoramiento personalizado" },
+
+{ content:"Terapias y acompañamiento" },
+
+{ content:"Gestión directa y atención individual" }
+
+]
+},
+
+{
+content: "Actividad asociativa y organizativa",
+
+children: [
+
+{ content:"2008–2014" },
+
+{ content:"Presidencia y representación institucional" },
+
+{ content:"Campañas y coordinación empresarial" },
+
+{ content:"Subvenciones e interlocución pública" }
+
+]
+},
+
+{
+content: "Patrón estructural",
+
+children: [
+
+{ content:"Capacidad recurrente de autoorganización" },
+
+{ content:"Creación y sostenimiento de actividad propia" },
+
+{ content:"Integración entre operación, gestión y servicio" }
+
+]
+}
+
+]
+},
+
+/* ========================================================= */
+/* FACTOR HUMANO */
+/* ========================================================= */
+
+{
+
+content: "FACTOR HUMANO, FILOSOFÍA Y REGULACIÓN",
+
+children: [
+
+{
+content: "Yoga y regulación humana",
+
+children: [
+
+{ content:"Monitor de Yoga | Certificado Oficial | 580h | Orihuela | 2023" },
+
+{ content:"Clases grupales y acompañamiento humano" },
+
+{ content:"Pregunta clave: ¿Qué ocurre en una empresa cuando las personas trabajan agotadas o desconectadas?" },
+
+{ content:"Aplicación empresarial: claridad, estabilidad y presencia operativa" }
+
+]
+},
+
+{
+content: "Terapia y comprensión emocional",
+
+children: [
+
+{ content:"Masajista terapéutico | Academia Española Masaje | 2010" },
+
+{ content:"Terapeuta O.D.Í.N.E. | +200h prácticas" },
+
+{ content:"Luz Triuna y acompañamiento | Ana GI" },
+
+{ content:"Pregunta clave: ¿Cuánto rendimiento pierde una organización por fricción emocional?" },
+
+{ content:"Aplicación empresarial: cohesión y reducción de conflictos" }
+
+]
+},
+
+{
+content: "Vedanta Advaita y visión sistémica",
+
+children: [
+
+{ content:"Integración filosófica basada en no-dualidad" },
+
+{ content:"Observación dinámica humana y organizativa" },
+
+{ content:"Pregunta clave: ¿Qué sucede cuando personas y operación dejan de verse como partes separadas?" },
+
+{ content:"Aplicación empresarial: alineación profunda y funcionamiento coherente" }
+
+]
+},
+
+{
+content: "Retiros y coordinación humana",
+
+children: [
+
+{ content:"Organización logística y acompañamiento grupal" },
+
+{ content:"Coordinación con Ana GI | 2024–2026" },
+
+{ content:"Pregunta clave: ¿Puede sostenerse una estructura si las personas pierden sentido interno?" },
+
+{ content:"Aplicación empresarial: resiliencia y estabilidad humana" }
+
+]
+}
+
+]
+},
+
+/* ========================================================= */
+/* FORMACIÓN CRONOLÓGICA */
+/* ========================================================= */
+
+{
+
+content: "FORMACIÓN Y EVOLUCIÓN CRONOLÓGICA",
+
+children: [
+
+{
+content:"1974–1991 | Base técnica inicial",
+children:[
+{content:"EGB | CEIP Dena | Meaño" },
+{content:"Mecanografía >120ppm | ~150h | 1989" },
+{content:"Técnico Auxiliar Mecánica Automóvil | IES Villalonga | 1990" },
+{content:"Permisos A y B | 1991" }
+]
+},
+
+{
+content:"1992–1994 | Especialización y Ejército",
+children:[
+{content:"Gestión Empresa e Informática | INFOR | 20h" },
+{content:"FP2 Mecánica y Electricidad Automóvil | 1993" },
+{content:"Cabo de Taller | Ejército | Marines, Valencia" },
+{content:"Diploma Honor extraoficial | 1993" },
+{content:"Permiso C | Camión | 1994" }
+]
+},
+
+{
+content:"1996–2005 | Seguridad, informática y energías",
+children:[
+{content:"PRL | 50h | INGAFOR" },
+{content:"Windows, Word e Internet | CENFOP" },
+{content:"Energías renovables y solar fotovoltaica" },
+{content:"Cruceros y transatlánticos | 90h" },
+{content:"Primeros auxilios | Cruz Roja" }
+]
+},
+
+{
+content:"2006–2011 | Liderazgo y expansión técnica",
+children:[
+{content:"Presidencia asociaciones empresariales" },
+{content:"Experto Energías Renovables | 430h" },
+{content:"Sistemas Energías Renovables | 440h" },
+{content:"Masajista terapéutico | 2010" },
+{content:"CELGA 4 | 2010" }
+]
+},
+
+{
+content:"2013–2019 | Inmersión humana y administrativa",
+children:[
+{content:"Luz Triuna | Ana GI" },
+{content:"Retiro Babaji | 264h intensivas" },
+{content:"Administración y prácticas Xunta | 633h total" },
+{content:"Carretillas y plataformas elevadoras" }
+]
+},
+
+{
+content:"2023–2026 | Etapa actual y futura",
+children:[
+{content:"Monitor Yoga Oficial | 580h | 2023" },
+{content:"Terapeuta O.D.Í.N.E. | +200h" },
+{content:"Máster IA Aplicada | UTAMED | 2026–Actualidad" }
+]
+}
+
+]
+},
+
+/* ========================================================= */
+
+{
+
+content: "SÍNTESIS ESTRUCTURAL",
+
+children: [
+
+{ content:"Más de 35 años de experiencia real" },
+
+{ content:"Integración entre operación, organización y tecnología" },
+
+{ content:"Capacidad para entrar en sistemas complejos y estabilizarlos" },
+
+{ content:"Experiencia práctica bajo presión y continuidad funcional" },
+
+{ content:"Visión transversal aplicada a personas, procesos y operación" },
+
+{ content:"Optimización sin complejidad innecesaria" }
+
+]
+}
+
+]
+
 };
 
 Markmap.create("#mindmap", {
-autoFit: true,
-initialExpandLevel: 1,
-duration: 500
+
+autoFit:true,
+initialExpandLevel:1,
+duration:600,
+maxWidth:420,
+zoom:true,
+pan:true
+
 }, data);
+
 </script>
 
 </body>
