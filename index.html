@@ -1,570 +1,504 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Miguel Otero Cabaleiro | Mapa de Capacidades Operativas</title>
+	<meta name="description" content="Arquitectura de Capacidades Operativas: +35 años integrando personas, procesos, recursos y tecnología para resolver problemas reales.">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
 
-<meta charset="UTF-8">
+		html, body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			font-family: 'Inter', Arial, Helvetica, sans-serif;
+			background: #F3F3F3;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		/* LAYOUT PRINCIPAL */
+		.container {
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+			background: #F3F3F3;
+		}
 
-<title>Miguel Otero Cabaleiro | Arquitectura Operativa Transversal</title>
+		/* CABECERA CON GRADIENTE */
+		.header {
+			background: linear-gradient(135deg, #FF9900 0%, #FFD814 100%);
+			color: #111111;
+			padding: 40px 32px;
+			box-shadow: 0 2px 12px rgba(15, 17, 17, 0.15);
+			flex-shrink: 0;
+		}
 
-<meta name="description" content="Mapa profesional interactivo de Miguel Otero Cabaleiro: experiencia operativa real, logística, coordinación, adaptación tecnológica y organización transversal aplicada a entornos industriales y humanos.">
+		.header-content {
+			max-width: 1400px;
+			margin: 0 auto;
+		}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		.header-title {
+			font-size: 32px;
+			font-weight: 700;
+			letter-spacing: -0.5px;
+			margin-bottom: 8px;
+		}
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+		.header-subtitle {
+			font-size: 16px;
+			font-weight: 400;
+			color: #232F3E;
+			opacity: 0.9;
+		}
 
-<style>
+		.header-tagline {
+			font-size: 14px;
+			font-weight: 500;
+			color: #131A22;
+			margin-top: 12px;
+			letter-spacing: 0.3px;
+		}
 
-html, body{
-margin:0;
-padding:0;
-width:100%;
-height:100%;
-overflow:hidden;
+		/* CONTENEDOR PRINCIPAL */
+		.main-content {
+			display: flex;
+			flex: 1;
+			overflow: hidden;
+			gap: 24px;
+			padding: 24px 32px;
+			max-width: 1400px;
+			margin: 0 auto;
+			width: 100%;
+		}
 
-background:#f6f7f5;
+		/* TARJETA LATERAL FIJA */
+		.sidebar {
+			width: 280px;
+			background: #FFFFFF;
+			border: 1px solid #E3E6E6;
+			border-radius: 8px;
+			padding: 24px;
+			box-shadow: 0 2px 8px rgba(15, 17, 17, 0.15);
+			overflow-y: auto;
+			flex-shrink: 0;
+		}
 
-font-family:'Inter', system-ui, sans-serif;
+		.sidebar-section {
+			margin-bottom: 28px;
+		}
 
--webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
-}
+		.sidebar-section:last-child {
+			margin-bottom: 0;
+		}
 
-#mindmap{
-width:100vw;
-height:100vh;
-background:#f6f7f5;
-}
+		.sidebar-label {
+			font-size: 12px;
+			font-weight: 700;
+			text-transform: uppercase;
+			color: #565959;
+			letter-spacing: 1px;
+			margin-bottom: 12px;
+			display: block;
+		}
 
-/* TEXTO */
+		.sidebar-value {
+			font-size: 24px;
+			font-weight: 700;
+			color: #FF9900;
+			line-height: 1.2;
+			margin-bottom: 4px;
+		}
 
-.markmap text{
+		.sidebar-description {
+			font-size: 13px;
+			color: #565959;
+			line-height: 1.4;
+		}
 
-fill:#172033 !important;
+		.sidebar-divider {
+			height: 1px;
+			background: #E3E6E6;
+			margin: 20px 0;
+		}
 
-font-size:14px !important;
-font-weight:500;
+		.sidebar-tags {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
 
-letter-spacing:-0.01em;
+		.tag {
+			display: inline-block;
+			background: #FAFAFA;
+			border: 1px solid #E3E6E6;
+			border-radius: 4px;
+			padding: 6px 10px;
+			font-size: 12px;
+			color: #232F3E;
+			font-weight: 500;
+		}
 
-}
+		/* ÁRBOL INTERACTIVO */
+		.tree-container {
+			flex: 1;
+			background: #FFFFFF;
+			border: 1px solid #E3E6E6;
+			border-radius: 8px;
+			padding: 20px;
+			box-shadow: 0 2px 8px rgba(15, 17, 17, 0.15);
+			overflow: hidden;
+		}
 
-/* LÍNEAS */
+		#mindmap {
+			width: 100%;
+			height: 100%;
+		}
 
-.markmap path{
+		/* ESTILOS MARKMAP CUSTOMIZADOS */
+		.markmap text {
+			fill: #111111 !important;
+			font-size: 13px !important;
+			font-weight: 500;
+			letter-spacing: -0.3px;
+		}
 
-stroke:#355c7d !important;
-stroke-width:2px !important;
+		.markmap path {
+			stroke: #37475A !important;
+			stroke-width: 2px !important;
+			stroke-linecap: round;
+			opacity: 0.75;
+		}
 
-stroke-linecap:round;
+		.markmap circle {
+			fill: #FF9900 !important;
+			r: 5px;
+			transition: all 0.25s ease;
+		}
 
-opacity:.82;
+		/* HOVER EFFECTS */
+		.markmap-node:hover > circle {
+			fill: #FFD814 !important;
+			r: 7px;
+			filter: drop-shadow(0 2px 6px rgba(255, 153, 0, 0.3));
+		}
 
-}
+		.markmap-node:hover > text {
+			fill: #232F3E !important;
+			font-weight: 600;
+		}
 
-/* NODOS */
+		/* COLORES POR CATEGORÍA */
+		.markmap-node[data-category="operaciones"] > circle { fill: #007185 !important; }
+		.markmap-node[data-category="logistica"] > circle { fill: #067D62 !important; }
+		.markmap-node[data-category="formacion"] > circle { fill: #FFB300 !important; }
+		.markmap-node[data-category="personas"] > circle { fill: #7B2CBF !important; }
+		.markmap-node[data-category="tecnologia"] > circle { fill: #FF6B6B !important; }
 
-.markmap circle{
+		/* PIE DE PÁGINA */
+		.footer {
+			background: #FFFFFF;
+			border-top: 1px solid #E3E6E6;
+			padding: 16px 32px;
+			text-align: center;
+			color: #565959;
+			font-size: 12px;
+			flex-shrink: 0;
+		}
 
-fill:#355c7d !important;
+		.footer-content {
+			max-width: 1400px;
+			margin: 0 auto;
+		}
 
-r:5.5;
+		/* RESPONSIVE */
+		@media (max-width: 1024px) {
+			.main-content {
+				flex-direction: column;
+				padding: 16px;
+				gap: 16px;
+			}
 
-transition:.25s ease;
+			.sidebar {
+				width: 100%;
+				max-height: 180px;
+				display: flex;
+				gap: 32px;
+				overflow-x: auto;
+				overflow-y: hidden;
+			}
 
-}
+			.sidebar-section {
+				flex-shrink: 0;
+				min-width: 150px;
+			}
 
-/* HOVER */
+			.tree-container {
+				flex: 1;
+				min-height: 400px;
+			}
 
-.markmap-node:hover > circle{
+			.header {
+				padding: 24px 16px;
+			}
 
-fill:#b45309 !important;
+			.header-title {
+				font-size: 24px;
+			}
 
-transform:scale(1.08);
+			.header-subtitle {
+				font-size: 14px;
+			}
+		}
 
-}
+		@media (max-width: 768px) {
+			.main-content {
+				padding: 12px;
+			}
 
-.markmap-node:hover > text{
+			.header {
+				padding: 20px 16px;
+			}
 
-fill:#92400e !important;
+			.header-title {
+				font-size: 20px;
+			}
 
-}
+			.header-tagline {
+				font-size: 12px;
+			}
 
-/* SUAVIDAD VISUAL */
+			.footer {
+				padding: 12px 16px;
+				font-size: 11px;
+			}
 
-svg{
+			.sidebar {
+				max-height: 120px;
+			}
 
-transition:background .3s ease;
+			.sidebar-value {
+				font-size: 20px;
+			}
+		}
 
-}
+		/* ANIMACIONES SUAVES */
+		svg {
+			transition: background 0.3s ease;
+		}
 
-</style>
+		.markmap-node {
+			cursor: pointer;
+			transition: opacity 0.2s ease;
+		}
 
+		.markmap-node:active > circle {
+			r: 6px;
+		}
+
+	</style>
 </head>
-
 <body>
-
-<svg id="mindmap"></svg>
-
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
-
-<script>
-
-const { Markmap } = window.markmap;
-
-const data = {
-
-content: "Miguel Otero Cabaleiro | Operaciones · Personas · Procesos | +35 años de experiencia real",
-
-children: [
-
-{
-content: "EXPERIENCIA OPERATIVA REAL",
-
-children: [
-
-{
-content: "Infraestructura y obra civil",
-
-children: [
-
-{ content:"Excanando S.A. | AVE | Giratorias 64T | Bulldozer | 2005–2008" },
-
-{ content:"Fomento de Áridos y Obras | Cantera 50T | 2005–2008" },
-
-{ content:"Excavaciones Dena S.L. | Muros, viñedos y desmontes | 1994–1998" },
-
-{ content:"Construcciones Carro S.L. | Explanaciones y nivelación | 1998–1999" },
-
-{ content:"Excavaciones Alimaos S.L. | Canalizaciones y obra civil | 2000–2004" },
-
-{ content:"CyC Piñeiro / Fenosa | Fibra óptica y canalizaciones | 2000–2004" },
-
-{ content:"Acad Viaria / Obras y Viales / Nocar | Firmes, biondas y compactación | 2002–2004" }
-
-]
-},
-
-{
-content: "Logística y transporte",
-
-children: [
-
-{ content:"Distribución alimentaria | Carrefour · Froiz · Mercadona" },
-
-{ content:"Camión rígido y grúa | Planthispania | 2025–2026" },
-
-{ content:"Camión 12T y apoyo obra | 2000–2001" }
-
-]
-},
-
-{
-content: "Mantenimiento y soporte técnico",
-
-children: [
-
-{ content:"FP2 Mecánica y Electricidad Automóvil | 5 años académicos" },
-
-{ content:"Mecánica general y desmontaje motores" },
-
-{ content:"Electricidad aplicada y mantenimiento preventivo" },
-
-{ content:"Diagnóstico funcional y resolución práctica" }
-
-]
-},
-
-{
-content: "Entorno rural y autonomía física",
-
-children: [
-
-{ content:"Labranza, poda y mantenimiento rural" },
-
-{ content:"Cuidado continuado de animales" },
-
-{ content:"Trabajo físico y autonomía desde infancia" }
-
-]
-}
-
-]
-},
-
-{
-content: "ORGANIZACIÓN Y COORDINACIÓN",
-
-children: [
-
-{
-content: "Liderazgo institucional",
-
-children: [
-
-{ content:"Presidente Federación Rías Baixas | DOG 18/08/2014" },
-
-{ content:"Representación autonómica y subvenciones" },
-
-{ content:"Coordinación empresarial y campañas comerciales" }
-
-]
-},
-
-{
-content: "Asociaciones y redes",
-
-children: [
-
-{ content:"O Corazón de Meaño | +65 empresarios coordinados" },
-
-{ content:"Equipos MLM y coordinación humana" },
-
-{ content:"Organización funcional y alineación operativa" }
-
-]
-},
-
-{
-content: "Administración y gestión",
-
-children: [
-
-{ content:"Operaciones auxiliares administrativas | 473h | Xunta" },
-
-{ content:"Prácticas administrativas | 160h" },
-
-{ content:"Gestión documental y organización funcional" }
-
-]
-},
-
-{
-content: "Capacidades organizativas",
-
-children: [
-
-{ content:"Detección de fricción estructural" },
-
-{ content:"Optimización de continuidad funcional" },
-
-{ content:"Resolución práctica de problemas reales" },
-
-{ content:"Integración entre operación y organización" }
-
-]
-}
-
-]
-},
-
-{
-content: "ADAPTACIÓN TECNOLÓGICA APLICADA",
-
-children: [
-
-{
-content: "Formación tecnológica",
-
-children: [
-
-{ content:"Máster IA Aplicada y Optimización Productiva" },
-
-{ content:"UTAMED | 30 ECTS | ~900h | 2026–Actualidad" }
-
-]
-},
-
-{
-content: "Aplicación práctica",
-
-children: [
-
-{ content:"Automatización de tareas y documentación" },
-
-{ content:"Optimización logística y organizativa" },
-
-{ content:"Análisis operativo y apoyo a decisiones" },
-
-{ content:"Integración humano-proceso-tecnología" }
-
-]
-},
-
-{
-content: "Learning agility",
-
-children: [
-
-{ content:"Adaptación transversal multisectorial" },
-
-{ content:"Aprendizaje acelerado por inmersión práctica" },
-
-{ content:"Reconfiguración profesional continua" }
-
-]
-}
-
-]
-},
-
-{
-content: "ACTIVIDAD AUTÓNOMA Y PROYECTOS",
-
-children: [
-
-{
-content: "Maquinaria y obra civil autónoma",
-
-children: [
-
-{ content:"Movimientos de tierra y nivelación" },
-
-{ content:"Trabajos de excavación y obra civil" },
-
-{ content:"Actividad independiente temprana" }
-
-]
-},
-
-{
-content: "Hostelería y atención pública",
-
-children: [
-
-{ content:"Socio Autónomo | Bocatería Messura" },
-
-{ content:"Club Tenis Vilanova | Cafetería y comedor" },
-
-{ content:"Gestión diaria y atención cliente" }
-
-]
-},
-
-{
-content: "Herbolario y bienestar",
-
-children: [
-
-{ content:"Venta y asesoramiento personalizado" },
-
-{ content:"Atención individual y acompañamiento" },
-
-{ content:"Gestión autónoma integral" }
-
-]
-},
-
-{
-content: "Patrón estructural",
-
-children: [
-
-{ content:"Capacidad recurrente de autoorganización" },
-
-{ content:"Integración entre operación, gestión y servicio" },
-
-{ content:"Sostenimiento funcional de actividad propia" }
-
-]
-}
-
-]
-},
-
-{
-content: "FACTOR HUMANO Y REGULACIÓN",
-
-children: [
-
-{
-content: "Yoga y bienestar",
-
-children: [
-
-{ content:"Monitor Yoga Oficial | 580h | 2023" },
-
-{ content:"Clases grupales y acompañamiento humano" },
-
-{ content:"Claridad, estabilidad y presencia operativa" }
-
-]
-},
-
-{
-content: "Terapia y acompañamiento",
-
-children: [
-
-{ content:"Masajista terapéutico | 2010" },
-
-{ content:"Terapeuta O.D.Í.N.E. | +200h prácticas" },
-
-{ content:"Reducción de fricción interpersonal" }
-
-]
-},
-
-{
-content: "Visión sistémica e integración organizativa",
-
-children: [
-
-{ content:"Observación dinámica humana y organizativa" },
-
-{ content:"Integración entre personas y operación" },
-
-{ content:"Mejora de coherencia funcional" }
-
-]
-}
-
-]
-},
-
-{
-content: "FORMACIÓN Y EVOLUCIÓN",
-
-children: [
-
-{
-content:"1974–1991 | Base técnica inicial",
-
-children:[
-
-{content:"Mecanografía >120ppm | ~150h" },
-
-{content:"Técnico Auxiliar Mecánica Automóvil | 1990" },
-
-{content:"Permisos A y B | 1991" }
-
-]
-},
-
-{
-content:"1992–1994 | Especialización y Ejército",
-
-children:[
-
-{content:"FP2 Mecánica y Electricidad Automóvil | 1993" },
-
-{content:"Cabo de Taller | Marines, Valencia" },
-
-{content:"Permiso C | Camión | 1994" }
-
-]
-},
-
-{
-content:"1996–2005 | Seguridad y energías",
-
-children:[
-
-{content:"PRL | 50h" },
-
-{content:"Windows, Word e Internet" },
-
-{content:"Energías renovables y solar fotovoltaica" },
-
-{content:"Primeros auxilios | Cruz Roja" }
-
-]
-},
-
-{
-content:"2006–2011 | Liderazgo y expansión",
-
-children:[
-
-{content:"Presidencia asociaciones empresariales" },
-
-{content:"Experto Energías Renovables | 430h" },
-
-{content:"Sistemas Energías Renovables | 440h" },
-
-{content:"Masajista terapéutico | 2010" }
-
-]
-},
-
-{
-content:"2013–2019 | Organización y administración",
-
-children:[
-
-{content:"Administración y prácticas Xunta | 633h" },
-
-{content:"Carretillas y plataformas elevadoras" }
-
-]
-},
-
-{
-content:"2023–2026 | Etapa actual",
-
-children:[
-
-{content:"Monitor Yoga Oficial | 580h" },
-
-{content:"Terapeuta O.D.Í.N.E. | +200h" },
-
-{content:"Máster IA Aplicada | UTAMED" }
-
-]
-}
-
-]
-},
-
-{
-content: "SÍNTESIS ESTRUCTURAL",
-
-children: [
-
-{ content:"Más de 35 años de experiencia práctica acumulada" },
-
-{ content:"Integración entre operación, logística y organización" },
-
-{ content:"Adaptación transversal a distintos entornos reales" },
-
-{ content:"Capacidad de coordinación funcional y continuidad operativa" },
-
-{ content:"Experiencia técnica combinada con visión organizativa" },
-
-{ content:"Adaptación tecnológica aplicada a necesidades reales" },
-
-{ content:"Integración entre personas, procesos y operación" }
-
-]
-}
-
-]
-
-};
-
-Markmap.create("#mindmap", {
-
-autoFit:true,
-
-initialExpandLevel:1,
-
-duration:600,
-
-maxWidth:420,
-
-zoom:true,
-
-pan:true
-
-}, data);
-
-</script>
-
+	<div class="container">
+		<!-- CABECERA -->
+		<div class="header">
+			<div class="header-content">
+				<div class="header-title">Mapa de Capacidades Operativas</div>
+				<div class="header-subtitle">Miguel Otero Cabaleiro</div>
+				<div class="header-tagline">Integrador de personas, procesos, recursos y tecnología | Estabilizador Operativo</div>
+			</div>
+		</div>
+
+		<!-- CONTENIDO PRINCIPAL -->
+		<div class="main-content">
+			<!-- TARJETA LATERAL -->
+			<aside class="sidebar">
+				<div class="sidebar-section">
+					<span class="sidebar-label">Experiencia Acumulada</span>
+					<div class="sidebar-value">+35 años</div>
+					<div class="sidebar-description">En operaciones reales, desde 1988 hasta hoy</div>
+				</div>
+
+				<div class="sidebar-divider"></div>
+
+				<div class="sidebar-section">
+					<span class="sidebar-label">Ámbitos Profesionales</span>
+					<div class="sidebar-value">20+</div>
+					<div class="sidebar-description">Construcción, logística, hostelería, IA y más</div>
+				</div>
+
+				<div class="sidebar-divider"></div>
+
+				<div class="sidebar-section">
+					<span class="sidebar-label">Adaptabilidad</span>
+					<div class="sidebar-tags">
+						<span class="tag">Industria</span>
+						<span class="tag">Comercio</span>
+						<span class="tag">Tecnología</span>
+						<span class="tag">Bienestar</span>
+						<span class="tag">Formación</span>
+					</div>
+				</div>
+
+				<div class="sidebar-divider"></div>
+
+				<div class="sidebar-section">
+					<span class="sidebar-label">Formación Continua</span>
+					<div class="sidebar-description">30+ certificaciones | Máster IA 2026 en curso | Aprendizaje permanente</div>
+				</div>
+			</aside>
+
+			<!-- ÁRBOL INTERACTIVO -->
+			<div class="tree-container">
+				<svg id="mindmap"></svg>
+			</div>
+		</div>
+
+		<!-- PIE DE PÁGINA -->
+		<div class="footer">
+			<div class="footer-content">
+				Mapa interactivo · Expandir/contraer nodos · Zoom y desplazamiento activados · Datos verificables en CV forense 9.0
+			</div>
+		</div>
+	</div>
+
+	<!-- LIBRERÍAS -->
+	<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
+
+	<script>
+		const { Markmap } = window.markmap;
+
+		const data = {
+			content: "Mapa de Capacidades Operativas",
+			children: [
+				{
+					content: "Miguel Otero Cabaleiro",
+					children: [
+						{
+							content: "¿Qué puedo aportar?",
+							children: [
+								{ content: "Resolver problemas reales" },
+								{ content: "Estabilizar operaciones" },
+								{ content: "Coordinar personas" },
+								{ content: "Integrar procesos" },
+								{ content: "Adaptación rápida" },
+								{ content: "Aprendizaje continuo" }
+							]
+						},
+						{
+							content: "Operaciones · Logística · Infraestructura",
+							children: [
+								{ content: "Obra civil y excavación | Retroexcavadoras, bulldozer, giratorias 64T" },
+								{ content: "Maquinaria pesada | Operación en 12+ tipos simultáneos" },
+								{ content: "Distribución y transporte | Carrefour, Mercadona, Froiz, sistemas logísticos" },
+								{ content: "Mantenimiento y reparación | FP2 Mecánica, técnica autodidacta" },
+								{ content: "Entorno rural | Labranza, mantenimiento, cuidado de animales" }
+							]
+						},
+						{
+							content: "Coordinación y Liderazgo",
+							children: [
+								{ content: "Presidente Federación Rías Baixas | DOG 2014 verificado" },
+								{ content: "Presidencia Asociación O Corazón de Meaño | 6 años, 65 empresarios" },
+								{ content: "Coordinación de redes MLM | Hasta 100 personas simultáneamente" },
+								{ content: "Gestión de crisis | COVID-19 desde liderazgo asociativo local" },
+								{ content: "Interlocución institucional | Plenos, subvenciones, administración pública" }
+							]
+						},
+						{
+							content: "Personas y Relaciones",
+							children: [
+								{ content: "Monitor de Yoga certificado | 580h, ejercido profesionalmente" },
+								{ content: "Terapeuta O.D.Í.N.E. | +200h práctica, especialización activa" },
+								{ content: "Masajista terapéutico certificado | 2010" },
+								{ content: "Mentoría y desarrollo | Redes, colaboración, formación continua" },
+								{ content: "Visión sistémica | Observación de dinámicas humanas y organizativas" }
+							]
+						},
+						{
+							content: "Tecnología e Innovación",
+							children: [
+								{ content: "Máster IA Aplicada y Optimización | UTAMED, 30 ECTS, en curso 2026" },
+								{ content: "Automatización de procesos | Análisis operativo, documentación" },
+								{ content: "Adaptación tecnológica | Learning agility probada en múltiples sectores" },
+								{ content: "Pensamiento digital | Integración humano-proceso-tecnología" }
+							]
+						},
+						{
+							content: "Formación Estructurada",
+							children: [
+								{ content: "Técnica: Mecánica, Electricidad, Instalaciones solares | FP2 + 1100h" },
+								{ content: "Administrativa: PRL, Operaciones auxiliares, Gestión | 633h Xunta" },
+								{ content: "Espiritual: Vedanta Advaíta, Luz Triuna, Yoga | 13 años" },
+								{ content: "Especializada: Energías renovables, Sanación, O.D.Í.N.E. | 1000h+" }
+							]
+						},
+						{
+							content: "Magnitudes Verificables",
+							children: [
+								{ content: "35+ años de experiencia ininterrumpida desde 1988" },
+								{ content: "20+ sectores profesionales y actividades" },
+								{ content: "30+ certificaciones formativas con fechas documentadas" },
+								{ content: "13 años de colaboración con la Maestra Ana GI" },
+								{ content: "Operación simultánea de 5+ proyectos en períodos pico" }
+							]
+						},
+						{
+							content: "Principios Operativos",
+							children: [
+								{ content: "Continuidad operativa: Mantener funcionalidad en adversidad" },
+								{ content: "Mejora continua: Aprendizaje y adaptación permanente" },
+								{ content: "Responsabilidad: Aceptar consecuencias de decisiones propias" },
+								{ content: "Visión sistémica: Integrar múltiples perspectivas simultáneamente" },
+								{ content: "Coherencia: Alineación entre percepción, pensamiento y acción" }
+							]
+						},
+						{
+							content: "Evidencias Documentales",
+							children: [
+								{ content: "DOG 18/08/2014: Citación oficial como titular de órgano de gobierno" },
+								{ content: "30+ Certificados de formación: Institucionales y especializados" },
+								{ content: "Incapacidad laboral concedida de por vida: Resolución judicial" },
+								{ content: "Subvenciones públicas 2016-2018: Registradas en DOG" },
+								{ content: "Permisos y licencias: C, C+E, carretillas, plataformas" }
+							]
+						},
+						{
+							content: "Cronología Resumida",
+							children: [
+								{ content: "1973-1988: Infancia y adolescencia técnica en O Salnés" },
+								{ content: "1988-2008: Ciclo industrial pesado. Pico en Cuenca, 64T, 2005-2008" },
+								{ content: "2008-2020: Liderazgo institucional, 9+ años presidencias" },
+								{ content: "2013-2025: Inmersión espiritual. 13 años con Ana GI, yoga" },
+								{ content: "2023-2026: Formación digital. IA, certificación yoga, expansión" }
+							]
+						}
+					]
+				}
+			]
+		};
+
+		Markmap.create("#mindmap", {
+			autoFit: true,
+			initialExpandLevel: 2,
+			duration: 500,
+			maxWidth: 350,
+			zoom: true,
+			pan: true
+		}, data);
+
+	</script>
 </body>
-
 </html>
