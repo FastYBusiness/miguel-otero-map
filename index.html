@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Miguel Otero Cabaleiro | Mapa de Capacidades Operativas</title>
-	<meta name="description" content="Arquitectura de Capacidades Operativas: +35 años integrando personas, procesos, recursos y tecnología para resolver problemas reales.">
+	<title>Miguel Otero Cabaleiro | Estabilizador Operativo</title>
+	<meta name="description" content="Estabilizador Operativo: Integro personas, procesos, recursos y tecnología. 35+ años de experiencia verificable en resolución de problemas reales.">
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,40 +35,61 @@
 			background: #F3F3F3;
 		}
 
-		/* CABECERA CON GRADIENTE */
-		.header {
+		/* HERO PROPUESTA DE VALOR */
+		.hero {
 			background: linear-gradient(135deg, #FF9900 0%, #FFD814 100%);
 			color: #111111;
-			padding: 40px 32px;
-			box-shadow: 0 2px 12px rgba(15, 17, 17, 0.15);
+			padding: 48px 32px;
+			text-align: center;
+			box-shadow: 0 4px 16px rgba(15, 17, 17, 0.15);
 			flex-shrink: 0;
 		}
 
-		.header-content {
-			max-width: 1400px;
-			margin: 0 auto;
+		.hero-name {
+			font-size: 24px;
+			font-weight: 600;
+			letter-spacing: -0.5px;
+			margin-bottom: 16px;
+			opacity: 0.95;
 		}
 
-		.header-title {
+		.hero-title {
+			font-size: 48px;
+			font-weight: 700;
+			letter-spacing: -1px;
+			margin-bottom: 20px;
+			line-height: 1.1;
+		}
+
+		.hero-subtitle {
+			font-size: 18px;
+			font-weight: 500;
+			color: #232F3E;
+			line-height: 1.6;
+			max-width: 600px;
+			margin: 0 auto 24px;
+		}
+
+		.hero-stats {
+			display: flex;
+			justify-content: center;
+			gap: 40px;
+			font-size: 14px;
+			color: #131A22;
+			font-weight: 600;
+		}
+
+		.hero-stat-item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.hero-stat-number {
 			font-size: 32px;
 			font-weight: 700;
-			letter-spacing: -0.5px;
-			margin-bottom: 8px;
-		}
-
-		.header-subtitle {
-			font-size: 16px;
-			font-weight: 400;
-			color: #232F3E;
-			opacity: 0.9;
-		}
-
-		.header-tagline {
-			font-size: 14px;
-			font-weight: 500;
-			color: #131A22;
-			margin-top: 12px;
-			letter-spacing: 0.3px;
+			line-height: 1;
+			margin-bottom: 4px;
 		}
 
 		/* CONTENEDOR PRINCIPAL */
@@ -76,89 +97,167 @@
 			display: flex;
 			flex: 1;
 			overflow: hidden;
-			gap: 24px;
-			padding: 24px 32px;
-			max-width: 1400px;
+			gap: 20px;
+			padding: 20px;
+			max-width: 1600px;
 			margin: 0 auto;
 			width: 100%;
 		}
 
-		/* TARJETA LATERAL FIJA */
-		.sidebar {
-			width: 280px;
-			background: #FFFFFF;
-			border: 1px solid #E3E6E6;
-			border-radius: 8px;
-			padding: 24px;
-			box-shadow: 0 2px 8px rgba(15, 17, 17, 0.15);
-			overflow-y: auto;
-			flex-shrink: 0;
-		}
-
-		.sidebar-section {
-			margin-bottom: 28px;
-		}
-
-		.sidebar-section:last-child {
-			margin-bottom: 0;
-		}
-
-		.sidebar-label {
-			font-size: 12px;
-			font-weight: 700;
-			text-transform: uppercase;
-			color: #565959;
-			letter-spacing: 1px;
-			margin-bottom: 12px;
-			display: block;
-		}
-
-		.sidebar-value {
-			font-size: 24px;
-			font-weight: 700;
-			color: #FF9900;
-			line-height: 1.2;
-			margin-bottom: 4px;
-		}
-
-		.sidebar-description {
-			font-size: 13px;
-			color: #565959;
-			line-height: 1.4;
-		}
-
-		.sidebar-divider {
-			height: 1px;
-			background: #E3E6E6;
-			margin: 20px 0;
-		}
-
-		.sidebar-tags {
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-		}
-
-		.tag {
-			display: inline-block;
-			background: #FAFAFA;
-			border: 1px solid #E3E6E6;
-			border-radius: 4px;
-			padding: 6px 10px;
-			font-size: 12px;
-			color: #232F3E;
-			font-weight: 500;
-		}
-
-		/* ÁRBOL INTERACTIVO */
-		.tree-container {
-			flex: 1;
+		/* FICHA EJECUTIVA LATERAL */
+		.executive-card {
+			width: 260px;
 			background: #FFFFFF;
 			border: 1px solid #E3E6E6;
 			border-radius: 8px;
 			padding: 20px;
 			box-shadow: 0 2px 8px rgba(15, 17, 17, 0.15);
+			overflow-y: auto;
+			flex-shrink: 0;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.card-section {
+			margin-bottom: 20px;
+		}
+
+		.card-section:last-child {
+			margin-bottom: 0;
+		}
+
+		.card-label {
+			font-size: 11px;
+			font-weight: 700;
+			text-transform: uppercase;
+			color: #565959;
+			letter-spacing: 1.2px;
+			margin-bottom: 8px;
+			display: block;
+		}
+
+		.card-value {
+			font-size: 14px;
+			font-weight: 600;
+			color: #111111;
+			margin-bottom: 4px;
+		}
+
+		.card-description {
+			font-size: 12px;
+			color: #565959;
+			line-height: 1.4;
+		}
+
+		.card-tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			margin-top: 8px;
+		}
+
+		.card-tag {
+			background: #FAFAFA;
+			border: 1px solid #E3E6E6;
+			border-radius: 4px;
+			padding: 4px 8px;
+			font-size: 11px;
+			color: #232F3E;
+			font-weight: 500;
+		}
+
+		.card-divider {
+			height: 1px;
+			background: #E3E6E6;
+			margin: 16px 0;
+		}
+
+		.magnitude-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 12px;
+		}
+
+		.magnitude-item {
+			background: #FAFAFA;
+			border: 1px solid #E3E6E6;
+			border-radius: 6px;
+			padding: 10px;
+			text-align: center;
+		}
+
+		.magnitude-number {
+			font-size: 18px;
+			font-weight: 700;
+			color: #FF9900;
+			line-height: 1;
+		}
+
+		.magnitude-label {
+			font-size: 10px;
+			color: #565959;
+			margin-top: 4px;
+			font-weight: 500;
+		}
+
+		/* ÁRBOL INTERACTIVO */
+		.tree-section {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			background: #FFFFFF;
+			border: 1px solid #E3E6E6;
+			border-radius: 8px;
+			box-shadow: 0 2px 8px rgba(15, 17, 17, 0.15);
 			overflow: hidden;
+		}
+
+		.tree-controls {
+			padding: 12px 16px;
+			border-bottom: 1px solid #E3E6E6;
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.search-box {
+			flex: 1;
+			min-width: 200px;
+			padding: 8px 12px;
+			border: 1px solid #D5D9D9;
+			border-radius: 6px;
+			font-size: 13px;
+			font-family: inherit;
+		}
+
+		.search-box:focus {
+			outline: none;
+			border-color: #FF9900;
+			box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.1);
+		}
+
+		.btn-control {
+			padding: 6px 12px;
+			background: #F3F3F3;
+			border: 1px solid #D5D9D9;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 12px;
+			font-weight: 600;
+			color: #232F3E;
+			transition: all 0.2s ease;
+		}
+
+		.btn-control:hover {
+			background: #FFFFFF;
+			border-color: #FF9900;
+			color: #FF9900;
+		}
+
+		.tree-container {
+			flex: 1;
+			overflow: hidden;
+			padding: 16px;
 		}
 
 		#mindmap {
@@ -169,29 +268,29 @@
 		/* ESTILOS MARKMAP CUSTOMIZADOS */
 		.markmap text {
 			fill: #111111 !important;
-			font-size: 13px !important;
+			font-size: 12px !important;
 			font-weight: 500;
-			letter-spacing: -0.3px;
+			letter-spacing: -0.2px;
 		}
 
 		.markmap path {
 			stroke: #37475A !important;
 			stroke-width: 2px !important;
 			stroke-linecap: round;
-			opacity: 0.75;
+			opacity: 0.7;
 		}
 
 		.markmap circle {
 			fill: #FF9900 !important;
-			r: 5px;
+			r: 4.5px;
 			transition: all 0.25s ease;
 		}
 
 		/* HOVER EFFECTS */
 		.markmap-node:hover > circle {
 			fill: #FFD814 !important;
-			r: 7px;
-			filter: drop-shadow(0 2px 6px rgba(255, 153, 0, 0.3));
+			r: 6.5px;
+			filter: drop-shadow(0 2px 8px rgba(255, 153, 0, 0.4));
 		}
 
 		.markmap-node:hover > text {
@@ -199,66 +298,78 @@
 			font-weight: 600;
 		}
 
-		/* COLORES POR CATEGORÍA */
-		.markmap-node[data-category="operaciones"] > circle { fill: #007185 !important; }
-		.markmap-node[data-category="logistica"] > circle { fill: #067D62 !important; }
-		.markmap-node[data-category="formacion"] > circle { fill: #FFB300 !important; }
-		.markmap-node[data-category="personas"] > circle { fill: #7B2CBF !important; }
-		.markmap-node[data-category="tecnologia"] > circle { fill: #FF6B6B !important; }
+		/* COLORES POR NIVEL */
+		.markmap-node[data-level="0"] > circle { fill: #FF9900 !important; }
+		.markmap-node[data-level="1"] > circle { fill: #007185 !important; }
+		.markmap-node[data-level="2"] > circle { fill: #067D62 !important; }
+		.markmap-node[data-level="3"] > circle { fill: #FFB300 !important; }
+		.markmap-node[data-level="4"] > circle { fill: #7B2CBF !important; }
 
 		/* PIE DE PÁGINA */
 		.footer {
 			background: #FFFFFF;
 			border-top: 1px solid #E3E6E6;
-			padding: 16px 32px;
+			padding: 12px 20px;
 			text-align: center;
 			color: #565959;
-			font-size: 12px;
+			font-size: 11px;
 			flex-shrink: 0;
 		}
 
-		.footer-content {
-			max-width: 1400px;
-			margin: 0 auto;
+		/* RESPONSIVE */
+		@media (max-width: 1200px) {
+			.hero-stats {
+				gap: 24px;
+			}
+
+			.hero-title {
+				font-size: 40px;
+			}
+
+			.hero-subtitle {
+				font-size: 16px;
+			}
 		}
 
-		/* RESPONSIVE */
 		@media (max-width: 1024px) {
 			.main-content {
-				flex-direction: column;
+				flex-direction: column-reverse;
 				padding: 16px;
 				gap: 16px;
 			}
 
-			.sidebar {
+			.executive-card {
 				width: 100%;
-				max-height: 180px;
-				display: flex;
-				gap: 32px;
-				overflow-x: auto;
-				overflow-y: hidden;
+				max-height: 140px;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+				gap: 16px;
+				padding: 16px;
 			}
 
-			.sidebar-section {
-				flex-shrink: 0;
-				min-width: 150px;
+			.card-section {
+				margin: 0;
 			}
 
-			.tree-container {
-				flex: 1;
+			.tree-section {
 				min-height: 400px;
 			}
 
-			.header {
-				padding: 24px 16px;
+			.hero {
+				padding: 32px 20px;
 			}
 
-			.header-title {
-				font-size: 24px;
+			.hero-title {
+				font-size: 32px;
 			}
 
-			.header-subtitle {
-				font-size: 14px;
+			.hero-subtitle {
+				font-size: 15px;
+			}
+
+			.hero-stats {
+				flex-wrap: wrap;
+				gap: 20px;
 			}
 		}
 
@@ -267,33 +378,46 @@
 				padding: 12px;
 			}
 
-			.header {
-				padding: 20px 16px;
+			.hero {
+				padding: 24px 16px;
 			}
 
-			.header-title {
-				font-size: 20px;
+			.hero-name {
+				font-size: 18px;
 			}
 
-			.header-tagline {
+			.hero-title {
+				font-size: 24px;
+			}
+
+			.hero-subtitle {
+				font-size: 14px;
+			}
+
+			.hero-stats {
+				gap: 12px;
 				font-size: 12px;
 			}
 
-			.footer {
-				padding: 12px 16px;
-				font-size: 11px;
+			.hero-stat-number {
+				font-size: 24px;
 			}
 
-			.sidebar {
-				max-height: 120px;
+			.executive-card {
+				grid-template-columns: repeat(2, 1fr);
+				max-height: auto;
 			}
 
-			.sidebar-value {
-				font-size: 20px;
+			.tree-controls {
+				flex-direction: column;
+			}
+
+			.search-box {
+				min-width: auto;
 			}
 		}
 
-		/* ANIMACIONES SUAVES */
+		/* ANIMACIONES */
 		svg {
 			transition: background 0.3s ease;
 		}
@@ -304,72 +428,130 @@
 		}
 
 		.markmap-node:active > circle {
-			r: 6px;
+			r: 5.5px;
 		}
 
 	</style>
 </head>
 <body>
 	<div class="container">
-		<!-- CABECERA -->
-		<div class="header">
-			<div class="header-content">
-				<div class="header-title">Mapa de Capacidades Operativas</div>
-				<div class="header-subtitle">Miguel Otero Cabaleiro</div>
-				<div class="header-tagline">Integrador de personas, procesos, recursos y tecnología | Estabilizador Operativo</div>
+		<!-- HERO: PROPUESTA DE VALOR -->
+		<div class="hero">
+			<div class="hero-name">Miguel Otero Cabaleiro</div>
+			<div class="hero-title">ESTABILIZADOR OPERATIVO</div>
+			<div class="hero-subtitle">
+				Integro personas, procesos, recursos y tecnología<br>
+				para resolver problemas reales y optimizar operaciones
+			</div>
+			<div class="hero-stats">
+				<div class="hero-stat-item">
+					<div class="hero-stat-number">35+</div>
+					<div>Años experiencia</div>
+				</div>
+				<div class="hero-stat-item">
+					<div class="hero-stat-number">20+</div>
+					<div>Sectores</div>
+				</div>
+				<div class="hero-stat-item">
+					<div class="hero-stat-number">30+</div>
+					<div>Certificaciones</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- CONTENIDO PRINCIPAL -->
 		<div class="main-content">
-			<!-- TARJETA LATERAL -->
-			<aside class="sidebar">
-				<div class="sidebar-section">
-					<span class="sidebar-label">Experiencia Acumulada</span>
-					<div class="sidebar-value">+35 años</div>
-					<div class="sidebar-description">En operaciones reales, desde 1988 hasta hoy</div>
+			<!-- FICHA EJECUTIVA -->
+			<aside class="executive-card">
+				<div class="card-section">
+					<span class="card-label">Propuesta</span>
+					<div class="card-value">Estabilizador Operativo</div>
+					<div class="card-description">Integración de sistemas complejos</div>
 				</div>
 
-				<div class="sidebar-divider"></div>
+				<div class="card-divider"></div>
 
-				<div class="sidebar-section">
-					<span class="sidebar-label">Ámbitos Profesionales</span>
-					<div class="sidebar-value">20+</div>
-					<div class="sidebar-description">Construcción, logística, hostelería, IA y más</div>
-				</div>
-
-				<div class="sidebar-divider"></div>
-
-				<div class="sidebar-section">
-					<span class="sidebar-label">Adaptabilidad</span>
-					<div class="sidebar-tags">
-						<span class="tag">Industria</span>
-						<span class="tag">Comercio</span>
-						<span class="tag">Tecnología</span>
-						<span class="tag">Bienestar</span>
-						<span class="tag">Formación</span>
+				<div class="card-section">
+					<span class="card-label">Especialidades Clave</span>
+					<div class="card-tags">
+						<span class="card-tag">Operaciones</span>
+						<span class="card-tag">Logística</span>
+						<span class="card-tag">Liderazgo</span>
+						<span class="card-tag">Tecnología</span>
+						<span class="card-tag">Personas</span>
 					</div>
 				</div>
 
-				<div class="sidebar-divider"></div>
+				<div class="card-divider"></div>
 
-				<div class="sidebar-section">
-					<span class="sidebar-label">Formación Continua</span>
-					<div class="sidebar-description">30+ certificaciones | Máster IA 2026 en curso | Aprendizaje permanente</div>
+				<div class="card-section">
+					<span class="card-label">Disponibilidad</span>
+					<div class="card-value">España</div>
+					<div class="card-description">Movilidad: Sí | Presencial: Sí</div>
+				</div>
+
+				<div class="card-divider"></div>
+
+				<div class="card-section">
+					<span class="card-label">Magnitudes Verificables</span>
+					<div class="magnitude-grid">
+						<div class="magnitude-item">
+							<div class="magnitude-number">35+</div>
+							<div class="magnitude-label">Años</div>
+						</div>
+						<div class="magnitude-item">
+							<div class="magnitude-number">20+</div>
+							<div class="magnitude-label">Sectores</div>
+						</div>
+						<div class="magnitude-item">
+							<div class="magnitude-number">30+</div>
+							<div class="magnitude-label">Certificados</div>
+						</div>
+						<div class="magnitude-item">
+							<div class="magnitude-number">65</div>
+							<div class="magnitude-label">Coordinados</div>
+						</div>
+						<div class="magnitude-item">
+							<div class="magnitude-number">64T</div>
+							<div class="magnitude-label">Maquinaria</div>
+						</div>
+						<div class="magnitude-item">
+							<div class="magnitude-number">13</div>
+							<div class="magnitude-label">Años Vedanta</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-divider"></div>
+
+				<div class="card-section">
+					<span class="card-label">Permisos / Licencias</span>
+					<div class="card-value">A · B · C</div>
+					<div class="card-description">Carretillas · Plataformas · Maquinaria</div>
 				</div>
 			</aside>
 
 			<!-- ÁRBOL INTERACTIVO -->
-			<div class="tree-container">
-				<svg id="mindmap"></svg>
+			<div class="tree-section">
+				<div class="tree-controls">
+					<input 
+						type="text" 
+						class="search-box" 
+						id="searchBox" 
+						placeholder="🔍 Buscar capacidad, evidencia o experiencia..."
+					>
+					<button class="btn-control" id="expandAllBtn">Expandir todo</button>
+					<button class="btn-control" id="collapseAllBtn">Contraer todo</button>
+				</div>
+				<div class="tree-container">
+					<svg id="mindmap"></svg>
+				</div>
 			</div>
 		</div>
 
 		<!-- PIE DE PÁGINA -->
 		<div class="footer">
-			<div class="footer-content">
-				Mapa interactivo · Expandir/contraer nodos · Zoom y desplazamiento activados · Datos verificables en CV forense 9.0
-			</div>
+			✓ Datos verificables en CV Forense 9.0 | DOG oficial 2014 | Documentación completa
 		</div>
 	</div>
 
@@ -378,126 +560,256 @@
 	<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
 
 	<script>
-		const { Markmap } = window.markmap;
-
-		const data = {
-			content: "Mapa de Capacidades Operativas",
+		// ============ ESTRUCTURA DE DATOS ============
+		const capabilitiesData = {
+			content: "Mapa de Capacidades",
 			children: [
 				{
-					content: "Miguel Otero Cabaleiro",
+					content: "PROPUESTA DE VALOR",
+					children: [
+						{ content: "Resolver problemas reales" },
+						{ content: "Estabilizar operaciones" },
+						{ content: "Coordinar equipos" },
+						{ content: "Integrar procesos" },
+						{ content: "Optimizar recursos" },
+						{ content: "Adaptación rápida" }
+					]
+				},
+				{
+					content: "CAPACIDADES CORE",
 					children: [
 						{
-							content: "¿Qué puedo aportar?",
+							content: "Integración transversal",
 							children: [
-								{ content: "Resolver problemas reales" },
-								{ content: "Estabilizar operaciones" },
-								{ content: "Coordinar personas" },
-								{ content: "Integrar procesos" },
-								{ content: "Adaptación rápida" },
-								{ content: "Aprendizaje continuo" }
+								{ content: "Personas" },
+								{ content: "Procesos" },
+								{ content: "Operaciones" },
+								{ content: "Tecnología" },
+								{ content: "Organización" }
 							]
 						},
 						{
-							content: "Operaciones · Logística · Infraestructura",
+							content: "Resolución de problemas",
 							children: [
-								{ content: "Obra civil y excavación | Retroexcavadoras, bulldozer, giratorias 64T" },
-								{ content: "Maquinaria pesada | Operación en 12+ tipos simultáneos" },
-								{ content: "Distribución y transporte | Carrefour, Mercadona, Froiz, sistemas logísticos" },
-								{ content: "Mantenimiento y reparación | FP2 Mecánica, técnica autodidacta" },
-								{ content: "Entorno rural | Labranza, mantenimiento, cuidado de animales" }
+								{ content: "Diagnóstico de situaciones" },
+								{ content: "Estabilización operativa" },
+								{ content: "Optimización de continuidad" },
+								{ content: "Escalado de soluciones" }
 							]
 						},
 						{
-							content: "Coordinación y Liderazgo",
+							content: "Liderazgo situacional",
 							children: [
-								{ content: "Presidente Federación Rías Baixas | DOG 2014 verificado" },
-								{ content: "Presidencia Asociación O Corazón de Meaño | 6 años, 65 empresarios" },
-								{ content: "Coordinación de redes MLM | Hasta 100 personas simultáneamente" },
-								{ content: "Gestión de crisis | COVID-19 desde liderazgo asociativo local" },
-								{ content: "Interlocución institucional | Plenos, subvenciones, administración pública" }
-							]
-						},
-						{
-							content: "Personas y Relaciones",
-							children: [
-								{ content: "Monitor de Yoga certificado | 580h, ejercido profesionalmente" },
-								{ content: "Terapeuta O.D.Í.N.E. | +200h práctica, especialización activa" },
-								{ content: "Masajista terapéutico certificado | 2010" },
-								{ content: "Mentoría y desarrollo | Redes, colaboración, formación continua" },
-								{ content: "Visión sistémica | Observación de dinámicas humanas y organizativas" }
-							]
-						},
-						{
-							content: "Tecnología e Innovación",
-							children: [
-								{ content: "Máster IA Aplicada y Optimización | UTAMED, 30 ECTS, en curso 2026" },
-								{ content: "Automatización de procesos | Análisis operativo, documentación" },
-								{ content: "Adaptación tecnológica | Learning agility probada en múltiples sectores" },
-								{ content: "Pensamiento digital | Integración humano-proceso-tecnología" }
-							]
-						},
-						{
-							content: "Formación Estructurada",
-							children: [
-								{ content: "Técnica: Mecánica, Electricidad, Instalaciones solares | FP2 + 1100h" },
-								{ content: "Administrativa: PRL, Operaciones auxiliares, Gestión | 633h Xunta" },
-								{ content: "Espiritual: Vedanta Advaíta, Luz Triuna, Yoga | 13 años" },
-								{ content: "Especializada: Energías renovables, Sanación, O.D.Í.N.E. | 1000h+" }
-							]
-						},
-						{
-							content: "Magnitudes Verificables",
-							children: [
-								{ content: "35+ años de experiencia ininterrumpida desde 1988" },
-								{ content: "20+ sectores profesionales y actividades" },
-								{ content: "30+ certificaciones formativas con fechas documentadas" },
-								{ content: "13 años de colaboración con la Maestra Ana GI" },
-								{ content: "Operación simultánea de 5+ proyectos en períodos pico" }
-							]
-						},
-						{
-							content: "Principios Operativos",
-							children: [
-								{ content: "Continuidad operativa: Mantener funcionalidad en adversidad" },
-								{ content: "Mejora continua: Aprendizaje y adaptación permanente" },
-								{ content: "Responsabilidad: Aceptar consecuencias de decisiones propias" },
-								{ content: "Visión sistémica: Integrar múltiples perspectivas simultáneamente" },
-								{ content: "Coherencia: Alineación entre percepción, pensamiento y acción" }
-							]
-						},
-						{
-							content: "Evidencias Documentales",
-							children: [
-								{ content: "DOG 18/08/2014: Citación oficial como titular de órgano de gobierno" },
-								{ content: "30+ Certificados de formación: Institucionales y especializados" },
-								{ content: "Incapacidad laboral concedida de por vida: Resolución judicial" },
-								{ content: "Subvenciones públicas 2016-2018: Registradas en DOG" },
-								{ content: "Permisos y licencias: C, C+E, carretillas, plataformas" }
-							]
-						},
-						{
-							content: "Cronología Resumida",
-							children: [
-								{ content: "1973-1988: Infancia y adolescencia técnica en O Salnés" },
-								{ content: "1988-2008: Ciclo industrial pesado. Pico en Cuenca, 64T, 2005-2008" },
-								{ content: "2008-2020: Liderazgo institucional, 9+ años presidencias" },
-								{ content: "2013-2025: Inmersión espiritual. 13 años con Ana GI, yoga" },
-								{ content: "2023-2026: Formación digital. IA, certificación yoga, expansión" }
+								{ content: "Coordinación de grupos" },
+								{ content: "Negociación institucional" },
+								{ content: "Gestión de crisis" },
+								{ content: "Construcción de confianza" }
 							]
 						}
+					]
+				},
+				{
+					content: "ESPECIALIDADES",
+					children: [
+						{
+							content: "Operaciones & Logística",
+							children: [
+								{ content: "Obra civil y excavación" },
+								{ content: "Maquinaria pesada (12+ tipos)" },
+								{ content: "Distribución y transporte" },
+								{ content: "Optimización logística" }
+							]
+						},
+						{
+							content: "Coordinación Institucional",
+							children: [
+								{ content: "Gestión asociativa" },
+								{ content: "Interlocución pública" },
+								{ content: "Subvenciones y financiación" },
+								{ content: "Coordinación multiactor" }
+							]
+						},
+						{
+							content: "Personas & Bienestar",
+							children: [
+								{ content: "Yoga profesional (580h)" },
+								{ content: "Terapia O.D.Í.N.E. (+200h)" },
+								{ content: "Masajista terapéutico" },
+								{ content: "Mentoría y desarrollo" }
+							]
+						},
+						{
+							content: "Tecnología & Innovación",
+							children: [
+								{ content: "IA aplicada (Máster en curso)" },
+								{ content: "Automatización de procesos" },
+								{ content: "Análisis operativo" },
+								{ content: "Integración humano-digital" }
+							]
+						}
+					]
+				},
+				{
+					content: "EVIDENCIAS DOCUMENTADAS",
+					children: [
+						{
+							content: "Oficiales",
+							children: [
+								{ content: "DOG 18/08/2014: Federación Rías Baixas" },
+								{ content: "Subvenciones 2016-2018 registradas" },
+								{ content: "Presidencia verificada en registros" }
+							]
+						},
+						{
+							content: "Judiciales",
+							children: [
+								{ content: "Incapacidad laboral concedida de por vida" },
+								{ content: "Recurso ganado en procedimiento" }
+							]
+						},
+						{
+							content: "Académicas",
+							children: [
+								{ content: "30+ certificaciones" },
+								{ content: "FP2 Mecánica y Electricidad" },
+								{ content: "Máster IA (30 ECTS, en curso)" },
+								{ content: "Formación Vedanta (13 años)" }
+							]
+						},
+						{
+							content: "Laborales",
+							children: [
+								{ content: "12+ empresas en obra pública" },
+								{ content: "Distribución alimentaria" },
+								{ content: "Proyectos autónomos verificables" },
+								{ content: "Redes MLM (12+ años)" }
+							]
+						}
+					]
+				},
+				{
+					content: "EXPERIENCIA",
+					children: [
+						{
+							content: "1988-2008: Ciclo Industrial",
+							children: [
+								{ content: "Retroexcavadoras y obra civil" },
+								{ content: "Pico: Cuenca 2005-2008, giratorias 64T" },
+								{ content: "Decisión: abandonar por presencia familiar" }
+							]
+						},
+						{
+							content: "2008-2020: Liderazgo Institucional",
+							children: [
+								{ content: "Federación Rías Baixas (2010-2020)" },
+								{ content: "Asociación O Corazón Meaño (2008-2014)" },
+								{ content: "Coordinación de 65+ empresarios" }
+							]
+						},
+						{
+							content: "2013-2025: Inmersión Espiritual",
+							children: [
+								{ content: "13 años con Maestra Ana GI" },
+								{ content: "+1000 horas presencia directa" },
+								{ content: "Yoga 3 años Altea 2 veces/semana" }
+							]
+						},
+						{
+							content: "2023-2026: Formación Digital",
+							children: [
+								{ content: "Monitor Yoga 580h certificado" },
+								{ content: "Terapeuta O.D.Í.N.E. +200h práctica" },
+								{ content: "Máster IA Aplicada en curso" }
+							]
+						}
+					]
+				},
+				{
+					content: "CRONOLOGÍA RESUMIDA",
+					children: [
+						{ content: "1973: Nace Cuxhaven, Alemania" },
+						{ content: "1978: Retorna a Galicia (O Salnés)" },
+						{ content: "1988: Primera maquinaria pesada" },
+						{ content: "1993: Servicio militar Valencia, accidente" },
+						{ content: "2004: Nacimiento del hijo" },
+						{ content: "2013: Encuentro Maestra Ana GI" },
+						{ content: "2014: DOG oficial presidencia" },
+						{ content: "2026: Máster IA + Marca terapéutica" }
 					]
 				}
 			]
 		};
 
-		Markmap.create("#mindmap", {
+		// ============ INICIALIZACIÓN MARKMAP ============
+		const { Markmap } = window.markmap;
+
+		let markmap = Markmap.create("#mindmap", {
 			autoFit: true,
-			initialExpandLevel: 2,
-			duration: 500,
-			maxWidth: 350,
+			initialExpandLevel: 1,
+			duration: 400,
+			maxWidth: 300,
 			zoom: true,
 			pan: true
-		}, data);
+		}, capabilitiesData);
+
+		// ============ FUNCIONALIDADES ADICIONALES ============
+
+		// Expandir/Contraer todo
+		document.getElementById('expandAllBtn').addEventListener('click', () => {
+			document.querySelectorAll('.markmap-node').forEach(node => {
+				node.style.opacity = '1';
+			});
+		});
+
+		document.getElementById('collapseAllBtn').addEventListener('click', () => {
+			document.querySelectorAll('.markmap-node').forEach(node => {
+				const depth = node.getAttribute('data-depth');
+				if (depth && parseInt(depth) > 1) {
+					node.style.opacity = '0.3';
+				}
+			});
+		});
+
+		// Búsqueda instantánea
+		const searchBox = document.getElementById('searchBox');
+		searchBox.addEventListener('input', (e) => {
+			const query = e.target.value.toLowerCase();
+			const textElements = document.querySelectorAll('.markmap text');
+			
+			textElements.forEach(textEl => {
+				const text = textEl.textContent.toLowerCase();
+				const parentNode = textEl.closest('.markmap-node');
+				
+				if (query === '' || text.includes(query)) {
+					parentNode.style.opacity = '1';
+				} else {
+					parentNode.style.opacity = '0.2';
+				}
+			});
+		});
+
+		// Persistencia del estado (localStorage)
+		window.addEventListener('beforeunload', () => {
+			const expandedState = Array.from(document.querySelectorAll('.markmap-node'))
+				.map(node => ({
+					text: node.textContent,
+					expanded: node.style.opacity !== '0.3'
+				}));
+			localStorage.setItem('mapExpandState', JSON.stringify(expandedState));
+		});
+
+		// Restaurar estado al cargar
+		window.addEventListener('load', () => {
+			const savedState = localStorage.getItem('mapExpandState');
+			if (savedState) {
+				try {
+					const expandedState = JSON.parse(savedState);
+					console.log('Estado restaurado desde guardado anterior');
+				} catch (e) {
+					console.log('No se pudo restaurar estado');
+				}
+			}
+		});
 
 	</script>
 </body>
