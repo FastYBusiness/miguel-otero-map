@@ -99,7 +99,7 @@
     }
 
     .sidebar {
-      width: 200px;
+      width: 220px;
       background: #FFFFFF;
       border: 1px solid #E3E6E6;
       border-radius: 8px;
@@ -141,7 +141,7 @@
       display: block;
       width: 100%;
       padding: 8px 10px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       background: #FAFAFA;
       border: 1px solid #E3E6E6;
       border-radius: 6px;
@@ -170,7 +170,6 @@
       flex: 1;
       padding: 12px;
       overflow-y: auto;
-      border-top: 1px solid #E3E6E6;
       font-size: 11px;
       color: #565959;
       line-height: 1.5;
@@ -178,7 +177,7 @@
 
     .context-empty {
       text-align: center;
-      padding-top: 40px;
+      padding-top: 20px;
       opacity: 0.6;
     }
 
@@ -190,7 +189,7 @@
     }
 
     .context-text {
-      font-size: 10px;
+      font-size: 11px;
       margin-bottom: 8px;
       line-height: 1.4;
     }
@@ -244,9 +243,8 @@
 
     .markmap text {
       fill: #111111 !important;
-      font-size: 11px !important;
+      font-size: 12px !important;
       font-weight: 500;
-      pointer-events: all;
     }
 
     .markmap path {
@@ -258,98 +256,8 @@
 
     .markmap circle {
       fill: #FF9900 !important;
-      r: 3.5px;
+      r: 4px;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .markmap-node:hover > circle {
-      fill: #FFD814 !important;
-      r: 5px;
-      filter: drop-shadow(0 1px 4px rgba(255,153,0,0.3));
-    }
-
-    .markmap-node:hover > text {
-      fill: #232F3E !important;
-      font-weight: 600;
-    }
-
-    @media (max-width: 1024px) {
-      .header-subtitle {
-        display: none;
-      }
-
-      .main {
-        flex-direction: column-reverse;
-      }
-
-      .sidebar {
-        width: 100%;
-        max-height: 120px;
-        flex-direction: row;
-      }
-
-      .nav-container {
-        flex: 1;
-        border-right: 1px solid #E3E6E6;
-        border-bottom: none;
-        overflow-x: auto;
-        overflow-y: hidden;
-        display: flex;
-        gap: 6px;
-      }
-
-      .nav-btn {
-        flex-shrink: 0;
-        min-width: 80px;
-        margin: 0;
-      }
-
-      .search-box {
-        border-right: 1px solid #E3E6E6;
-        border-bottom: none;
-        padding: 8px;
-      }
-
-      .context {
-        display: none;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header-title {
-        font-size: 16px;
-      }
-
-      .header-stats {
-        gap: 12px;
-      }
-
-      .stat-number {
-        font-size: 14px;
-      }
-
-      .main {
-        padding: 8px;
-        gap: 8px;
-      }
-    }
-
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #FAFAFA;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #D5D9D9;
-      border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #FF9900;
     }
   </style>
 </head>
@@ -386,7 +294,7 @@
         </div>
         <div class="nav-container" id="nav"></div>
         <div class="context" id="context">
-          <div class="context-empty">Selecciona un nodo</div>
+          <div class="context-empty">Selecciona una especialidad arriba</div>
         </div>
       </aside>
 
@@ -403,279 +311,188 @@
     </div>
   </div>
 
-  <!-- CDN correctos: sin rutas adicionales -->
+  <!-- Scripts de Markmap empaquetados correctamente -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4"></script>
   <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
 
   <script>
-    const DATA = {
-      "content": "Miguel Otero Cabaleiro",
-      "id": "root",
-      "children": [
-        {
-          "content": "PROPUESTA DE VALOR",
-          "id": "propuesta",
-          "children": [
-            { "content": "Resolver problemas reales" },
-            { "content": "Estabilizar operaciones" },
-            { "content": "Coordinar equipos" },
-            { "content": "Integrar procesos" },
-            { "content": "Optimizar recursos" },
-            { "content": "Adaptación rápida" }
-          ]
-        },
-        {
-          "content": "CAPACIDADES CORE",
-          "id": "capacidades",
-          "children": [
-            {
-              "content": "Integración Transversal",
-              "id": "integracion",
-              "children": [
-                { "content": "Personas" },
-                { "content": "Procesos" },
-                { "content": "Operaciones" },
-                { "content": "Tecnología" },
-                { "content": "Organización" }
-              ]
-            },
-            {
-              "content": "Resolución de Problemas",
-              "id": "resolucion",
-              "children": [
-                { "content": "Diagnóstico" },
-                { "content": "Estabilización" },
-                { "content": "Optimización" },
-                { "content": "Escalado" }
-              ]
-            },
-            {
-              "content": "Liderazgo Situacional",
-              "id": "liderazgo",
-              "children": [
-                { "content": "Coordinación" },
-                { "content": "Negociación" },
-                { "content": "Gestión de crisis" },
-                { "content": "Confianza" }
-              ]
-            }
-          ]
-        },
-        {
-          "content": "ESPECIALIDADES",
-          "id": "especialidades",
-          "children": [
-            {
-              "content": "Operaciones & Logística",
-              "id": "espec-op",
-              "children": [
-                { "content": "Obra civil" },
-                { "content": "Maquinaria pesada" },
-                { "content": "Distribución" },
-                { "content": "Logística" }
-              ]
-            },
-            {
-              "content": "Coordinación Institucional",
-              "id": "espec-lid",
-              "children": [
-                { "content": "Gestión asociativa" },
-                { "content": "Interlocución pública" },
-                { "content": "Subvenciones" },
-                { "content": "Coordinación multiactor" }
-              ]
-            },
-            {
-              "content": "Personas & Bienestar",
-              "id": "espec-per",
-              "children": [
-                { "content": "Yoga (580h)" },
-                { "content": "Terapia O.D.Í.N.E." },
-                { "content": "Masaje terapéutico" },
-                { "content": "Mentoría" }
-              ]
-            },
-            {
-              "content": "Tecnología & Innovación",
-              "id": "espec-tec",
-              "children": [
-                { "content": "IA aplicada" },
-                { "content": "Automatización" },
-                { "content": "Análisis" },
-                { "content": "Digitalización" }
-              ]
-            }
-          ]
-        },
-        {
-          "content": "EVIDENCIAS",
-          "id": "evidencias",
-          "children": [
-            {
-              "content": "Oficiales",
-              "children": [
-                { "content": "DOG 18/08/2014" },
-                { "content": "Subvenciones 2016-2018" },
-                { "content": "Registros verificados" }
-              ]
-            },
-            {
-              "content": "Académicas",
-              "children": [
-                { "content": "30+ certificaciones" },
-                { "content": "FP2 Mecánica" },
-                { "content": "Máster IA 2026" },
-                { "content": "Vedanta (13 años)" }
-              ]
-            },
-            {
-              "content": "Laborales",
-              "children": [
-                { "content": "12+ empresas obra pública" },
-                { "content": "Distribución alimentaria" },
-                { "content": "Proyectos verificables" },
-                { "content": "Redes MLM (12+ años)" }
-              ]
-            }
-          ]
-        },
-        {
-          "content": "EXPERIENCIA",
-          "id": "experiencia",
-          "children": [
-            {
-              "content": "1988-2008: Industrial",
-              "children": [
-                { "content": "Obra civil" },
-                { "content": "Cuenca 2005-2008 (64T)" },
-                { "content": "Decisión familiar" }
-              ]
-            },
-            {
-              "content": "2008-2020: Liderazgo",
-              "children": [
-                { "content": "Federación Rías Baixas" },
-                { "content": "O Corazón Meaño" },
-                { "content": "65+ empresarios" }
-              ]
-            },
-            {
-              "content": "2013-2025: Espiritual",
-              "children": [
-                { "content": "13 años Maestra Ana GI" },
-                { "content": "+1000 horas" },
-                { "content": "Yoga Altea" }
-              ]
-            },
-            {
-              "content": "2023-2026: Digital",
-              "children": [
-                { "content": "Yoga 580h" },
-                { "content": "O.D.Í.N.E. +200h" },
-                { "content": "Máster IA" }
-              ]
-            }
-          ]
-        }
-      ]
-    };
+    const markdownData = `
+# Miguel Otero Cabaleiro
+
+## PROPUESTA DE VALOR
+- Resolver problemas reales
+- Estabilizar operaciones
+- Coordinar equipos
+- Integrar procesos
+- Optimizar recursos
+- Adaptación rápida
+
+## CAPACIDADES CORE
+### Integración Transversal
+- Personas
+- Procesos
+- Operaciones
+- Tecnología
+- Organización
+### Resolución de Problemas
+- Diagnóstico
+- Estabilización
+- Optimización
+- Escalado
+### Liderazgo Situacional
+- Coordinación
+- Negociación
+- Gestión de crisis
+- Confianza
+
+## ESPECIALIDADES
+### Operaciones & Logística
+- Obra civil
+- Maquinaria pesada
+- Distribución
+- Logística
+### Coordinación Institucional
+- Gestión asociativa
+- Interlocución pública
+- Subvenciones
+- Coordinación multiactor
+### Personas & Bienestar
+- Yoga (580h)
+- Terapia O.D.Í.N.E.
+- Masaje terapéutico
+- Mentoría
+### Tecnología & Innovación
+- IA aplicada
+- Automatización
+- Análisis
+- Digitalización
+
+## EVIDENCIAS
+### Oficiales
+- DOG 18/08/2014
+- Subvenciones 2016-2018
+- Registros verificados
+### Académicas
+- 30+ certificaciones
+- FP2 Mecánica
+- Máster IA 2026
+- Vedanta (13 años)
+### Laborales
+- 12+ empresas obra pública
+- Distribución alimentaria
+- Proyectos verificables
+- Redes MLM (12+ años)
+
+## EXPERIENCIA
+### 1988-2008: Industrial
+- Obra civil
+- Cuenca 2005-2008 (64T)
+- Decisión familiar
+### 2008-2020: Liderazgo
+- Federación Rías Baixas
+- O Corazón Meaño
+- 65+ empresarios
+### 2013-2025: Espiritual
+- 13 años Maestra Ana GI
+- +1000 horas
+- Yoga Altea
+### 2023-2026: Digital
+- Yoga 580h
+- O.D.Í.N.E. +200h
+- Máster IA
+`;
 
     const CONTEXT = {
-      "integracion": { "title": "Integración Transversal", "text": "Integrar simultáneamente personas, procesos, operaciones, tecnología y organización en un sistema coherente." },
-      "resolucion": { "title": "Resolución de Problemas", "text": "Diagnosticar situaciones complejas, estabilizar operaciones, optimizar continuidad y escalar soluciones." },
-      "liderazgo": { "title": "Liderazgo Situacional", "text": "Adaptación dinámica de estilo según contexto: grupos pequeños, instituciones públicas, equipos multidisciplinares." },
       "espec-op": { "title": "Operaciones & Logística", "text": "Experiencia verificada en obra civil, maquinaria pesada (64T), sistemas de distribución y optimización logística." },
       "espec-lid": { "title": "Coordinación Institucional", "text": "Gestión de asociaciones, negociación pública, acceso a subvenciones y coordinación multiactor." },
       "espec-per": { "title": "Personas & Bienestar", "text": "Formación profesional: Yoga, Terapia O.D.Í.N.E., masaje terapéutico. Enfoque integral de bienestar." },
       "espec-tec": { "title": "Tecnología & Innovación", "text": "IA aplicada a optimización operativa, automatización de procesos, análisis de datos y gestión digital." }
     };
 
-    class App {
-      constructor() {
-        this.markmap = null;
-        this.specialties = [
-          { id: 'espec-op', label: 'Operaciones' },
-          { id: 'espec-lid', label: 'Liderazgo' },
-          { id: 'espec-per', label: 'Personas' },
-          { id: 'espec-tec', label: 'Tecnología' }
-        ];
-        this.init();
-      }
+    const specialties = [
+      { id: 'espec-op', label: 'Operaciones' },
+      { id: 'espec-lid', label: 'Liderazgo' },
+      { id: 'espec-per', label: 'Personas' },
+      { id: 'espec-tec', label: 'Tecnología' }
+    ];
 
-      init() {
-        this.renderNav();
-        this.renderTree(1);
-        this.setupListeners();
-      }
+    let mmInstance = null;
 
-      renderNav() {
-        const nav = document.getElementById('nav');
-        nav.innerHTML = this.specialties
-          .map(s => `<button class="nav-btn" data-id="${s.id}">${s.label}</button>`)
-          .join('');
+    function init() {
+      const { Transformer } = window.markmap;
+      const { Markmap } = window.markmap;
 
-        nav.querySelectorAll('.nav-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            nav.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            this.showContext(btn.dataset.id);
-          });
+      const transformer = new Transformer();
+      const { root } = transformer.transform(markdownData);
+
+      // Crear el mapa interactivo
+      mmInstance = Markmap.create('#map', {
+        autoFit: true,
+        duration: 300,
+        initialExpandLevel: 2
+      }, root);
+
+      // Renderizar los botones laterales
+      const nav = document.getElementById('nav');
+      nav.innerHTML = specialties
+        .map(s => `<button class="nav-btn" data-id="${s.id}">${s.label}</button>`)
+        .join('');
+
+      nav.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          nav.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const info = CONTEXT[btn.dataset.id];
+          const ctx = document.getElementById('context');
+          if (info) {
+            ctx.innerHTML = `
+              <div class="context-title">${info.title}</div>
+              <div class="context-text">${info.text}</div>
+            `;
+          }
         });
-      }
+      });
 
-      renderTree(expandLevel) {
-        const { Markmap } = window.markmap;
-        document.getElementById('map').innerHTML = '';
-        this.markmap = Markmap.create('#map', {
-          autoFit: true,
-          initialExpandLevel: expandLevel,
-          duration: 300,
-          maxWidth: 250,
-          zoom: true,
-          pan: true
-        }, DATA);
-      }
+      // Controles del mapa
+      document.getElementById('btnExpand').addEventListener('click', () => {
+        const { root } = transformer.transform(markdownData);
+        mmInstance.setData(root, { initialExpandLevel: 5 });
+        mmInstance.fit();
+      });
 
-      showContext(id) {
-        const info = CONTEXT[id];
-        const ctx = document.getElementById('context');
-        if (info) {
-          ctx.innerHTML = `
-            <div class="context-title">${info.title}</div>
-            <div class="context-text">${info.text}</div>
-          `;
-        }
-      }
+      document.getElementById('btnCollapse').addEventListener('click', () => {
+        const { root } = transformer.transform(markdownData);
+        mmInstance.setData(root, { initialExpandLevel: 1 });
+        mmInstance.fit();
+      });
 
-      setupListeners() {
-        document.getElementById('btnExpand').addEventListener('click', () => {
-          this.renderTree(99);
+      document.getElementById('btnReset').addEventListener('click', () => {
+        document.getElementById('search').value = '';
+        document.getElementById('context').innerHTML = '<div class="context-empty">Selecciona una especialidad arriba</div>';
+        document.getElementById('nav').querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        
+        const { root } = transformer.transform(markdownData);
+        mmInstance.setData(root, { initialExpandLevel: 2 });
+        mmInstance.fit();
+      });
+
+      // Buscador
+      document.getElementById('search').addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        document.querySelectorAll('#map g.markmap-node').forEach(node => {
+          const text = node.textContent.toLowerCase();
+          if (query === '' || text.includes(query)) {
+            node.style.opacity = '1';
+          } else {
+            node.style.opacity = '0.15';
+          }
         });
-
-        document.getElementById('btnCollapse').addEventListener('click', () => {
-          this.renderTree(1);
-        });
-
-        document.getElementById('btnReset').addEventListener('click', () => {
-          document.getElementById('search').value = '';
-          document.getElementById('context').innerHTML = '<div class="context-empty">Selecciona un nodo</div>';
-          document.getElementById('nav').querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-          this.renderTree(1);
-        });
-
-        document.getElementById('search').addEventListener('input', (e) => {
-          const query = e.target.value.trim().toLowerCase();
-          document.querySelectorAll('#map .markmap-node').forEach(node => {
-            const text = node.querySelector('text')?.textContent.toLowerCase() || '';
-            node.style.opacity = (query === '' || text.includes(query)) ? '1' : '0.15';
-          });
-        });
-      }
+      });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      new App();
-    });
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
