@@ -1,63 +1,91 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Plataforma profesional de conocimiento de Miguel Otero Cabaleiro, Estabilizador Operativo de Valor Transversal.">
-<title>Miguel Otero Cabaleiro | Estabilizador Operativo de Valor Transversal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plataforma profesional de conocimiento de Miguel Otero Cabaleiro, Estabilizador Operativo de Valor Transversal. Integración de personas, procesos, recursos y tecnología.">
+  <meta name="author" content="Miguel Otero Cabaleiro">
+  <meta name="theme-color" content="#FF9900">
+
+  <!-- Open Graph para compartir en LinkedIn / WhatsApp / Redes -->
+  <meta property="og:title" content="Miguel Otero Cabaleiro | Estabilizador Operativo">
+  <meta property="og:description" content="Mapa interactivo de conocimiento y capacidades operativas. 35+ años de experiencia, 20+ sectores, 30+ certificaciones y respaldo público oficial (DOG).">
+  <meta property="og:type" content="website">
+
+  <title>Miguel Otero Cabaleiro | Estabilizador Operativo de Valor Transversal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="app">
 
-<header class="cabecera">
-  <div class="cabecera-contenido">
-    <div>
-      <div class="cabecera-nombre">Miguel Otero Cabaleiro</div>
-      <h1 class="cabecera-titulo">Estabilizador Operativo de Valor Transversal</h1>
-      <div class="cabecera-subtitulo">Integración de personas, procesos, recursos, organización y tecnología.</div>
+  <!-- Cabecera Principal con Magnitudes del CV Extendido -->
+  <header class="cabecera">
+    <div class="cabecera-contenido">
+      <div class="cabecera-izq">
+        <div class="cabecera-nombre">Miguel Otero Cabaleiro</div>
+        <h1 class="cabecera-titulo">Estabilizador Operativo de Valor Transversal</h1>
+        <div class="cabecera-subtitulo">Integración práctica de personas, procesos, recursos materiales, organización e Inteligencia Artificial.</div>
+      </div>
+      <div class="cabecera-magnitudes" aria-label="Magnitudes profesionales verificadas">
+        <div class="magnitud" title="35+ años de experiencia continuada (1985-2026)">
+          <b id="m-exp">35+</b>
+          <span>Años Exp.</span>
+        </div>
+        <div class="magnitud" title="Más de 20 sectores productivos de aplicación directa">
+          <b id="m-sec">20+</b>
+          <span>Sectores</span>
+        </div>
+        <div class="magnitud" title="Más de 30 empresas, entidades y 30+ certificaciones">
+          <b id="m-emp">30+</b>
+          <span>Entidades</span>
+        </div>
+      </div>
     </div>
-    <div class="cabecera-magnitudes" aria-label="Magnitudes profesionales">
-      <div class="magnitud"><b id="m-exp">--</b><span>Años</span></div>
-      <div class="magnitud"><b id="m-sec">--</b><span>Sectores</span></div>
-      <div class="magnitud"><b id="m-emp">--</b><span>Entidades</span></div>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main class="cuerpo">
-  <aside class="lateral">
-    <div class="caja-buscador">
-      <label for="buscador" class="sr-only">Buscar en el mapa de conocimiento</label>
-      <input type="search" id="buscador" placeholder="Buscar empresa, curso, maquinaria o competencia..." autocomplete="off" spellcheck="false">
-    </div>
-    <nav id="menu" aria-label="Navegación por áreas profesionales"></nav>
-    <section id="contexto" aria-live="polite">
-      <div class="contexto-vacio">Selecciona un área o utiliza el buscador.</div>
+  <!-- Cuerpo Operativo de la Plataforma -->
+  <main class="cuerpo">
+    <!-- Barra Lateral: Buscador y Filtros por Áreas RRHH -->
+    <aside class="lateral">
+      <div class="caja-buscador">
+        <label for="buscador" class="sr-only">Buscar en el mapa de conocimiento</label>
+        <input type="search" id="buscador" placeholder="🔍 Buscar (ej. camión, IA, DOG, carretillas)..." autocomplete="off" spellcheck="false">
+      </div>
+      <nav id="menu" aria-label="Navegación por áreas profesionales"></nav>
+      <section id="contexto" aria-live="polite">
+        <div class="contexto-vacio">Selecciona un área o utiliza el buscador superior para explorar la base de conocimiento.</div>
+      </section>
+    </aside>
+
+    <!-- Zona Central: Árbol Interactivo Markmap -->
+    <section class="zona-arbol" aria-label="Mapa de conocimiento profesional">
+      <div class="barra-herramientas">
+        <button type="button" class="btn-herramienta" id="btn-expandir">▼ Expandir árbol</button>
+        <button type="button" class="btn-herramienta" id="btn-contraer">▲ Contraer árbol</button>
+        <button type="button" class="btn-herramienta" id="btn-limpiar">✕ Restablecer vista</button>
+      </div>
+      <div class="contenedor-mapa">
+        <svg id="mapa" role="img" aria-label="Árbol interactivo de conocimiento profesional"></svg>
+      </div>
     </section>
-  </aside>
+  </main>
 
-  <section class="zona-arbol" aria-label="Mapa de conocimiento profesional">
-    <div class="barra-herramientas">
-      <button type="button" class="btn-herramienta" id="btn-expandir">Expandir árbol</button>
-      <button type="button" class="btn-herramienta" id="btn-contraer">Contraer árbol</button>
-      <button type="button" class="btn-herramienta" id="btn-limpiar">Restablecer vista</button>
-    </div>
-    <div class="contenedor-mapa">
-      <svg id="mapa" role="img" aria-label="Árbol interactivo de conocimiento profesional"></svg>
-    </div>
-  </section>
-</main>
-
-<footer class="pie">
-  Plataforma Profesional de Conocimiento · Miguel Otero Cabaleiro
-</footer>
+  <!-- Pie de Página e Información de Contacto Directo -->
+  <footer class="pie">
+    <span>Plataforma Profesional de Conocimiento · <b>Miguel Otero Cabaleiro</b></span> | 
+    <span>Torrevieja (Alicante)</span> | 
+    <span>Tel: <a href="tel:+34669808392" style="color:inherit; text-decoration:underline;">+34 669 808 392</a></span> | 
+    <span>Email: <a href="mailto:migueloterocabaleiro@gmail.com" style="color:inherit; text-decoration:underline;">migueloterocabaleiro@gmail.com</a></span> | 
+    <span>Respaldo Oficial: <b>DOG nº 155 (18/08/2014)</b></span>
+  </footer>
 
 </div>
 
+<!-- Librerías de Visualización de Datos y Lógica Principal -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4"></script>
 <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
