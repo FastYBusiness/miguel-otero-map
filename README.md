@@ -1,159 +1,66 @@
 # Plataforma Profesional de Conocimiento
 
 ## Miguel Otero Cabaleiro
-
 ### Estabilizador Operativo de Valor Transversal
 
 ---
 
 ## ¿Qué es este proyecto?
 
-Esta plataforma no es un currículum tradicional ni un portfolio.
+Esta plataforma no es un currículum tradicional ni un portafolio estático.
 
-Es una base de conocimiento interactiva diseñada para representar de forma estructurada una trayectoria profesional desarrollada durante más de 35 años en distintos sectores, mostrando una única capacidad profesional aplicada a contextos diferentes.
+Es la **base de conocimiento interactiva y navegable** que sirve como reflejo digital del **Documento Maestro de Posicionamiento Profesional (CV Extendido en 17 apartados)**. 
 
-La información se organiza para facilitar su exploración por personas y por futuros sistemas de Inteligencia Artificial.
+Está diseñada para representar de forma estructurada, trazable y verificable una trayectoria profesional desarrollada durante más de 35 años en más de 20 sectores productivos, demostrando el despliegue de una única capacidad transversal de estabilización e integración aplicada a contextos diferentes.
 
----
-
-## Propuesta de Valor
-
-**Profesional orientado a integrar personas, procesos, recursos, organización y tecnología para resolver problemas reales, aportar continuidad operativa y mejorar el rendimiento de organizaciones de distintos sectores.**
-
-La diversidad de experiencias no representa profesiones independientes, sino una misma capacidad transversal aplicada a entornos diferentes.
+La información está organizada mediante estándares web abiertos para facilitar su exploración fluida por seleccionadores humanos y su procesamiento por futuros sistemas de Inteligencia Artificial (LLMs / RAG).
 
 ---
 
-## Áreas Profesionales
+## Propuesta de Valor Estratégica
 
-La información está organizada en cinco grandes áreas de gestión:
+**Integración práctica y directa de personas, procesos, recursos materiales, organización institucional y tecnologías aplicadas para resolver incidencias críticas, aportar continuidad operativa, eliminar fricciones en la cadena de producción y optimizar el rendimiento global de las organizaciones.**
 
-- Operaciones
-- Comercial
-- Gestión y Organización
-- Personas
-- Tecnología
-
-Estas áreas se relacionan automáticamente con sectores, aptitudes, experiencias, formación y evidencias.
+La diversidad de experiencias no representa profesiones independientes, sino una misma capacidad transversal de diagnóstico, resolución e integración adaptada al terreno.
 
 ---
 
-## Funcionalidades
+## Áreas Profesionales de Gestión (RRHH)
 
-La plataforma permite:
+La información se vertebra en cinco grandes áreas estratégicas y operativas:
 
-- Buscar cualquier experiencia mediante una palabra.
-- Navegar mediante un árbol interactivo.
-- Explorar sectores profesionales.
-- Consultar competencias y aptitudes.
-- Visualizar formación y experiencia relacionada.
-- Acceder a evidencias documentales asociadas.
+- **Operaciones:** Obra civil, maquinaria pesada (hasta 64T), canteras, logística, transporte rígido (18T) con grúa (10T) y PRL.
+- **Comercial:** Desarrollo de negocio, redes MLM, venta consultiva, prospección y fidelización.
+- **Gestión y Organización:** Presidencia asociativa, interlocución pública, tramitación de subvenciones y expedientes.
+- **Personas:** Liderazgo carismático, mediación de conflictos, docencia reglada (Yoga 580h) y acompañamiento emocional.
+- **Tecnología:** Inteligencia Artificial Generativa (UTAMED 30 ECTS), automatización de procesos, Markdown, HTML5, JSON y Git/GitHub Pages.
 
-Ejemplos de búsqueda:
-
-- camión
-- retroexcavadora
-- Mercadona
-- IA
-- GitHub
-- Yoga
-- MLM
-- mantenimiento
-- coordinación
-- PRL
+Estas áreas se relacionan dinámicamente con sectores, aptitudes, nodos de experiencia, formación y evidencias oficiales.
 
 ---
 
-## Arquitectura
+## Funcionalidades de la Plataforma
 
-El proyecto utiliza una arquitectura extremadamente sencilla y compatible con GitHub Pages.
+- **Buscador Multicriterio Instantáneo:** Localiza cualquier experiencia, empresa, maquinaria o competencia clave por palabra.
+- **Navegación por Árbol Interactivo (Markmap):** Visualización jerárquica y expandible de toda la base de conocimiento.
+- **Exploración por Sectores (20+):** Filtro directo por ámbitos de aplicación productiva.
+- **Tarjetas de Contexto Enriquecidas:** Clasificación de nodos por tipo (*Experiencia*, *Formación Reglada*, *Capacitación / Licencias* y *Evidencia Registral*).
+- **Acceso a Evidencias Verificables:** Mención y trazabilidad de títulos, publicaciones oficiales (DOG) y habilitaciones DGT.
 
-```
-index.html
-styles.css
-app.js
-knowledge-base.json
-assets/
-README.md
-```
-
-### Fuente única de verdad
-
-Toda la información profesional se almacena exclusivamente en:
-
-```
-knowledge-base.json
-```
-
-El resto de archivos únicamente representan la información.
+### Ejemplos de Búsqueda Directa en la Web
+- `camión` / `grúa`
+- `giratoria 64T` / `cantera`
+- `Mercadona` / `Carrefour`
+- `DOG` / `Diario Oficial de Galicia`
+- `UTAMED` / `IA`
+- `Planthispania` / `Frutas Víctor López`
+- `Yoga` / `El Campello` / `Arasti Barca`
+- `Permiso C` / `PEMP` / `carretillas`
+- `O.D.Í.N.E.` / `Ana GI`
+- `FP2 Mecánica` / `subvenciones`
 
 ---
 
-## Tecnologías
+## Arquitectura del Proyecto
 
-- HTML5
-- CSS3
-- JavaScript Vanilla
-- JSON
-- Markmap
-- GitHub Pages
-
-No utiliza:
-
-- Backend
-- Base de datos
-- Node.js
-- React
-- Frameworks
-
----
-
-## Magnitudes
-
-- 35+ años de experiencia
-- 20+ sectores profesionales
-- 30+ empresas y organizaciones
-- 30+ formaciones y certificaciones
-- 15+ tipos de maquinaria operada
-- 65+ empresarios representados institucionalmente
-
----
-
-## Principios del Proyecto
-
-- Una única fuente de verdad.
-- Información verificable.
-- Arquitectura simple.
-- Sin duplicidades.
-- Compatible con GitHub Pages.
-- Preparado para evolución futura.
-
----
-
-## Evolución
-
-El modelo está preparado para futuras integraciones con:
-
-- Buscadores semánticos
-- Inteligencia Artificial
-- Sistemas RAG
-- Chatbots
-- Generación automática de documentación profesional
-
-Sin modificar la arquitectura actual.
-
----
-
-## Estado
-
-**Versión:** 3.0
-
-**Estado:** Estable
-
-**Arquitectura:** Producción
-
-**Licencia:** Uso personal
-
----
-
-> La amplitud de la trayectoria profesional refleja la capacidad de integrar personas, procesos, recursos, organización y tecnología para aportar estabilidad, continuidad operativa y mejora continua en organizaciones de distintos sectores.
+El proyecto utiliza una arquitectura *serverless* ligera, limpia y compatible al 100% con **GitHub Pages**.
