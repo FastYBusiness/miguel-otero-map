@@ -1,4 +1,20 @@
-/* styles.css — Toda la apariencia visual, separada del HTML y del contenido */
+/* ============================================================
+   styles.css — Sistema de Diseño y Apariencia Visual
+   Plataforma Profesional de Conocimiento — Miguel Otero Cabaleiro
+   ============================================================ */
+
+:root {
+  --color-primario: #FF9900;
+  --color-secundario: #FFD814;
+  --color-oscuro: #232F3E;
+  --color-texto: #111111;
+  --color-texto-secundario: #565959;
+  --color-fondo: #F3F3F3;
+  --color-blanco: #FFFFFF;
+  --color-borde: #E3E6E6;
+  --color-borde-input: #D5D9D9;
+  --color-activo: #007185;
+}
 
 * {
   margin: 0;
@@ -10,9 +26,9 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-  background: #F3F3F3;
-  color: #111111;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -22,11 +38,11 @@ html, body {
   height: 100vh;
 }
 
-/* ---------- Cabecera ---------- */
+/* ---------- 1. CABECERA ---------- */
 
 .cabecera {
-  background: linear-gradient(135deg, #FF9900 0%, #FFD814 100%);
-  padding: 18px 24px;
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+  padding: 16px 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   flex-shrink: 0;
 }
@@ -41,15 +57,16 @@ html, body {
   flex-wrap: wrap;
 }
 
-.cabecera-nombre { font-size: 14px; font-weight: 600; }
-.cabecera-titulo { font-size: 22px; font-weight: 700; margin: 2px 0; }
-.cabecera-subtitulo { font-size: 12px; color: #232F3E; }
+.cabecera-izq { flex: 1; min-width: 280px; }
+.cabecera-nombre { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.cabecera-titulo { font-size: 20px; font-weight: 700; margin: 2px 0; color: var(--color-texto); }
+.cabecera-subtitulo { font-size: 12px; color: var(--color-oscuro); font-weight: 500; }
 
 .cabecera-magnitudes { display: flex; gap: 18px; }
-.magnitud { text-align: center; font-size: 11px; font-weight: 600; }
-.magnitud b { display: block; font-size: 19px; }
+.magnitud { text-align: center; font-size: 11px; font-weight: 600; color: var(--color-oscuro); }
+.magnitud b { display: block; font-size: 18px; font-weight: 700; color: var(--color-texto); }
 
-/* ---------- Cuerpo principal ---------- */
+/* ---------- 2. CUERPO PRINCIPAL ---------- */
 
 .cuerpo {
   display: flex;
@@ -59,55 +76,61 @@ html, body {
   padding: 10px;
 }
 
-/* ---------- Barra lateral ---------- */
+/* ---------- 3. BARRA LATERAL (BUSCADOR & NAVEGACIÓN) ---------- */
 
 .lateral {
-  width: 210px;
-  background: #FFFFFF;
-  border: 1px solid #E3E6E6;
+  width: 240px;
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.caja-buscador { padding: 10px; border-bottom: 1px solid #E3E6E6; }
+.caja-buscador { padding: 10px; border-bottom: 1px solid var(--color-borde); }
 
 #buscador {
   width: 100%;
-  padding: 7px 9px;
-  border: 1px solid #D5D9D9;
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde-input);
   border-radius: 5px;
   font-size: 12px;
   font-family: inherit;
+  transition: all 0.2s ease;
 }
-#buscador:focus { outline: none; border-color: #FF9900; box-shadow: 0 0 0 2px rgba(255,153,0,0.12); }
+#buscador:focus { 
+  outline: none; 
+  border-color: var(--color-primario); 
+  box-shadow: 0 0 0 2px rgba(255,153,0,0.18); 
+}
 
 #menu {
   padding: 10px;
-  border-bottom: 1px solid #E3E6E6;
+  border-bottom: 1px solid var(--color-borde);
   overflow-y: auto;
+  max-height: 200px;
 }
 
 .menu-btn {
   display: block;
   width: 100%;
-  padding: 8px 10px;
+  padding: 7px 10px;
   margin-bottom: 4px;
   background: #FAFAFA;
-  border: 1px solid #E3E6E6;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #232F3E;
+  border: 1px solid var(--color-borde);
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-oscuro);
   cursor: pointer;
   text-align: left;
   transition: all 0.15s ease;
 }
-.menu-btn:hover { border-color: #FF9900; color: #FF9900; }
-.menu-btn.activo { background: #FF9900; border-color: #FF9900; color: #FFFFFF; }
+.menu-btn:hover { border-color: var(--color-primario); color: var(--color-primario); background: var(--color-blanco); }
+.menu-btn.activo { background: var(--color-primario); border-color: var(--color-primario); color: var(--color-blanco); }
 
 #contexto {
   flex: 1;
@@ -117,28 +140,36 @@ html, body {
   line-height: 1.5;
 }
 
-.contexto-vacio { color: #565959; text-align: center; padding-top: 30px; font-size: 12px; }
-.ctx-titulo { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-.ctx-desc { font-size: 12px; color: #565959; margin-bottom: 10px; }
-.ctx-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #565959; letter-spacing: 0.5px; margin: 10px 0 4px; }
-.item { background: #FAFAFA; border: 1px solid #E3E6E6; border-radius: 5px; padding: 6px 8px; margin-bottom: 4px; font-size: 12px; }
+.contexto-vacio { color: var(--color-texto-secundario); text-align: center; padding-top: 20px; font-size: 11px; }
+.ctx-titulo { font-size: 13px; font-weight: 700; margin-bottom: 4px; color: var(--color-texto); }
+.ctx-desc { font-size: 11px; color: var(--color-texto-secundario); margin-bottom: 8px; }
+.ctx-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--color-texto-secundario); letter-spacing: 0.5px; margin: 8px 0 2px; }
 
-/* ---------- Árbol ---------- */
+.item { 
+  background: #FAFAFA; 
+  border: 1px solid var(--color-borde); 
+  border-radius: 5px; 
+  padding: 8px; 
+  margin-bottom: 6px; 
+  font-size: 11px; 
+}
+
+/* ---------- 4. ZONA ÁRBOL INTERACTIVO (MARKMAP) ---------- */
 
 .zona-arbol {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #FFFFFF;
-  border: 1px solid #E3E6E6;
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .barra-herramientas {
   padding: 8px 12px;
-  border-bottom: 1px solid #E3E6E6;
+  border-bottom: 1px solid var(--color-borde);
   background: #FAFAFA;
   display: flex;
   gap: 6px;
@@ -146,60 +177,73 @@ html, body {
 
 .btn-herramienta {
   padding: 5px 10px;
-  background: #FFFFFF;
-  border: 1px solid #D5D9D9;
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde-input);
   border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
-  color: #232F3E;
+  color: var(--color-oscuro);
   cursor: pointer;
+  transition: all 0.15s ease;
 }
-.btn-herramienta:hover { border-color: #FF9900; color: #FF9900; }
+.btn-herramienta:hover { border-color: var(--color-primario); color: var(--color-primario); }
 
-.contenedor-mapa { flex: 1; overflow: hidden; padding: 10px; }
+.contenedor-mapa { flex: 1; overflow: hidden; padding: 6px; }
 #mapa { width: 100%; height: 100%; }
 
-.markmap text { fill: #111111 !important; font-size: 11px !important; font-weight: 500; }
-.markmap path { stroke: #37475A !important; stroke-width: 1.5px !important; stroke-linecap: round; opacity: 0.6; }
-.markmap circle { fill: #FF9900 !important; r: 3.5px; cursor: pointer; }
-.markmap-node:hover > circle { fill: #FFD814 !important; r: 5px; }
-.markmap-node:hover > text { fill: #232F3E !important; font-weight: 600; }
-.markmap-node.nodo-activo > circle { fill: #007185 !important; r: 5.5px; }
-.markmap-node.nodo-activo > text { fill: #007185 !important; font-weight: 700; }
+/* Estilos dinámicos para los nodos SVG de Markmap */
+.markmap text { fill: var(--color-texto) !important; font-size: 11px !important; font-weight: 500; }
+.markmap path { stroke: #37475A !important; stroke-width: 1.5px !important; stroke-linecap: round; opacity: 0.65; }
+.markmap circle { fill: var(--color-primario) !important; r: 3.5px; cursor: pointer; }
+.markmap-node:hover > circle { fill: var(--color-secundario) !important; r: 5px; }
+.markmap-node:hover > text { fill: var(--color-oscuro) !important; font-weight: 600; }
+.markmap-node.nodo-activo > circle { fill: var(--color-activo) !important; r: 6px; }
+.markmap-node.nodo-activo > text { fill: var(--color-activo) !important; font-weight: 700; }
 
-/* ---------- Pie ---------- */
+/* ---------- 5. PIE DE PÁGINA ---------- */
 
 .pie {
   text-align: center;
-  font-size: 10px;
-  color: #565959;
-  padding: 8px;
-  background: #FFFFFF;
-  border-top: 1px solid #E3E6E6;
+  font-size: 11px;
+  color: var(--color-texto-secundario);
+  padding: 8px 12px;
+  background: var(--color-blanco);
+  border-top: 1px solid var(--color-borde);
   flex-shrink: 0;
 }
 
-/* ---------- Responsive ---------- */
+.pie a {
+  color: inherit;
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+.pie a:hover {
+  color: var(--color-primario);
+}
+
+/* ---------- 6. ADAPTABILIDAD RESPONSIVE ---------- */
 
 @media (max-width: 1024px) {
   .cabecera-subtitulo { display: none; }
   .cuerpo { flex-direction: column-reverse; }
-  .lateral { width: 100%; max-height: 260px; flex-direction: row; flex-wrap: wrap; }
-  #menu { flex: 1; overflow-x: auto; overflow-y: hidden; display: flex; gap: 6px; border-right: 1px solid #E3E6E6; border-bottom: none; }
-  .menu-btn { flex-shrink: 0; min-width: 80px; margin: 0; }
-  .caja-buscador { flex-shrink: 0; border-right: 1px solid #E3E6E6; border-bottom: none; }
-  #contexto { flex-basis: 100%; max-height: 160px; }
+  .lateral { width: 100%; max-height: 280px; flex-direction: row; flex-wrap: wrap; }
+  #menu { flex: 1; overflow-x: auto; overflow-y: hidden; display: flex; gap: 6px; border-right: 1px solid var(--color-borde); border-bottom: none; max-height: none; }
+  .menu-btn { flex-shrink: 0; min-width: 90px; margin: 0; }
+  .caja-buscador { flex-shrink: 0; border-right: 1px solid var(--color-borde); border-bottom: none; }
+  #contexto { flex-basis: 100%; max-height: 150px; }
+  .zona-arbol { min-height: 350px; }
 }
 
 @media (max-width: 768px) {
-  .cuerpo { padding: 8px; gap: 8px; }
-  .cabecera { padding: 14px 12px; }
-  .cabecera-titulo { font-size: 17px; }
+  .cuerpo { padding: 6px; gap: 6px; }
+  .cabecera { padding: 12px; }
+  .cabecera-titulo { font-size: 16px; }
   .cabecera-magnitudes { gap: 10px; }
   .magnitud b { font-size: 15px; }
+  .pie { font-size: 10px; }
 }
 
-/* Oculta visualmente pero mantiene el texto disponible para lectores de pantalla */
+/* Accesibilidad lectores de pantalla */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -212,7 +256,8 @@ html, body {
   border: 0;
 }
 
-::-webkit-scrollbar { width: 6px; }
+/* Personalización de scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #FAFAFA; }
-::-webkit-scrollbar-thumb { background: #D5D9D9; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #FF9900; }
+::-webkit-scrollbar-thumb { background: var(--color-borde-input); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primario); }
