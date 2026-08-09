@@ -1,10 +1,11 @@
 /* ============================================================
-   app.js — Lógica de la plataforma (Release Estable para Producción)
+   app.js — Lógica de la Plataforma de Conocimiento Profesional
+   Miguel Otero Cabaleiro — Estabilizador Operativo de Valor Transversal
    Lee exclusivamente de knowledge-base.json (Única fuente de verdad).
-   Sin frameworks, sin servidor, compatible con GitHub Pages.
+   Sin frameworks, compatible con GitHub Pages.
    ============================================================ */
 
-/* ---------- 1. UTILIDADES DE TEXTO ---------- */
+/* ---------- 1. UTILIDADES DE TEXTO Y BÚSQUEDA ---------- */
 
 function normalizar(texto) {
   return String(texto || '')
@@ -17,8 +18,8 @@ function escaparRegex(texto) {
   return texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-/* Coincide solo si la búsqueda empieza una palabra (o el texto entero).
-   Garantiza máxima precisión en la búsqueda sin falsos positivos. */
+/* Coincide si la búsqueda empieza una palabra o término completo.
+   Garantiza máxima precisión sin falsos positivos. */
 function coincide(campo, queryNorm) {
   if (!campo || !queryNorm) return false;
   const patron = new RegExp('(^|[^\\p{L}\\p{N}])' + escaparRegex(queryNorm), 'u');
@@ -32,7 +33,7 @@ function agregarSinDuplicar(lista, item) {
   if (!lista.some(x => x.id === item.id)) lista.push(item);
 }
 
-/* Mapeo auxiliar de IDs a Nombres */
+/* Mapeos auxiliares de IDs a Nombres */
 function obtenerNombreSector(datos, idSector) {
   const sec = datos.sectores ? datos.sectores.find(s => s.id === idSector) : null;
   return sec ? sec.nombre : idSector;
@@ -52,7 +53,7 @@ function obtenerNombreArea(datos, idArea) {
   return area ? area.nombre : idArea;
 }
 
-/* ---------- 2. MOTOR DE BÚSQUEDA ---------- */
+/* ---------- 2. MOTOR DE BÚSQUEDA MULTICRITERIO ---------- */
 
 function buscar(query, datos) {
   const q = normalizar(query).trim();
@@ -100,7 +101,7 @@ function buscar(query, datos) {
     }
   }
 
-  // 4. Nodos de Conocimiento
+  // 4. Nodos de Conocimiento (Experiencias, Formación, Licencias, Evidencias)
   if (Array.isArray(datos.nodos_conocimiento)) {
     datos.nodos_conocimiento.forEach(nodo => {
       const nombresSectores = (nodo.id_sectores || []).map(sId => obtenerNombreSector(datos, sId));
@@ -111,6 +112,7 @@ function buscar(query, datos) {
                            coincide(nodo.descripcion, q) ||
                            coincide(nodo.entidades, q) ||
                            coincide(nodo.periodo, q) ||
+                           coincide(nodo.tipo, q) ||
                            coincide(nodo.palabras_clave, q) ||
                            coincide(nombresSectores, q) ||
                            coincide(nombresAptitudes, q) ||
@@ -125,7 +127,7 @@ function buscar(query, datos) {
   return r;
 }
 
-/* ---------- 3. CONSTRUCCIÓN DEL ÁRBOL ---------- */
+/* ---------- 3. CONSTRUCCIÓN DEL ÁRBOL INTERACTIVO ---------- */
 
 function construirArbol(datos) {
   const perfil = datos.perfil || {};
@@ -141,11 +143,11 @@ function construirArbol(datos) {
   const ramaAptitudes = () => {
     if (!datos.aptitudes) return [];
     const categorias = [
-      { key: 'operacion', nombre: 'Operación' },
-      { key: 'comercial', nombre: 'Comercial' },
-      { key: 'liderazgo', nombre: 'Liderazgo' },
-      { key: 'tecnologia', nombre: 'Tecnología' },
-      { key: 'administracion', nombre: 'Administración' }
+      { key: 'operacion', nombre: 'Operación & Logística' },
+      { key: 'comercial', nombre: 'Comercial & Negocio' },
+      { key: 'liderazgo', nombre: 'Liderazgo & Personas' },
+      { key: 'tecnologia', nombre: 'Tecnología & IA' },
+      { key: 'administracion', nombre: 'Administración & Gestión' }
     ];
     return categorias.map(cat => ({
       content: cat.nombre,
@@ -161,7 +163,7 @@ function construirArbol(datos) {
     content: perfil.nombre || 'Miguel Otero Cabaleiro',
     children: [
       {
-        content: perfil.identidad_profesional || 'ESTABILIZADOR OPERATIVO',
+        content: perfil.identidad_profesional || 'ESTABILIZADOR OPERATIVO DE VALOR TRANSVERSAL',
         children: [{ content: perfil.mision || '' }]
       },
       {
@@ -173,7 +175,7 @@ function construirArbol(datos) {
         children: ramaAptitudes()
       },
       {
-        content: 'Sectores de Aplicación',
+        content: 'Sectores de Aplicación (20+)',
         children: ramaSectores()
       }
     ]
@@ -215,7 +217,7 @@ if (typeof window !== 'undefined') {
       renderArbol(1);
       conectarBotones();
       conectarBuscador();
-      console.log('✓ Plataforma cargada correctamente');
+      console.log('✓ Plataforma cargada correctamente. Base de conocimiento sincronizada.');
     } catch (err) {
       console.error('Error cargando knowledge-base.json:', err);
       document.getElementById('contexto').innerHTML =
@@ -225,12 +227,14 @@ if (typeof window !== 'undefined') {
 
   function actualizarMagnitudesCabecera() {
     if (!DATOS || !DATOS.magnitudes) return;
-    const mags = document.querySelectorAll('.cabecera-magnitudes .magnitud b');
-    if (mags.length >= 3) {
-      mags[0].textContent = (DATOS.magnitudes.anos_experiencia || 35) + '+';
-      mags[1].textContent = (DATOS.magnitudes.sectores || 20) + '+';
-      mags[2].textContent = (DATOS.magnitudes.formaciones || 30) + '+';
-    }
+    
+    const elemExp = document.getElementById('m-exp');
+    const elemSec = document.getElementById('m-sec');
+    const elemEmp = document.getElementById('m-emp');
+
+    if (elemExp) elemExp.textContent = (DATOS.magnitudes.anos_experiencia || 35) + '+';
+    if (elemSec) elemSec.textContent = (DATOS.magnitudes.sectores || 20) + '+';
+    if (elemEmp) elemEmp.textContent = (DATOS.magnitudes.formaciones || DATOS.magnitudes.empresas || 30) + '+';
   }
 
   function renderArbol(nivel) {
@@ -242,7 +246,7 @@ if (typeof window !== 'undefined') {
       autoFit: true,
       initialExpandLevel: nivel,
       duration: DURACION_ANIMACION,
-      maxWidth: 260,
+      maxWidth: 280,
       zoom: true,
       pan: true
     }, arbol);
@@ -254,7 +258,9 @@ if (typeof window !== 'undefined') {
     nodos.forEach(n => {
       n.classList.remove('nodo-activo');
       const texto = n.querySelector('text')?.textContent || '';
-      if (!encontrado && texto.toLowerCase() === textoBuscado.toLowerCase()) encontrado = n;
+      if (!encontrado && texto.toLowerCase().includes(textoBuscado.toLowerCase())) {
+        encontrado = n;
+      }
     });
     if (encontrado) {
       encontrado.classList.add('nodo-activo');
@@ -303,6 +309,7 @@ if (typeof window !== 'undefined') {
     if (c) c.innerHTML = html;
   }
 
+  /* Renders de tarjetas formateadas por categoría */
   function renderTarjetaNodo(nodo) {
     const sectores = (nodo.id_sectores || []).map(s => obtenerNombreSector(DATOS, s)).join(', ');
     const aptitudes = (nodo.id_aptitudes || []).map(a => obtenerNombreAptitud(DATOS, a)).join(', ');
@@ -310,14 +317,28 @@ if (typeof window !== 'undefined') {
     const entidades = (nodo.entidades || []).join(', ');
     const kw = (nodo.palabras_clave || []).join(', ');
 
-    let html = `<div class="item">`;
-    html += `<b>${nodo.titulo}</b> (${nodo.periodo})<br/>`;
-    html += `<div style="margin-top:4px; color:#333;">${nodo.descripcion}</div>`;
-    if (entidades) html += `<div class="ctx-label">Entidades</div><div>${entidades}</div>`;
+    let badgeColor = '#FF9900';
+    let badgeText = (nodo.tipo || 'Nodo').toUpperCase();
+
+    if (nodo.tipo === 'experiencia') badgeColor = '#007185';
+    if (nodo.tipo === 'formacion') badgeColor = '#2e7d32';
+    if (nodo.tipo === 'capacitacion') badgeColor = '#d32f2f';
+    if (nodo.tipo === 'evidencia') badgeColor = '#6a1b9a';
+
+    let html = `<div class="item" style="border-left: 4px solid ${badgeColor};">`;
+    html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">`;
+    html += `<b>${nodo.titulo}</b>`;
+    html += `<span style="font-size:9px; background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:3px; font-weight:700;">${badgeText}</span>`;
+    html += `</div>`;
+    html += `<div style="font-size:11px; color:#565959; font-weight:600; margin-bottom:6px;">Periodo: ${nodo.periodo}</div>`;
+    html += `<div style="margin-top:4px; color:#232F3E; line-height:1.4;">${nodo.descripcion}</div>`;
+    
+    if (entidades) html += `<div class="ctx-label">Entidades / Empresas</div><div>${entidades}</div>`;
     if (areas) html += `<div class="ctx-label">Áreas RRHH</div><div>${areas}</div>`;
-    if (sectores) html += `<div class="ctx-label">Sectores</div><div>${sectores}</div>`;
-    if (aptitudes) html += `<div class="ctx-label">Aptitudes</div><div>${aptitudes}</div>`;
-    if (kw) html += `<div class="ctx-label">Palabras Clave</div><div>${kw}</div>`;
+    if (sectores) html += `<div class="ctx-label">Sectores Directos</div><div>${sectores}</div>`;
+    if (aptitudes) html += `<div class="ctx-label">Aptitudes Clave</div><div>${aptitudes}</div>`;
+    if (kw) html += `<div class="ctx-label">Palabras Clave ATS</div><div style="font-style:italic; font-size:10px; color:#565959;">${kw}</div>`;
+    
     html += `</div>`;
     return html;
   }
@@ -351,19 +372,19 @@ if (typeof window !== 'undefined') {
   }
 
   function mostrarContextoSectores() {
-    let html = `<div class="ctx-titulo">Sectores de Aplicación</div>`;
-    html += `<div class="ctx-desc">Ámbitos profesionales donde se aplica la capacidad transversal.</div>`;
+    let html = `<div class="ctx-titulo">Sectores de Aplicación (20+)</div>`;
+    html += `<div class="ctx-desc">Ámbitos profesionales donde se aplica la capacidad transversal de estabilización.</div>`;
     if (DATOS.sectores) {
       DATOS.sectores.forEach(s => {
-        html += `<div class="item">${s.nombre}</div>`;
+        html += `<div class="item"><b>${s.nombre}</b></div>`;
       });
     }
     mostrarHTML(html);
   }
 
   function mostrarContextoTodosNodos() {
-    let html = `<div class="ctx-titulo">Nodos de Conocimiento</div>`;
-    html += `<div class="ctx-desc">Inventario completo de experiencias, formación, capacitación y evidencias.</div>`;
+    let html = `<div class="ctx-titulo">Nodos de Conocimiento (Base Completa)</div>`;
+    html += `<div class="ctx-desc">Inventario completo de experiencias, formación reglada, licencias y evidencias registrales.</div>`;
     if (DATOS.nodos_conocimiento) {
       DATOS.nodos_conocimiento.forEach(n => {
         html += renderTarjetaNodo(n);
@@ -389,7 +410,7 @@ if (typeof window !== 'undefined') {
   function renderResultadosBusqueda(r) {
     const total = r.areas_hr.length + r.sectores.length + r.aptitudes.length + r.nodos.length;
     if (total === 0) {
-      mostrarHTML('<div class="contexto-vacio">Sin resultados para esa búsqueda.</div>');
+      mostrarHTML('<div class="contexto-vacio">Sin resultados para esa búsqueda. Intenta con palabras como "camión", "IA", "DOG", "carretillas" o "PEMP".</div>');
       return;
     }
     let html = '';
@@ -404,7 +425,7 @@ if (typeof window !== 'undefined') {
     if (r.sectores.length) {
       html += `<div class="ctx-label">Sectores</div>`;
       r.sectores.forEach(s => {
-        html += `<div class="item">${s.nombre}</div>`;
+        html += `<div class="item"><b>${s.nombre}</b></div>`;
       });
     }
 
@@ -416,7 +437,7 @@ if (typeof window !== 'undefined') {
     }
 
     if (r.nodos.length) {
-      html += `<div class="ctx-label">Nodos de Conocimiento</div>`;
+      html += `<div class="ctx-label">Nodos de Conocimiento (${r.nodos.length})</div>`;
       r.nodos.forEach(n => {
         html += renderTarjetaNodo(n);
       });
