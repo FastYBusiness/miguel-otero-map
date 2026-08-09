@@ -6,7 +6,7 @@
   },
   "magnitudes": {
     "anos_experiencia": 35,
-    "sectores": 5,
+    "sectores": 20,
     "empresas": 30,
     "formaciones": 30,
     "maquinas_operadas": 15,
@@ -28,50 +28,50 @@
     { "id": "sec_logistica", "nombre": "Logística" },
     { "id": "sec_distribucion", "nombre": "Distribución" },
     { "id": "sec_transporte", "nombre": "Transporte" },
-    { "id": "sec_restauracion", "nombre": "Restauración" },
-    { "id": "sec_comercio", "nombre": "Comercio" },
-    { "id": "sec_venta_directa", "nombre": "Venta directa" },
+    { "id": "sec_restauracion", "nombre": "Restauración y Hostelería" },
+    { "id": "sec_comercio", "nombre": "Comercio y Retail" },
+    { "id": "sec_venta_directa", "nombre": "Venta directa y MLM" },
     { "id": "sec_venta_consultiva", "nombre": "Venta consultiva" },
     { "id": "sec_atencion_cliente", "nombre": "Atención al cliente" },
-    { "id": "sec_coordinacion", "nombre": "Coordinación" },
-    { "id": "sec_direccion", "nombre": "Dirección" },
-    { "id": "sec_bienestar", "nombre": "Bienestar" },
-    { "id": "sec_yoga", "nombre": "Yoga" },
-    { "id": "sec_terapias", "nombre": "Terapias alternativas" },
-    { "id": "sec_automatizacion", "nombre": "Automatización" },
+    { "id": "sec_coordinacion", "nombre": "Coordinación de equipos" },
+    { "id": "sec_direccion", "nombre": "Dirección e Instituciones" },
+    { "id": "sec_bienestar", "nombre": "Bienestar y Salud integral" },
+    { "id": "sec_yoga", "nombre": "Yoga e Instrucción" },
+    { "id": "sec_terapias", "nombre": "Terapias alternativas y O.D.Í.N.E." },
+    { "id": "sec_automatizacion", "nombre": "Automatización de procesos" },
     { "id": "sec_digitalizacion", "nombre": "Digitalización" },
     { "id": "sec_ia", "nombre": "Inteligencia artificial" },
-    { "id": "sec_administracion", "nombre": "Administración y Gestión" },
-    { "id": "sec_energias_renovables", "nombre": "Energías Renovables" }
+    { "id": "sec_administracion", "nombre": "Administración y Gestión pública" },
+    { "id": "sec_energias_renovables", "nombre": "Energías Renovables y Solar" }
   ],
   "aptitudes": {
     "operacion": [
       { "id": "apt_incidencias", "nombre": "Resolver incidencias" },
-      { "id": "apt_coordinacion_op", "nombre": "Coordinación" },
-      { "id": "apt_organizacion", "nombre": "Organización" },
+      { "id": "apt_coordinacion_op", "nombre": "Coordinación operativa" },
+      { "id": "apt_organizacion", "nombre": "Organización de procesos" },
       { "id": "apt_continuidad", "nombre": "Continuidad operativa" },
-      { "id": "apt_optimizacion", "nombre": "Optimización" },
-      { "id": "apt_planificacion", "nombre": "Planificación" }
+      { "id": "apt_optimizacion", "nombre": "Optimización de recursos" },
+      { "id": "apt_planificacion", "nombre": "Planificación logística" }
     ],
     "comercial": [
-      { "id": "apt_ventas", "nombre": "Ventas" },
+      { "id": "apt_ventas", "nombre": "Ventas y Negocio" },
       { "id": "apt_negociacion", "nombre": "Negociación" },
-      { "id": "apt_captacion", "nombre": "Captación" },
-      { "id": "apt_cierre", "nombre": "Cierre" },
+      { "id": "apt_captacion", "nombre": "Captación de clientes" },
+      { "id": "apt_cierre", "nombre": "Cierre de operaciones" },
       { "id": "apt_fidelizacion", "nombre": "Fidelización" },
-      { "id": "apt_asesoramiento", "nombre": "Asesoramiento" },
-      { "id": "apt_prospeccion", "nombre": "Prospección" }
+      { "id": "apt_asesoramiento", "nombre": "Asesoramiento consultivo" },
+      { "id": "apt_prospeccion", "nombre": "Prospección de mercados" }
     ],
     "liderazgo": [
-      { "id": "apt_coordinacion_lid", "nombre": "Coordinación" },
-      { "id": "apt_mediacion", "nombre": "Mediación" },
-      { "id": "apt_comunicacion", "nombre": "Comunicación" },
-      { "id": "apt_conflictos", "nombre": "Gestión de conflictos" }
+      { "id": "apt_coordinacion_lid", "nombre": "Liderazgo institucional" },
+      { "id": "apt_mediacion", "nombre": "Mediación de conflictos" },
+      { "id": "apt_comunicacion", "nombre": "Comunicación adaptativa" },
+      { "id": "apt_conflictos", "nombre": "Gestión de crisis" }
     ],
     "tecnologia": [
       { "id": "apt_ia_procesos", "nombre": "IA aplicada a procesos productivos" },
-      { "id": "apt_automatizacion", "nombre": "Automatización" },
-      { "id": "apt_documentacion", "nombre": "Documentación" }
+      { "id": "apt_automatizacion", "nombre": "Automatización con LLMs" },
+      { "id": "apt_documentacion", "nombre": "Estructuración de datos (JSON/HTML/Markdown)" }
     ],
     "administracion": [
       { "id": "apt_gestion_admin", "nombre": "Gestión administrativa" },
@@ -83,19 +83,20 @@
     {
       "id": "nodo_exp_maquinaria_pesada",
       "tipo": "experiencia",
-      "titulo": "Operador y Gestor de Maquinaria de Obra Pública",
+      "titulo": "Operador y Gestor de Maquinaria de Obra Pública y Canteras",
       "entidades": [
+        "Excanando S.A.",
+        "Fomento de Áridos y Obras S.L.",
         "Excavaciones Dena S.L.",
         "Construcciones Carro S.L.",
-        "Excanando S.A.",
         "Acad Viaria S.L.",
-        "Fomento de Áridos y Obras",
-        "Excavaciones Alimaos S.L.",
         "CyC Piñeiro / Fenosa",
-        "Autónomo"
+        "Obras y Viales",
+        "Excavaciones Alimaos S.L.",
+        "Trabajador Autónomo"
       ],
       "periodo": "1988 - 2008",
-      "descripcion": "Operación de más de 15 tipos de maquinaria (giratorias de hasta 64T, retroexcavadoras, bulldozer, camión grúa). Ejecución continua para clientes externos y empresas, garantizando la resolución de incidencias en terreno y continuidad operativa.",
+      "descripcion": "Operación avanzada de más de 15 tipos de maquinaria pesada (giratorias de cadenas de hasta 64T en obra civil y 50T en cantera a cielo abierto, retroexcavadoras, bulldozer, hincadora de biondas de seguridad y camión grúa). Garantía de continuidad operativa, canalizaciones de fibra/electricidad y mantenimiento mecánico preventivo.",
       "id_areas": ["hr_ope"],
       "id_sectores": [
         "sec_construccion",
@@ -111,30 +112,31 @@
         "apt_coordinacion_op"
       ],
       "palabras_clave": [
-        "retroexcavadora",
-        "camión",
-        "obra",
-        "maquinaria",
-        "excavadora",
-        "movimiento de tierras",
-        "carretillas",
         "giratoria 64T",
-        "bulldozer",
+        "giratoria 50T",
         "cantera",
-        "canalizaciones"
+        "bulldozer",
+        "retroexcavadora",
+        "camión grúa",
+        "biondas",
+        "Fenosa",
+        "canalizaciones",
+        "movimiento de tierras",
+        "obra civil",
+        "Cuenca"
       ]
     },
     {
       "id": "nodo_exp_logistica",
       "tipo": "experiencia",
-      "titulo": "Gestión Logística y Distribución",
+      "titulo": "Gestión Logística, Conducción Especializada y Distribución",
       "entidades": [
+        "Planthispania (2026)",
         "Transportes Inmediatos Personalizados SLU",
-        "Planthispania",
-        "Distribución Alimentaria (Carrefour, Froiz, Mercadona, Eroski, Día)"
+        "Distribución Alimentaria de Última Milla (Carrefour, Mercadona, Froiz, Eroski, Día)"
       ],
       "periodo": "2005 - 2026",
-      "descripcion": "Recogida, organización y reparto para grandes superficies y particulares. Conducción de camión rígido (18T) con grúa (10T) y apoyo logístico en obra civil.",
+      "descripcion": "Conducción especialista de camión rígido pesado (18T) equipado con grúa articulada (10T) para transporte de material industrial. Gestión logística de distribución capilar para las principales cadenas de alimentación en Pontevedra y Poio, cumpliendo ventanas horarias estrictas sin mermas.",
       "id_areas": ["hr_ope", "hr_com"],
       "id_sectores": [
         "sec_logistica",
@@ -148,30 +150,61 @@
         "apt_incidencias"
       ],
       "palabras_clave": [
+        "Planthispania",
+        "camión 18T",
+        "grúa 10T",
         "Mercadona",
         "Carrefour",
         "Froiz",
         "Eroski",
         "Día",
-        "logística",
-        "reparto",
-        "camión",
-        "grúa",
-        "transporte de mercancías"
+        "logística alimentaria",
+        "estiba",
+        "reparto de última milla"
+      ]
+    },
+    {
+      "id": "nodo_exp_procesado_alimentario",
+      "tipo": "experiencia",
+      "titulo": "Especialista en Procesado Alimentario y Expansión de Marca",
+      "entidades": [
+        "Frutas Víctor López S.L.",
+        "Mambovento S.L."
+      ],
+      "periodo": "2025 - 2026",
+      "descripcion": "Elaboración y formulación de zumos/smoothies naturales, estandarización de cadenas de producción manual e industrial, control de calidad higiénico-sanitario y vertebración de canales de distribución local para la expansión hacia nuevos municipios.",
+      "id_areas": ["hr_ope", "hr_com"],
+      "id_sectores": [
+        "sec_distribucion",
+        "sec_atencion_cliente",
+        "sec_coordinacion"
+      ],
+      "id_aptitudes": [
+        "apt_organizacion",
+        "apt_optimizacion",
+        "apt_incidencias"
+      ],
+      "palabras_clave": [
+        "Frutas Víctor López",
+        "Mambovento",
+        "procesado alimentario",
+        "control de calidad",
+        "mermas",
+        "expansión comercial"
       ]
     },
     {
       "id": "nodo_exp_comercial_mlm",
       "tipo": "experiencia",
-      "titulo": "Desarrollo de Negocio y Ventas (MLM y Venta Directa)",
+      "titulo": "Desarrollo de Negocio, Ventas Directas y Redes Comerciales",
       "entidades": [
-        "Herboristería",
-        "Telefonía IP",
-        "Plataforma Internacional Oro",
-        "Sector Criptomonedas"
+        "Sector Criptomonedas y Productos Financieros (2017-2020)",
+        "Plataforma Internacional Oro de Inversión",
+        "Red de Telefonía IP",
+        "Marcas Internacionales de Herboristería"
       ],
       "periodo": "1996 - 2020",
-      "descripcion": "Creación, prospección y gestión de redes comerciales (hasta 100 personas). Venta consultiva, asesoramiento financiero, fidelización y conferencias mensuales. Captación y cierre de operaciones de inversión y bienestar.",
+      "descripcion": "Creación, prospección, capacitación y liderazgo de redes comerciales distribuidas de hasta 100 personas. Venta consultiva en inversión, oro, telecomunicaciones y salud. Organización e impartición de conferencias mensuales de divulgación comercial.",
       "id_areas": ["hr_com", "hr_ges", "hr_per"],
       "id_sectores": [
         "sec_comercio",
@@ -191,28 +224,62 @@
       ],
       "palabras_clave": [
         "MLM",
-        "ventas",
+        "redes comerciales",
+        "oro de inversión",
+        "telefonía IP",
+        "criptomonedas",
+        "venta consultiva",
         "prospección",
-        "negociación",
-        "seguimiento comercial",
-        "desarrollo comercial",
-        "captación",
-        "asesoramiento",
-        "redes comerciales"
+        "conferencias"
+      ]
+    },
+    {
+      "id": "nodo_exp_institucional",
+      "tipo": "experiencia",
+      "titulo": "Liderazgo Institucional, Presidencia Patronal y Gestión Pública",
+      "entidades": [
+        "Federación de Profesionais e Pequenos Empresarios Rías Baixas (Presidente Fundador)",
+        "Asociación O Corazón de Meaño (Presidente)"
+      ],
+      "periodo": "2008 - 2020",
+      "descripcion": "Representación institucional publicada en el Diario Oficial de Galicia (DOG nº 155, 18/08/2014). Coordinación de más de 65 pymes, interlocución en plenos municipales, Cámaras de Comercio y Mancomunidad del Salnés. Solicitud y justificación de subvenciones autonómicas (DOG 2016, 2017, 2018) y gestión de crisis del COVID-19.",
+      "id_areas": ["hr_ges", "hr_per", "hr_com"],
+      "id_sectores": [
+        "sec_direccion",
+        "sec_coordinacion",
+        "sec_comercio",
+        "sec_administracion"
+      ],
+      "id_aptitudes": [
+        "apt_coordinacion_lid",
+        "apt_mediacion",
+        "apt_comunicacion",
+        "apt_conflictos",
+        "apt_tramites_oficiales"
+      ],
+      "palabras_clave": [
+        "DOG",
+        "Diario Oficial de Galicia",
+        "Federación Rías Baixas",
+        "O Corazón de Meaño",
+        "subvenciones",
+        "patronal",
+        "asociacionismo",
+        "COVID-19",
+        "plenos municipales"
       ]
     },
     {
       "id": "nodo_exp_hosteleria",
       "tipo": "experiencia",
-      "titulo": "Gestión y Operaciones en Hostelería",
+      "titulo": "Gestión de Hostelería, Mantenimiento de Alto Standing y Servicios",
       "entidades": [
-        "Bocatería Messura",
-        "Club Tenis Vilanova (Cantina deportiva)",
-        "Burger King",
-        "Hotel (Recepción)"
+        "Bocatería Messura (~6 años)",
+        "Urbanización Islamar (Isla de A Toxa)",
+        "Burger King / Recepción Hotelera / Cantinas Deportivas"
       ],
-      "periodo": "1986 - 2015",
-      "descripcion": "Gestión diaria de locales, atención al cliente en barra y comedor, control de caja, organización del servicio, logística semanal y mantenimiento de instalaciones.",
+      "periodo": "1985 - 2015",
+      "descripcion": "Gestión integral de establecimiento de restauración (caja, proveedores, personal). Seguridad privada, control de accesos y mantenimiento técnico de instalaciones de lujo en A Toxa (piscinas, jardines). Servicios de repartidor en moto y recepción nocturna.",
       "id_areas": ["hr_ope", "hr_com", "hr_ges"],
       "id_sectores": [
         "sec_restauracion",
@@ -226,95 +293,27 @@
         "apt_fidelizacion"
       ],
       "palabras_clave": [
+        "Messura",
+        "A Toxa",
+        "Islamar",
         "hostelería",
-        "cafetería",
-        "barra",
-        "comedor",
-        "atención al cliente",
-        "gestión diaria",
-        "organización del servicio",
-        "caja"
-      ]
-    },
-    {
-      "id": "nodo_exp_institucional",
-      "tipo": "experiencia",
-      "titulo": "Liderazgo Institucional y Asociativo",
-      "entidades": [
-        "Federación de Profesionais e Pequenos Empresarios Rías Baixas",
-        "Asociación O Corazón de Meaño"
-      ],
-      "periodo": "2008 - 2020",
-      "descripcion": "Presidente fundador (publicado en el Diario Oficial de Galicia - DOG 18/08/2014). Coordinación de más de 65 empresarios, mediación institucional, gestión de subvenciones públicas, campañas comerciales y gestión de crisis.",
-      "id_areas": ["hr_ges", "hr_per", "hr_com"],
-      "id_sectores": [
-        "sec_direccion",
-        "sec_coordinacion",
-        "sec_comercio",
-        "sec_administracion"
-      ],
-      "id_aptitudes": [
-        "apt_coordinacion_lid",
-        "apt_mediacion",
-        "apt_comunicacion",
-        "apt_conflictos",
-        "apt_planificacion"
-      ],
-      "palabras_clave": [
-        "coordinación",
-        "dirección",
-        "empresarios",
-        "subvenciones",
-        "mediación",
-        "DOG",
-        "Federación Rías Baixas",
-        "asociacionismo"
-      ]
-    },
-    {
-      "id": "nodo_exp_mantenimiento",
-      "tipo": "experiencia",
-      "titulo": "Mantenimiento Técnico y Electromecánica",
-      "entidades": [
-        "Circuito de Karts",
-        "Islamar / A Toxa",
-        "Ejército de Tierra (Cabo de Taller Mecánico - Marines)",
-        "Autodidacta"
-      ],
-      "periodo": "1985 - Presente",
-      "descripcion": "Mecánica avanzada de motores y maquinaria, mantenimiento preventivo de instalaciones, resolución de averías electromecánicas, electricidad aplicada y diagnosis.",
-      "id_areas": ["hr_ope", "hr_tec"],
-      "id_sectores": [
-        "sec_construccion",
-        "sec_maquinaria",
-        "sec_automatizacion"
-      ],
-      "id_aptitudes": [
-        "apt_incidencias",
-        "apt_continuidad",
-        "apt_optimizacion"
-      ],
-      "palabras_clave": [
-        "mantenimiento",
-        "mantenimiento preventivo",
-        "mecánica",
-        "electricidad aplicada",
-        "diagnosis",
-        "resolución de averías",
-        "cabo de taller"
+        "mantenimiento integral",
+        "control de accesos",
+        "seguridad privada",
+        "cantina"
       ]
     },
     {
       "id": "nodo_exp_terapias_yoga",
       "tipo": "experiencia",
-      "titulo": "Monitor de Yoga y Terapeuta de Desarrollo Personal",
+      "titulo": "Monitor de Yoga, Terapeuta O.D.Í.N.E. y Docencia",
       "entidades": [
-        "Sistema Ana GI (13 años de formación con la Maestra Ana GI)",
-        "Arasti Barca",
-        "Ayuntamiento de El Campello"
+        "Arasti Barca M.A. S.L. / Escuelas Deportivas Municipales de El Campello (2023-2024)",
+        "Sistema Ana GI (13+ años de inmersión)",
+        "Clases presenciales de Yoga en Altea (3 años)"
       ],
       "periodo": "2013 - Presente",
-      "descripcion": "Instrucción de yoga (Monitor Oficial 580h), terapia O.D.Í.N.E. (+200h), masajista terapéutico, gestión de grupos, retiros y colaboración activa en expansión de marca, divulgación y digitalización del conocimiento.",
+      "descripcion": "Instrucción de yoga reglada (Certificado 580h), terapeuta especializado en el sistema O.D.Í.N.E. (+200h prácticas), masajista terapéutico, coordinación logística de retiros presenciales y seminarios online (Zoom), y digitalización del conocimiento mediante IA.",
       "id_areas": ["hr_per", "hr_com", "hr_ges"],
       "id_sectores": [
         "sec_bienestar",
@@ -330,22 +329,56 @@
       ],
       "palabras_clave": [
         "yoga",
-        "terapias",
-        "Ana GI",
-        "divulgación",
-        "crecimiento personal",
-        "bienestar",
+        "Arasti Barca",
+        "El Campello",
+        "Altea",
         "O.D.Í.N.E.",
-        "masaje"
+        "Ana GI",
+        "masaje terapéutico",
+        "retiros",
+        "desarrollo personal"
+      ]
+    },
+    {
+      "id": "nodo_exp_mantenimiento_militar",
+      "tipo": "experiencia",
+      "titulo": "Electromecánica, Mantenimiento Industrial y Logística Militar",
+      "entidades": [
+        "Ejército de Tierra (Cabo de Taller Mecánico - Marines, Valencia)",
+        "Circuito de Karts",
+        "Mantenimiento Autodidacta e Industrial"
+      ],
+      "periodo": "1985 - Presente",
+      "descripcion": "Cabo de Taller Mecánico en unidad de carros de combate (diplomado con Diploma de Honor en 1993). Mantenimiento electromecánico de motores diésel/gasolina, diagnosis de sistemas hidráulicos de maquinaria pesada, soldadura por hilo/electrodo y electricidad industrial.",
+      "id_areas": ["hr_ope", "hr_tec"],
+      "id_sectores": [
+        "sec_construccion",
+        "sec_maquinaria",
+        "sec_automatizacion"
+      ],
+      "id_aptitudes": [
+        "apt_incidencias",
+        "apt_continuidad",
+        "apt_optimizacion"
+      ],
+      "palabras_clave": [
+        "cabo de taller",
+        "carros de combate",
+        "Marines Valencia",
+        "Diploma de Honor",
+        "motores diésel",
+        "hidráulica",
+        "soldadura",
+        "mantenimiento electromecánico"
       ]
     },
     {
       "id": "nodo_form_ia_tech",
       "tipo": "formacion",
       "titulo": "Máster en IA Aplicada y Optimización de Procesos Productivos",
-      "entidades": ["UTAMED"],
-      "periodo": "2026",
-      "descripcion": "Implementación de inteligencia artificial, digitalización de activos, automatización de tareas y estructuración de bases de conocimiento. Desarrollo operativo utilizando tecnologías web y formatos de datos estándar (JSON, HTML, Markdown, Git).",
+      "entidades": ["UTAMED (Universidad Tecnológica del Atlántico Mediterráneo)"],
+      "periodo": "2026 - 2027",
+      "descripcion": "Postgrado de 30 ECTS (~900h). Implementación de inteligencia artificial generativa, automatización de procesos administrativos/operativos con LLMs, estructuración de bases de datos web (JSON, HTML5, Markdown) y despliegue técnico en Git/GitHub Pages.",
       "id_areas": ["hr_tec", "hr_ope", "hr_ges"],
       "id_sectores": [
         "sec_ia",
@@ -359,32 +392,60 @@
         "apt_optimizacion"
       ],
       "palabras_clave": [
+        "UTAMED",
         "IA",
         "inteligencia artificial",
-        "automatización",
-        "documentación",
-        "GitHub",
-        "HTML",
+        "prompt engineering",
+        "GitHub Pages",
         "JSON",
-        "digitalización",
-        "organización del conocimiento",
-        "UTAMED"
+        "HTML",
+        "Markdown",
+        "automatización de procesos"
+      ]
+    },
+    {
+      "id": "nodo_form_mecanica_fp",
+      "tipo": "formacion",
+      "titulo": "Formación Profesional Reglada en Mecánica y Electricidad del Automóvil",
+      "entidades": ["IES Villalonga (Sanxenxo, Pontevedra)"],
+      "periodo": "1988 - 1993",
+      "descripcion": "Titulaciones oficiales de FP1 (Técnico Auxiliar en Mecánica, 1990) y FP2 (Técnico Especialista en Mecánica y Electricidad del Automóvil, 1993). Base técnica oficial para la diagnosis electromecánica, motores de combustión y mantenimiento industrial.",
+      "id_areas": ["hr_ope", "hr_tec"],
+      "id_sectores": [
+        "sec_maquinaria",
+        "sec_transporte",
+        "sec_construccion"
+      ],
+      "id_aptitudes": [
+        "apt_incidencias",
+        "apt_continuidad",
+        "apt_optimizacion"
+      ],
+      "palabras_clave": [
+        "FP2 Mecánica",
+        "FP1 Mecánica",
+        "IES Villalonga",
+        "electricidad del automóvil",
+        "diagnosis de motores",
+        "mantenimiento técnico"
       ]
     },
     {
       "id": "nodo_form_gestion_admin",
       "tipo": "formacion",
-      "titulo": "Gestión Auxiliar Administrativa y Energías Renovables",
+      "titulo": "Administración Auxiliar, Energías Renovables y PRL",
       "entidades": [
         "Xunta de Galicia",
-        "Centros de Formación Técnica Especializada"
+        "Generalitat Valenciana (Monitor de Yoga 580h)",
+        "FORMASELECT / CIP Formaciones / OCV"
       ],
-      "periodo": "1990 - 2024",
-      "descripcion": "Formación acreditada en Operaciones Auxiliares Administrativas (473h + 160h prácticas), Experto en Energías Renovables y Solar Fotovoltaica (870h combinadas), Prevención de Riesgos Laborales (PRL 50h) y Mecanografía Superior (>120 ppm).",
-      "id_areas": ["hr_ges", "hr_ope"],
+      "periodo": "1989 - 2024",
+      "descripcion": "Certificado Oficial de Monitor de Yoga (580h, Generalitat Valenciana). Operaciones Auxiliares Administrativas (473h + 160h prácticas, Xunta de Galicia). Experto en Energías Renovables y Solar Fotovoltaica (870h combinadas). Técnico PRL (110h). Mecanografía superior rápida (>120 ppm).",
+      "id_areas": ["hr_ges", "hr_ope", "hr_per"],
       "id_sectores": [
         "sec_administracion",
         "sec_energias_renovables",
+        "sec_yoga",
         "sec_coordinacion"
       ],
       "id_aptitudes": [
@@ -394,25 +455,25 @@
         "apt_organizacion"
       ],
       "palabras_clave": [
+        "Monitor de Yoga 580h",
         "Xunta de Galicia",
-        "administración",
-        "mecanografía",
-        "PRL",
+        "mecanografía 120 ppm",
         "energías renovables",
         "solar fotovoltaica",
-        "gestión documental"
+        "PRL",
+        "operaciones administrativas"
       ]
     },
     {
       "id": "nodo_permisos_y_licencias",
       "tipo": "capacitacion",
-      "titulo": "Habilitaciones, Licencias y Permisos de Conducción",
+      "titulo": "Permisos de Conducción DGT y Certificaciones Operativas XESINTEC",
       "entidades": [
         "Dirección General de Tráfico (DGT)",
-        "Organismos Acreditados de Formación Práctica"
+        "XESINTEC (Organismo de Formación Técnica)"
       ],
       "periodo": "1991 - Presente",
-      "descripcion": "Permisos de conducción A, B, C (Camión pesado). Certificaciones operativas para conducción y manejo de Carretillas Elevadoras, Transpaletas y Plataformas Elevadoras Móviles de Personal (PEMP).",
+      "descripcion": "Permiso C (Camión Pesado en vigor desde 1994), Permiso B (Turismos) y Permiso A (Motocicletas). Acreditaciones técnicas oficiales para Carretillas Elevadoras, Transpaletas Eléctricas/Manuales, Plataformas Elevadoras Móviles de Personal (PEMP fijas/móviles) y remolque autocargador.",
       "id_areas": ["hr_ope"],
       "id_sectores": [
         "sec_transporte",
@@ -426,25 +487,26 @@
       ],
       "palabras_clave": [
         "Permiso C",
-        "camión",
-        "carretillas",
-        "plataformas elevadoras",
+        "camión pesado",
         "DGT",
-        "licencias de conducción",
-        "maquinaria industrial"
+        "XESINTEC",
+        "carretillas elevadoras",
+        "PEMP",
+        "transpaleta eléctrica",
+        "plataformas elevadoras"
       ]
     },
     {
       "id": "nodo_evidencias_oficiales",
       "tipo": "evidencia",
-      "titulo": "Evidencias Documentales y Títulos Verificables",
+      "titulo": "Evidencias Registrales, Judiciales y Reconocimientos Oficiales",
       "entidades": [
-        "Diario Oficial de Galicia (DOG)",
-        "Juzgados de lo Social",
-        "Entidades de Formación Oficial"
+        "Diario Oficial de Galicia (DOG nº 155, 18/08/2014)",
+        "Juzgados de lo Social (Sentencia Firme de Incapacidad Compatible)",
+        "Ejército de Tierra (Diploma de Honor 1993)"
       ],
       "periodo": "1990 - 2026",
-      "descripcion": "Respaldado por más de 30 certificaciones documentadas, publicación oficial en el Diario Oficial de Galicia (DOG 18/08/2014) por presidencia de entidad empresarial, subvenciones públicas concedidas 2016-2018 y resoluciones judiciales de incapacidad concedidas.",
+      "descripcion": "Respaldado por más de 30 certificaciones documentadas. Publicación registral pública en el Diario Oficial de Galicia (DOG 2014) como titular patronal. Sentencia judicial firme que reconoce pensión vitalicia con compatibilidad expresa para trabajo adaptado por cuenta ajena. Diploma de Honor del Ejército de Tierra.",
       "id_areas": ["hr_ges"],
       "id_sectores": [
         "sec_direccion",
@@ -457,11 +519,11 @@
       "palabras_clave": [
         "DOG",
         "Diario Oficial de Galicia",
-        "certificaciones",
-        "subvenciones",
-        "evidencias",
-        "resolución judicial",
-        "verificable"
+        "sentencia judicial firme",
+        "incapacidad compatible",
+        "pensión vitalicia",
+        "Diploma de Honor",
+        "evidencias verificables"
       ]
     }
   ]
