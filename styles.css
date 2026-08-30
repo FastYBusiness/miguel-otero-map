@@ -1,6 +1,6 @@
 /* ============================================================
-   styles.css — Plataforma Profesional de Conocimiento
-   v3 · Interfaz compacta · Mobile-first · preparada para navegación
+   styles.css — v4
+   Mobile: lectura desplazable + árbol a pantalla completa
    ============================================================ */
 
 :root {
@@ -14,11 +14,9 @@
   --color-borde: #E3E6E6;
   --color-borde-input: #D5D9D9;
   --color-activo: #007185;
-
   --radio: 10px;
   --radio-pequeno: 7px;
   --sombra: 0 2px 10px rgba(0,0,0,.07);
-  --tactil: 44px;
 }
 
 * {
@@ -44,31 +42,25 @@ input {
   font: inherit;
 }
 
-button,
-a {
+button {
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
-  touch-action: manipulation;
-}
-
 .app {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100dvh;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ============================================================
-   CABECERA — compacta, exactamente 3 niveles
-   ============================================================ */
+/* ================= CABECERA ================= */
 
 .cabecera {
   flex: 0 0 auto;
   background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
-  padding: 10px 18px 11px;
+  padding: 9px 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
   position: relative;
   z-index: 5;
@@ -78,93 +70,87 @@ button {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
-  column-gap: 24px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 2px;
 }
 
 .cabecera-izq {
+  width: 100%;
   min-width: 0;
-  display: contents;
+  text-align: center;
 }
 
 .cabecera-nombre {
-  grid-column: 1;
-  grid-row: 1;
-  font-size: 14px;
-  line-height: 1.15;
+  font-size: 18px;
+  line-height: 1.1;
   font-weight: 700;
-  letter-spacing: .25px;
-  text-transform: none;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 .cabecera-titulo {
-  grid-column: 1;
-  grid-row: 2;
-  font-size: 19px;
-  line-height: 1.12;
+  font-size: 17px;
+  line-height: 1.1;
   font-weight: 700;
-  margin: 3px 0 0;
-  color: var(--color-texto);
+  margin: 2px 0 5px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: clip;
 }
 
 .cabecera-subtitulo {
-  display: none;
+  display: none !important;
 }
 
 .cabecera-magnitudes {
-  grid-column: 2;
-  grid-row: 1 / span 2;
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-shrink: 0;
+  justify-content: center;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.cabecera-magnitudes .magnitud:nth-child(3) {
+  display: none !important;
 }
 
 .magnitud {
-  min-width: 62px;
-  text-align: center;
-  font-size: 10px;
-  line-height: 1.15;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  white-space: nowrap;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--color-oscuro);
 }
 
 .magnitud b {
-  display: block;
-  font-size: 18px;
+  font-size: 21px;
   line-height: 1;
   font-weight: 700;
-  color: var(--color-texto);
-  margin-bottom: 2px;
 }
 
-/* ============================================================
-   CUERPO
-   ============================================================ */
+/* ================= CUERPO ================= */
 
 .cuerpo {
   display: flex;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
+  height: 0;
   overflow: hidden;
-  gap: 10px;
-  padding: 10px;
+  gap: 8px;
+  padding: 7px;
 }
 
-/* ============================================================
-   PANEL DE NAVEGACIÓN / CONTENIDO
-   ============================================================ */
+/* ================= PANEL ================= */
 
 .lateral {
   width: 260px;
   min-width: 260px;
+  min-height: 0;
+  height: 100%;
   background: var(--color-blanco);
   border: 1px solid var(--color-borde);
   border-radius: var(--radio);
@@ -176,24 +162,22 @@ button {
 }
 
 .caja-buscador {
-  padding: 10px;
+  flex: 0 0 auto;
+  padding: 8px;
   border-bottom: 1px solid var(--color-borde);
 }
 
 #buscador {
+  display: block;
   width: 100%;
-  min-height: var(--tactil);
-  padding: 9px 11px;
+  height: 46px;
+  min-height: 46px;
+  padding: 8px 11px;
   border: 1px solid var(--color-borde-input);
   border-radius: var(--radio-pequeno);
-  font-size: 13px;
   background: var(--color-blanco);
   color: var(--color-texto);
-  transition: border-color .2s ease, box-shadow .2s ease;
-}
-
-#buscador::placeholder {
-  color: var(--color-texto-secundario);
+  font-size: 14px;
 }
 
 #buscador:focus {
@@ -203,7 +187,8 @@ button {
 }
 
 #menu {
-  padding: 8px;
+  flex: 0 0 auto;
+  padding: 7px;
   border-bottom: 1px solid var(--color-borde);
   overflow-y: auto;
   max-height: 260px;
@@ -218,23 +203,12 @@ button {
   background: #FAFAFA;
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-pequeno);
+  color: var(--color-oscuro);
   font-size: 11px;
   line-height: 1.15;
   font-weight: 650;
-  color: var(--color-oscuro);
-  cursor: pointer;
   text-align: left;
-  transition: border-color .15s ease, color .15s ease, background .15s ease, transform .1s ease;
-}
-
-.menu-btn:hover {
-  border-color: var(--color-primario);
-  color: var(--color-primario);
-  background: var(--color-blanco);
-}
-
-.menu-btn:active {
-  transform: scale(.985);
+  cursor: pointer;
 }
 
 .menu-btn.activo {
@@ -243,11 +217,18 @@ button {
   color: var(--color-blanco);
 }
 
+/* ================= CONTENIDO: AQUÍ ESTÁ EL SCROLL ================= */
+
 #contexto {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
+  height: auto;
   padding: 12px;
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
   font-size: 12px;
   line-height: 1.5;
 }
@@ -255,22 +236,21 @@ button {
 .contexto-vacio {
   color: var(--color-texto-secundario);
   text-align: center;
-  padding: 20px 8px 0;
-  font-size: 11px;
+  padding: 20px 8px;
 }
 
 .ctx-titulo {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.25;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .ctx-desc {
   font-size: 12px;
   line-height: 1.5;
   color: var(--color-texto-secundario);
-  margin-bottom: 9px;
+  margin-bottom: 10px;
 }
 
 .ctx-label {
@@ -280,25 +260,23 @@ button {
   text-transform: uppercase;
   color: var(--color-texto-secundario);
   letter-spacing: .45px;
-  margin: 9px 0 3px;
+  margin: 10px 0 4px;
 }
 
 .item {
   background: #FAFAFA;
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-pequeno);
-  padding: 9px;
+  padding: 10px;
   margin-bottom: 7px;
   font-size: 11px;
   line-height: 1.45;
 }
 
-/* ============================================================
-   ÁRBOL
-   ============================================================ */
+/* ================= ÁRBOL ================= */
 
 .zona-arbol {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
   display: flex;
@@ -312,49 +290,38 @@ button {
 
 .barra-herramientas {
   flex: 0 0 auto;
-  padding: 6px 9px;
+  padding: 6px 8px;
   border-bottom: 1px solid var(--color-borde);
   background: #FAFAFA;
   display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+  gap: 5px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
+
+.barra-herramientas::-webkit-scrollbar {
+  display: none;
 }
 
 .btn-herramienta {
+  flex: 0 0 auto;
   min-height: 38px;
   padding: 7px 10px;
   background: var(--color-blanco);
   border: 1px solid var(--color-borde-input);
   border-radius: var(--radio-pequeno);
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 650;
   color: var(--color-oscuro);
-  cursor: pointer;
-  transition: border-color .15s ease, color .15s ease, background .15s ease, transform .1s ease;
-}
-
-.btn-herramienta:hover {
-  border-color: var(--color-primario);
-  color: var(--color-primario);
-}
-
-.btn-herramienta:active {
-  transform: scale(.985);
-}
-
-.btn-herramienta:focus-visible,
-.menu-btn:focus-visible,
-#buscador:focus-visible {
-  outline: 3px solid rgba(0,113,133,.25);
-  outline-offset: 1px;
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
 }
 
 .contenedor-mapa {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
-  padding: 4px;
+  padding: 1px;
   position: relative;
   touch-action: none;
   overscroll-behavior: contain;
@@ -365,10 +332,6 @@ button {
   height: 100%;
   display: block;
 }
-
-/* ============================================================
-   MARKMAP
-   ============================================================ */
 
 .markmap text {
   fill: var(--color-texto) !important;
@@ -386,17 +349,6 @@ button {
 .markmap circle {
   fill: var(--color-primario) !important;
   r: 3.5px;
-  cursor: pointer;
-}
-
-.markmap-node:hover > circle {
-  fill: var(--color-secundario) !important;
-  r: 5px;
-}
-
-.markmap-node:hover > text {
-  fill: var(--color-oscuro) !important;
-  font-weight: 600;
 }
 
 .markmap-node.nodo-activo > circle {
@@ -409,117 +361,19 @@ button {
   font-weight: 700;
 }
 
-/* ============================================================
-   PIE
-   ============================================================ */
+/* ================= PIE ================= */
 
 .pie {
   flex: 0 0 auto;
   text-align: center;
   font-size: 10px;
-  line-height: 1.35;
-  color: var(--color-texto-secundario);
   padding: 6px 10px;
   background: var(--color-blanco);
   border-top: 1px solid var(--color-borde);
 }
 
-.pie a {
-  color: inherit;
-  text-decoration: underline;
-}
-
 /* ============================================================
-   TABLET
-   ============================================================ */
-
-@media (max-width: 1024px) {
-
-  .cabecera {
-    padding: 9px 14px;
-  }
-
-  .cabecera-contenido {
-    column-gap: 14px;
-  }
-
-  .cabecera-nombre {
-    font-size: 13px;
-  }
-
-  .cabecera-titulo {
-    font-size: 17px;
-  }
-
-  .cabecera-magnitudes {
-    gap: 10px;
-  }
-
-  .magnitud {
-    min-width: 54px;
-    font-size: 9px;
-  }
-
-  .magnitud b {
-    font-size: 16px;
-  }
-
-  .cuerpo {
-    flex-direction: column;
-    gap: 6px;
-    padding: 6px;
-  }
-
-  .lateral {
-    width: 100%;
-    min-width: 0;
-    max-height: none;
-    flex-shrink: 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .caja-buscador {
-    width: 235px;
-    flex: 0 0 235px;
-    border-right: 1px solid var(--color-borde);
-    border-bottom: none;
-  }
-
-  #menu {
-    flex: 1;
-    min-width: 0;
-    max-height: none;
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border-bottom: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .menu-btn {
-    flex: 0 0 auto;
-    width: auto;
-    min-width: 90px;
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  #contexto {
-    flex-basis: 100%;
-    max-height: 180px;
-    border-top: 1px solid var(--color-borde);
-  }
-
-  .zona-arbol {
-    min-height: 300px;
-  }
-}
-
-/* ============================================================
-   MÓVIL — 768 px
+   MÓVIL
    ============================================================ */
 
 @media (max-width: 768px) {
@@ -528,87 +382,62 @@ button {
     padding: 8px 10px 9px;
   }
 
-  .cabecera-contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 2px;
-  }
-
-  /* Línea 1 */
   .cabecera-nombre {
-    order: 1;
-    font-size: 13px;
-    line-height: 1.1;
+    font-size: 17px;
   }
 
-  /* Línea 2 */
   .cabecera-titulo {
-    order: 2;
-    font-size: clamp(16px, 5vw, 20px);
-    line-height: 1.1;
-    margin: 1px 0 2px;
-    white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
+    font-size: 16px;
+    margin-bottom: 6px;
   }
 
-  /* Línea 3 */
   .cabecera-magnitudes {
-    order: 3;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    gap: 24px;
-    margin: 0;
+    gap: 20px;
   }
 
   .magnitud {
-    min-width: auto;
-    font-size: 9px;
-    text-align: left;
+    font-size: 10px;
   }
 
   .magnitud b {
-    display: inline-block;
-    font-size: 16px;
-    margin-right: 3px;
-    vertical-align: baseline;
+    font-size: 21px;
   }
 
   .cuerpo {
+    display: flex;
+    flex-direction: column;
     gap: 5px;
     padding: 5px;
   }
 
   .lateral {
-    border-radius: 9px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: 100%;
   }
 
   .caja-buscador {
-    width: 100%;
-    flex-basis: auto;
     padding: 6px;
-    border-right: none;
-    border-bottom: 1px solid var(--color-borde);
   }
 
   #buscador {
+    height: 44px;
     min-height: 44px;
-    font-size: 15px;
-    padding: 9px 11px;
+    font-size: 14px;
   }
 
   #menu {
-    width: 100%;
     flex: 0 0 auto;
-    padding: 6px;
+    display: flex;
+    width: 100%;
+    max-height: none;
+    padding: 5px;
     gap: 5px;
     overflow-x: auto;
     overflow-y: hidden;
-    border-bottom: 1px solid var(--color-borde);
-    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   #menu::-webkit-scrollbar {
@@ -616,82 +445,64 @@ button {
   }
 
   .menu-btn {
-    min-height: 44px;
+    flex: 0 0 auto;
+    width: auto;
     min-width: max-content;
-    padding: 8px 12px;
-    border-radius: 8px;
+    min-height: 42px;
+    margin: 0;
+    padding: 7px 11px;
     font-size: 11px;
   }
 
-  /*
-   * El contexto vuelve a ser visible en móvil.
-   * La lógica JS decidirá cuándo debe dominar la pantalla
-   * y cuándo debe mostrarse el árbol.
-   */
+  /* El panel de información ocupa todo el espacio restante
+     y tiene su PROPIO scroll táctil. */
   #contexto {
-    display: block;
-    flex: 1 1 auto;
-    min-height: 180px;
-    max-height: none;
+    flex: 1 1 0;
+    min-height: 0;
+    height: 0;
     padding: 10px;
-    overflow-y: auto;
-    border-top: 0;
-  }
-
-  .ctx-titulo {
-    font-size: 17px;
-  }
-
-  .ctx-desc {
-    font-size: 13px;
-  }
-
-  .item {
-    padding: 10px;
-    font-size: 12px;
-  }
-
-  .zona-arbol {
-    flex: 0 0 34vh;
-    min-height: 190px;
-    max-height: 38vh;
-    border-radius: 9px;
-  }
-
-  .barra-herramientas {
-    padding: 5px;
-    gap: 5px;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    scrollbar-width: none;
+    overflow-y: auto !important;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
   }
 
-  .barra-herramientas::-webkit-scrollbar {
-    display: none;
+  /* Durante consulta no se muestra el árbol. */
+  body.vista-contenido .zona-arbol {
+    display: none !important;
   }
 
-  .btn-herramienta {
-    flex: 0 0 auto;
-    min-height: 40px;
-    padding: 8px 10px;
-    white-space: nowrap;
+  body.vista-contenido .lateral {
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
   }
 
-  .contenedor-mapa {
-    padding: 1px;
+  /* Al entrar explícitamente en ÁRBOL:
+     el panel desaparece y el árbol ocupa todo el cuerpo. */
+  body.vista-arbol .lateral {
+    display: none !important;
   }
 
-  .markmap text {
-    font-size: 9px !important;
+  body.vista-arbol .zona-arbol {
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 1 1 auto !important;
   }
 
-  .markmap circle {
-    r: 4px;
+  body.vista-arbol .contenedor-mapa {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
   }
 
-  .markmap-node.nodo-activo > circle {
-    r: 6px;
+  body.vista-arbol #mapa {
+    width: 100%;
+    height: 100%;
   }
 
   .pie {
@@ -699,69 +510,44 @@ button {
   }
 }
 
-/* ============================================================
-   MÓVIL PEQUEÑO — 480 px
-   ============================================================ */
+/* ================= MÓVIL PEQUEÑO ================= */
 
 @media (max-width: 480px) {
 
   .cabecera {
-    padding: 7px 9px 8px;
+    padding: 7px 8px 8px;
   }
 
   .cabecera-nombre {
-    font-size: 12px;
-  }
-
-  .cabecera-titulo {
     font-size: 16px;
   }
 
+  .cabecera-titulo {
+    font-size: 15px;
+  }
+
   .cabecera-magnitudes {
-    gap: 17px;
+    gap: 16px;
   }
 
   .magnitud {
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .magnitud b {
-    font-size: 15px;
+    font-size: 20px;
   }
 
   .cuerpo {
     padding: 4px;
-    gap: 4px;
-  }
-
-  #menu {
-    padding: 5px;
-  }
-
-  .menu-btn {
-    min-height: 44px;
-    padding: 8px 11px;
   }
 
   #contexto {
-    min-height: 170px;
     padding: 9px;
-  }
-
-  .zona-arbol {
-    flex-basis: 32vh;
-    min-height: 175px;
-  }
-
-  .btn-herramienta {
-    min-height: 40px;
-    padding: 8px 9px;
   }
 }
 
-/* ============================================================
-   PAISAJE EN MÓVIL
-   ============================================================ */
+/* ================= PAISAJE ================= */
 
 @media (max-width: 768px) and (orientation: landscape) {
 
@@ -769,73 +555,28 @@ button {
     padding: 5px 9px;
   }
 
-  .cabecera-contenido {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-    column-gap: 12px;
-  }
-
   .cabecera-nombre {
-    grid-column: 1;
-    grid-row: 1;
+    font-size: 14px;
   }
 
   .cabecera-titulo {
-    grid-column: 1;
-    grid-row: 2;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .cabecera-magnitudes {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    width: auto;
-    gap: 8px;
-  }
-
-  .magnitud {
-    font-size: 7px;
+    gap: 10px;
   }
 
   .magnitud b {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .cuerpo {
     padding: 4px;
   }
-
-  .lateral {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-
-  .caja-buscador {
-    width: 190px;
-    flex: 0 0 190px;
-    border-right: 1px solid var(--color-borde);
-    border-bottom: none;
-  }
-
-  #menu {
-    border-bottom: none;
-  }
-
-  #contexto {
-    display: none;
-  }
-
-  .zona-arbol {
-    flex: 1 1 auto;
-    max-height: none;
-    min-height: 0;
-  }
 }
 
-/* ============================================================
-   ACCESIBILIDAD
-   ============================================================ */
+/* ================= ACCESIBILIDAD ================= */
 
 .sr-only {
   position: absolute;
@@ -857,31 +598,4 @@ button {
     transition-duration: .01ms !important;
     animation-duration: .01ms !important;
   }
-}
-
-/* ============================================================
-   SCROLLBARS
-   ============================================================ */
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-borde-input) #FAFAFA;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #FAFAFA;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-borde-input);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primario);
 }
