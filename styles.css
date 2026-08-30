@@ -1,6 +1,12 @@
 /* ============================================================
-   styles.css — v4
-   Mobile: lectura desplazable + árbol a pantalla completa
+   styles.css — v5
+   Miguel Otero Cabaleiro
+   Optimizado para móvil:
+   - Cabecera compacta
+   - Navegación táctil
+   - Contenido con scroll real
+   - Árbol a pantalla completa
+   - Botones compactos
    ============================================================ */
 
 :root {
@@ -14,6 +20,7 @@
   --color-borde: #E3E6E6;
   --color-borde-input: #D5D9D9;
   --color-activo: #007185;
+
   --radio: 10px;
   --radio-pequeno: 7px;
   --sombra: 0 2px 10px rgba(0,0,0,.07);
@@ -30,9 +37,19 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
   background: var(--color-fondo);
   color: var(--color-texto);
+
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -51,17 +68,30 @@ button {
   width: 100%;
   height: 100dvh;
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
 }
 
-/* ================= CABECERA ================= */
+/* ============================================================
+   CABECERA
+   ============================================================ */
 
 .cabecera {
   flex: 0 0 auto;
-  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
-  padding: 9px 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primario),
+      var(--color-secundario)
+    );
+
+  padding: 7px 10px;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.12);
+
   position: relative;
   z-index: 5;
 }
@@ -69,33 +99,40 @@ button {
 .cabecera-contenido {
   width: 100%;
   max-width: 1400px;
+
   margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+
+  gap: 1px;
 }
 
 .cabecera-izq {
   width: 100%;
   min-width: 0;
+
   text-align: center;
 }
 
 .cabecera-nombre {
-  font-size: 18px;
-  line-height: 1.1;
+  font-size: 17px;
+  line-height: 1.05;
   font-weight: 700;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
 }
 
 .cabecera-titulo {
-  font-size: 17px;
-  line-height: 1.1;
+  font-size: 15px;
+  line-height: 1.05;
   font-weight: 700;
-  margin: 2px 0 5px;
+
+  margin: 2px 0 4px;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
@@ -105,12 +142,18 @@ button {
   display: none !important;
 }
 
+/* ============================================================
+   MAGNITUDES
+   ============================================================ */
+
 .cabecera-magnitudes {
   width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: baseline;
-  gap: 24px;
+
+  gap: 20px;
 }
 
 .cabecera-magnitudes .magnitud:nth-child(3) {
@@ -120,256 +163,593 @@ button {
 .magnitud {
   display: flex;
   align-items: baseline;
-  gap: 5px;
+
+  gap: 4px;
+
   white-space: nowrap;
-  font-size: 11px;
+
+  font-size: 10px;
   font-weight: 600;
 }
 
 .magnitud b {
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1;
   font-weight: 700;
 }
 
-/* ================= CUERPO ================= */
+/* ============================================================
+   CUERPO
+   ============================================================ */
 
 .cuerpo {
   display: flex;
+
   flex: 1 1 auto;
+
   min-height: 0;
   height: 0;
+
   overflow: hidden;
-  gap: 8px;
-  padding: 7px;
+
+  gap: 6px;
+  padding: 5px;
 }
 
-/* ================= PANEL ================= */
+/* ============================================================
+   PANEL PRINCIPAL
+   ============================================================ */
 
 .lateral {
   width: 260px;
   min-width: 260px;
+
   min-height: 0;
   height: 100%;
+
   background: var(--color-blanco);
-  border: 1px solid var(--color-borde);
+
+  border:
+    1px solid var(--color-borde);
+
   border-radius: var(--radio);
+
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
+
   flex-shrink: 0;
+
   box-shadow: var(--sombra);
 }
 
+/* ============================================================
+   BUSCADOR
+   ============================================================ */
+
 .caja-buscador {
   flex: 0 0 auto;
-  padding: 8px;
-  border-bottom: 1px solid var(--color-borde);
+
+  padding: 6px;
+
+  border-bottom:
+    1px solid var(--color-borde);
 }
 
 #buscador {
   display: block;
+
   width: 100%;
-  height: 46px;
-  min-height: 46px;
-  padding: 8px 11px;
-  border: 1px solid var(--color-borde-input);
-  border-radius: var(--radio-pequeno);
-  background: var(--color-blanco);
-  color: var(--color-texto);
+
+  height: 40px;
+  min-height: 40px;
+
+  padding: 7px 10px;
+
+  border:
+    1px solid var(--color-borde-input);
+
+  border-radius:
+    var(--radio-pequeno);
+
+  background:
+    var(--color-blanco);
+
+  color:
+    var(--color-texto);
+
   font-size: 14px;
 }
 
 #buscador:focus {
   outline: none;
-  border-color: var(--color-primario);
-  box-shadow: 0 0 0 3px rgba(255,153,0,.18);
+
+  border-color:
+    var(--color-primario);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(255,153,0,.18);
 }
+
+/* ============================================================
+   MENÚ
+   ============================================================ */
 
 #menu {
   flex: 0 0 auto;
-  padding: 7px;
-  border-bottom: 1px solid var(--color-borde);
+
+  padding: 6px;
+
+  border-bottom:
+    1px solid var(--color-borde);
+
   overflow-y: auto;
+
   max-height: 260px;
 }
 
 .menu-btn {
   display: block;
+
   width: 100%;
-  min-height: 40px;
-  padding: 7px 10px;
-  margin-bottom: 5px;
-  background: #FAFAFA;
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-pequeno);
-  color: var(--color-oscuro);
+
+  min-height: 36px;
+
+  padding: 6px 9px;
+
+  margin-bottom: 4px;
+
+  background:
+    #FAFAFA;
+
+  border:
+    1px solid var(--color-borde);
+
+  border-radius:
+    var(--radio-pequeno);
+
+  color:
+    var(--color-oscuro);
+
   font-size: 11px;
-  line-height: 1.15;
+  line-height: 1.1;
   font-weight: 650;
+
   text-align: left;
+
   cursor: pointer;
 }
 
-.menu-btn.activo {
-  background: var(--color-primario);
-  border-color: var(--color-primario);
-  color: var(--color-blanco);
+.menu-btn:last-child {
+  margin-bottom: 0;
 }
 
-/* ================= CONTENIDO: AQUÍ ESTÁ EL SCROLL ================= */
+.menu-btn.activo {
+  background:
+    var(--color-primario);
+
+  border-color:
+    var(--color-primario);
+
+  color:
+    var(--color-blanco);
+}
+
+/* ============================================================
+   CONTENIDO
+   ============================================================ */
 
 #contexto {
   flex: 1 1 auto;
+
   min-height: 0;
   height: auto;
-  padding: 12px;
+
+  padding: 10px;
+
   overflow-y: auto;
   overflow-x: hidden;
+
   -webkit-overflow-scrolling: touch;
+
   overscroll-behavior: contain;
+
   scrollbar-width: thin;
+
   font-size: 12px;
   line-height: 1.5;
 }
 
 .contexto-vacio {
-  color: var(--color-texto-secundario);
+  color:
+    var(--color-texto-secundario);
+
   text-align: center;
+
   padding: 20px 8px;
 }
 
 .ctx-titulo {
   font-size: 16px;
+
   line-height: 1.25;
+
   font-weight: 700;
+
   margin-bottom: 6px;
 }
 
 .ctx-desc {
   font-size: 12px;
+
   line-height: 1.5;
-  color: var(--color-texto-secundario);
+
+  color:
+    var(--color-texto-secundario);
+
   margin-bottom: 10px;
 }
 
 .ctx-label {
   font-size: 10px;
+
   line-height: 1.2;
+
   font-weight: 700;
+
   text-transform: uppercase;
-  color: var(--color-texto-secundario);
+
+  color:
+    var(--color-texto-secundario);
+
   letter-spacing: .45px;
+
   margin: 10px 0 4px;
 }
 
+/* ============================================================
+   TARJETAS
+   ============================================================ */
+
 .item {
-  background: #FAFAFA;
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-pequeno);
+  background:
+    #FAFAFA;
+
+  border:
+    1px solid var(--color-borde);
+
+  border-radius:
+    var(--radio-pequeno);
+
   padding: 10px;
+
   margin-bottom: 7px;
+
   font-size: 11px;
+
   line-height: 1.45;
 }
 
-/* ================= ÁRBOL ================= */
+.item-cabecera {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 7px;
+
+  margin-bottom: 4px;
+}
+
+.item-badge {
+  flex:
+    0 0 auto;
+
+  color:
+    #FFFFFF;
+
+  border-radius:
+    5px;
+
+  padding:
+    2px 5px;
+
+  font-size:
+    8px;
+
+  line-height:
+    1.1;
+
+  font-weight:
+    700;
+}
+
+.item-categoria {
+  flex:
+    0 0 auto;
+
+  font-size:
+    8px;
+
+  line-height:
+    1.2;
+
+  color:
+    var(--color-texto-secundario);
+
+  text-transform:
+    uppercase;
+}
+
+.item-periodo {
+  color:
+    var(--color-texto-secundario);
+
+  font-size:
+    10px;
+
+  margin-bottom:
+    5px;
+}
+
+.item-descripcion {
+  margin:
+    5px 0 7px;
+
+  line-height:
+    1.5;
+}
+
+.item-accion {
+  display:
+    flex;
+
+  justify-content:
+    flex-start;
+
+  margin-top:
+    8px;
+}
+
+.referencia-linea {
+  padding:
+    5px 0;
+
+  border-bottom:
+    1px solid
+    var(--color-borde);
+
+  line-height:
+    1.4;
+}
+
+.referencia-linea:last-of-type {
+  border-bottom:
+    none;
+}
+
+/* ============================================================
+   ÁRBOL
+   ============================================================ */
 
 .zona-arbol {
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--color-blanco);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio);
-  overflow: hidden;
-  box-shadow: var(--sombra);
+  flex:
+    1 1 auto;
+
+  min-width:
+    0;
+
+  min-height:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  background:
+    var(--color-blanco);
+
+  border:
+    1px solid
+    var(--color-borde);
+
+  border-radius:
+    var(--radio);
+
+  overflow:
+    hidden;
+
+  box-shadow:
+    var(--sombra);
 }
 
 .barra-herramientas {
-  flex: 0 0 auto;
-  padding: 6px 8px;
-  border-bottom: 1px solid var(--color-borde);
-  background: #FAFAFA;
-  display: flex;
-  gap: 5px;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  scrollbar-width: none;
+  flex:
+    0 0 auto;
+
+  padding:
+    5px 7px;
+
+  border-bottom:
+    1px solid
+    var(--color-borde);
+
+  background:
+    #FAFAFA;
+
+  display:
+    flex;
+
+  gap:
+    4px;
+
+  overflow-x:
+    auto;
+
+  flex-wrap:
+    nowrap;
+
+  scrollbar-width:
+    none;
 }
 
 .barra-herramientas::-webkit-scrollbar {
-  display: none;
+  display:
+    none;
 }
 
 .btn-herramienta {
-  flex: 0 0 auto;
-  min-height: 38px;
-  padding: 7px 10px;
-  background: var(--color-blanco);
-  border: 1px solid var(--color-borde-input);
-  border-radius: var(--radio-pequeno);
-  color: var(--color-oscuro);
-  font-size: 11px;
-  font-weight: 650;
-  white-space: nowrap;
+  flex:
+    0 0 auto;
+
+  min-height:
+    34px;
+
+  padding:
+    6px 9px;
+
+  background:
+    var(--color-blanco);
+
+  border:
+    1px solid
+    var(--color-borde-input);
+
+  border-radius:
+    var(--radio-pequeno);
+
+  color:
+    var(--color-oscuro);
+
+  font-size:
+    10px;
+
+  font-weight:
+    650;
+
+  white-space:
+    nowrap;
+
+  cursor:
+    pointer;
+}
+
+.btn-herramienta:active {
+  transform:
+    scale(.98);
 }
 
 .contenedor-mapa {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
-  padding: 1px;
-  position: relative;
-  touch-action: none;
-  overscroll-behavior: contain;
+  flex:
+    1 1 auto;
+
+  min-height:
+    0;
+
+  overflow:
+    hidden;
+
+  padding:
+    1px;
+
+  position:
+    relative;
+
+  touch-action:
+    none;
+
+  overscroll-behavior:
+    contain;
 }
 
 #mapa {
-  width: 100%;
-  height: 100%;
-  display: block;
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
 }
 
 .markmap text {
-  fill: var(--color-texto) !important;
-  font-size: 11px !important;
-  font-weight: 500;
+  fill:
+    var(--color-texto) !important;
+
+  font-size:
+    11px !important;
+
+  font-weight:
+    500;
 }
 
 .markmap path {
-  stroke: #37475A !important;
-  stroke-width: 1.5px !important;
-  stroke-linecap: round;
-  opacity: .65;
+  stroke:
+    #37475A !important;
+
+  stroke-width:
+    1.5px !important;
+
+  stroke-linecap:
+    round;
+
+  opacity:
+    .65;
 }
 
 .markmap circle {
-  fill: var(--color-primario) !important;
-  r: 3.5px;
+  fill:
+    var(--color-primario) !important;
+
+  r:
+    3.5px;
 }
 
 .markmap-node.nodo-activo > circle {
-  fill: var(--color-activo) !important;
-  r: 6px;
+  fill:
+    var(--color-activo) !important;
+
+  r:
+    6px;
 }
 
 .markmap-node.nodo-activo > text {
-  fill: var(--color-activo) !important;
-  font-weight: 700;
+  fill:
+    var(--color-activo) !important;
+
+  font-weight:
+    700;
 }
 
-/* ================= PIE ================= */
+/* ============================================================
+   PIE
+   ============================================================ */
 
 .pie {
-  flex: 0 0 auto;
-  text-align: center;
-  font-size: 10px;
-  padding: 6px 10px;
-  background: var(--color-blanco);
-  border-top: 1px solid var(--color-borde);
+  flex:
+    0 0 auto;
+
+  text-align:
+    center;
+
+  font-size:
+    10px;
+
+  padding:
+    6px 10px;
+
+  background:
+    var(--color-blanco);
+
+  border-top:
+    1px solid
+    var(--color-borde);
 }
 
 /* ============================================================
@@ -379,223 +759,466 @@ button {
 @media (max-width: 768px) {
 
   .cabecera {
-    padding: 8px 10px 9px;
+    padding:
+      7px 8px 8px;
   }
 
   .cabecera-nombre {
-    font-size: 17px;
+    font-size:
+      16px;
+
+    line-height:
+      1.05;
   }
 
   .cabecera-titulo {
-    font-size: 16px;
-    margin-bottom: 6px;
+    font-size:
+      14px;
+
+    line-height:
+      1.05;
+
+    margin:
+      2px 0 4px;
   }
 
   .cabecera-magnitudes {
-    gap: 20px;
+    gap:
+      18px;
   }
 
   .magnitud {
-    font-size: 10px;
+    font-size:
+      9px;
   }
 
   .magnitud b {
-    font-size: 21px;
+    font-size:
+      19px;
   }
 
   .cuerpo {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px;
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    gap:
+      4px;
+
+    padding:
+      4px;
   }
 
   .lateral {
-    width: 100%;
-    min-width: 0;
-    max-width: none;
-    height: 100%;
+    width:
+      100%;
+
+    min-width:
+      0;
+
+    max-width:
+      none;
+
+    height:
+      100%;
   }
 
   .caja-buscador {
-    padding: 6px;
+    padding:
+      5px;
   }
 
   #buscador {
-    height: 44px;
-    min-height: 44px;
-    font-size: 14px;
+    height:
+      40px;
+
+    min-height:
+      40px;
+
+    font-size:
+      14px;
   }
 
   #menu {
-    flex: 0 0 auto;
-    display: flex;
-    width: 100%;
-    max-height: none;
-    padding: 5px;
-    gap: 5px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    flex:
+      0 0 auto;
+
+    display:
+      flex;
+
+    width:
+      100%;
+
+    max-height:
+      none;
+
+    padding:
+      4px;
+
+    gap:
+      4px;
+
+    overflow-x:
+      auto;
+
+    overflow-y:
+      hidden;
+
+    scrollbar-width:
+      none;
+
+    -webkit-overflow-scrolling:
+      touch;
   }
 
   #menu::-webkit-scrollbar {
-    display: none;
+    display:
+      none;
   }
 
   .menu-btn {
-    flex: 0 0 auto;
-    width: auto;
-    min-width: max-content;
-    min-height: 42px;
-    margin: 0;
-    padding: 7px 11px;
-    font-size: 11px;
+    flex:
+      0 0 auto;
+
+    width:
+      auto;
+
+    min-width:
+      max-content;
+
+    min-height:
+      36px;
+
+    margin:
+      0;
+
+    padding:
+      6px 10px;
+
+    font-size:
+      10px;
+
+    line-height:
+      1.1;
   }
 
-  /* El panel de información ocupa todo el espacio restante
-     y tiene su PROPIO scroll táctil. */
   #contexto {
-    flex: 1 1 0;
-    min-height: 0;
-    height: 0;
-    padding: 10px;
-    overflow-y: auto !important;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
+    flex:
+      1 1 0;
+
+    min-height:
+      0;
+
+    height:
+      0;
+
+    padding:
+      9px;
+
+    overflow-y:
+      auto !important;
+
+    overflow-x:
+      hidden;
+
+    -webkit-overflow-scrolling:
+      touch;
+
+    overscroll-behavior-y:
+      contain;
   }
 
-  /* Durante consulta no se muestra el árbol. */
-  body.vista-contenido .zona-arbol {
-    display: none !important;
+  /* ----------------------------------------------------------
+     MODO CONTENIDO
+     ---------------------------------------------------------- */
+
+  body.vista-contenido
+  .zona-arbol {
+    display:
+      none !important;
   }
 
-  body.vista-contenido .lateral {
-    display: flex !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
+  body.vista-contenido
+  .lateral {
+    display:
+      flex !important;
+
+    width:
+      100% !important;
+
+    height:
+      100% !important;
+
+    min-height:
+      0 !important;
   }
 
-  /* Al entrar explícitamente en ÁRBOL:
-     el panel desaparece y el árbol ocupa todo el cuerpo. */
-  body.vista-arbol .lateral {
-    display: none !important;
+  /* ----------------------------------------------------------
+     MODO ÁRBOL
+     ---------------------------------------------------------- */
+
+  body.vista-arbol
+  .lateral {
+    display:
+      none !important;
   }
 
-  body.vista-arbol .zona-arbol {
-    display: flex !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    flex: 1 1 auto !important;
+  body.vista-arbol
+  .zona-arbol {
+    display:
+      flex !important;
+
+    width:
+      100% !important;
+
+    height:
+      100% !important;
+
+    min-height:
+      0 !important;
+
+    max-height:
+      none !important;
+
+    flex:
+      1 1 auto !important;
   }
 
-  body.vista-arbol .contenedor-mapa {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    height: auto !important;
+  body.vista-arbol
+  .contenedor-mapa {
+    flex:
+      1 1 auto !important;
+
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
   }
 
-  body.vista-arbol #mapa {
-    width: 100%;
-    height: 100%;
+  body.vista-arbol
+  #mapa {
+    width:
+      100%;
+
+    height:
+      100%;
   }
 
   .pie {
-    display: none;
+    display:
+      none;
   }
 }
 
-/* ================= MÓVIL PEQUEÑO ================= */
+/* ============================================================
+   MÓVIL PEQUEÑO
+   ============================================================ */
 
 @media (max-width: 480px) {
 
   .cabecera {
-    padding: 7px 8px 8px;
+    padding:
+      6px 7px 7px;
   }
 
   .cabecera-nombre {
-    font-size: 16px;
+    font-size:
+      15px;
   }
 
   .cabecera-titulo {
-    font-size: 15px;
+    font-size:
+      13px;
   }
 
   .cabecera-magnitudes {
-    gap: 16px;
+    gap:
+      15px;
   }
 
   .magnitud {
-    font-size: 9px;
+    font-size:
+      8px;
   }
 
   .magnitud b {
-    font-size: 20px;
+    font-size:
+      18px;
   }
 
   .cuerpo {
-    padding: 4px;
+    padding:
+      3px;
   }
 
   #contexto {
-    padding: 9px;
+    padding:
+      8px;
+  }
+
+  .menu-btn {
+    min-height:
+      34px;
+
+    padding:
+      5px 9px;
+
+    font-size:
+      10px;
+  }
+
+  .item {
+    padding:
+      9px;
+
+    margin-bottom:
+      6px;
   }
 }
 
-/* ================= PAISAJE ================= */
+/* ============================================================
+   TELÉFONO MUY ESTRECHO
+   ============================================================ */
 
-@media (max-width: 768px) and (orientation: landscape) {
-
-  .cabecera {
-    padding: 5px 9px;
-  }
+@media (max-width: 360px) {
 
   .cabecera-nombre {
-    font-size: 14px;
+    font-size:
+      14px;
   }
 
   .cabecera-titulo {
-    font-size: 14px;
+    font-size:
+      12px;
   }
 
   .cabecera-magnitudes {
-    gap: 10px;
+    gap:
+      12px;
   }
 
   .magnitud b {
-    font-size: 16px;
+    font-size:
+      17px;
+  }
+
+  .magnitud {
+    font-size:
+      8px;
+  }
+
+  .menu-btn {
+    font-size:
+      9px;
+
+    padding:
+      5px 8px;
+  }
+}
+
+/* ============================================================
+   PAISAJE
+   ============================================================ */
+
+@media (max-width: 768px)
+and (orientation: landscape) {
+
+  .cabecera {
+    padding:
+      4px 8px;
+  }
+
+  .cabecera-nombre {
+    font-size:
+      13px;
+  }
+
+  .cabecera-titulo {
+    font-size:
+      12px;
+  }
+
+  .cabecera-magnitudes {
+    gap:
+      9px;
+  }
+
+  .magnitud b {
+    font-size:
+      15px;
   }
 
   .cuerpo {
-    padding: 4px;
+    padding:
+      3px;
+  }
+
+  .menu-btn {
+    min-height:
+      32px;
+
+    padding:
+      4px 8px;
+  }
+
+  #buscador {
+    height:
+      36px;
+
+    min-height:
+      36px;
   }
 }
 
-/* ================= ACCESIBILIDAD ================= */
+/* ============================================================
+   ACCESIBILIDAD
+   ============================================================ */
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
+  position:
+    absolute;
+
+  width:
+    1px;
+
+  height:
+    1px;
+
+  padding:
+    0;
+
+  margin:
+    -1px;
+
+  overflow:
+    hidden;
+
+  clip:
+    rect(0,0,0,0);
+
+  white-space:
+    nowrap;
+
+  border:
+    0;
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
+
+    scroll-behavior:
+      auto !important;
+
+    transition-duration:
+      .01ms !important;
+
+    animation-duration:
+      .01ms !important;
   }
 }
