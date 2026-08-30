@@ -1,466 +1,1563 @@
-/* ============================================================
-   app.js — Lógica de la Plataforma de Conocimiento Profesional
-   Miguel Otero Cabaleiro — Estabilizador Operativo de Valor Transversal
-   Lee exclusivamente de knowledge-base.json (Única fuente de verdad).
-   Sin frameworks, compatible con GitHub Pages.
-   ============================================================ */
+(() => {
+  'use strict';
 
-/* ---------- 1. UTILIDADES DE TEXTO Y BÚSQUEDA ---------- */
-
-function normalizar(texto) {
-  return String(texto || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
-}
-
-function escaparRegex(texto) {
-  return texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-/* Coincide si la búsqueda empieza una palabra o término completo.
-   Garantiza máxima precisión sin falsos positivos. */
-function coincide(campo, queryNorm) {
-  if (!campo || !queryNorm) return false;
-  const patron = new RegExp('(^|[^\\p{L}\\p{N}])' + escaparRegex(queryNorm), 'u');
-  if (Array.isArray(campo)) {
-    return campo.some(item => patron.test(normalizar(item)));
-  }
-  return patron.test(normalizar(campo));
-}
-
-function agregarSinDuplicar(lista, item) {
-  if (!lista.some(x => x.id === item.id)) lista.push(item);
-}
-
-/* Mapeos auxiliares de IDs a Nombres */
-function obtenerNombreSector(datos, idSector) {
-  const sec = datos.sectores ? datos.sectores.find(s => s.id === idSector) : null;
-  return sec ? sec.nombre : idSector;
-}
-
-function obtenerNombreAptitud(datos, idAptitud) {
-  if (!datos.aptitudes) return idAptitud;
-  for (const cat in datos.aptitudes) {
-    const apt = datos.aptitudes[cat].find(a => a.id === idAptitud);
-    if (apt) return apt.nombre;
-  }
-  return idAptitud;
-}
-
-function obtenerNombreArea(datos, idArea) {
-  const area = datos.areas_hr ? datos.areas_hr.find(a => a.id === idArea) : null;
-  return area ? area.nombre : idArea;
-}
-
-/* ---------- 2. MOTOR DE BÚSQUEDA MULTICRITERIO ---------- */
-
-function buscar(query, datos) {
-  const q = normalizar(query).trim();
-  const vacio = {
-    areas_hr: [],
-    sectores: [],
-    aptitudes: [],
-    nodos: []
-  };
-  if (!q) return vacio;
-
-  const r = {
-    areas_hr: [],
-    sectores: [],
-    aptitudes: [],
-    nodos: []
-  };
-
-  // 1. Áreas RRHH
-  if (Array.isArray(datos.areas_hr)) {
-    datos.areas_hr.forEach(area => {
-      if (coincide(area.nombre, q)) {
-        agregarSinDuplicar(r.areas_hr, area);
-      }
-    });
-  }
-
-  // 2. Sectores
-  if (Array.isArray(datos.sectores)) {
-    datos.sectores.forEach(sec => {
-      if (coincide(sec.nombre, q)) {
-        agregarSinDuplicar(r.sectores, sec);
-      }
-    });
-  }
-
-  // 3. Aptitudes
-  if (datos.aptitudes) {
-    for (const cat in datos.aptitudes) {
-      datos.aptitudes[cat].forEach(apt => {
-        if (coincide(apt.nombre, q)) {
-          agregarSinDuplicar(r.aptitudes, apt);
-        }
-      });
-    }
-  }
-
-  // 4. Nodos de Conocimiento (Experiencias, Formación, Licencias, Evidencias)
-  if (Array.isArray(datos.nodos_conocimiento)) {
-    datos.nodos_conocimiento.forEach(nodo => {
-      const nombresSectores = (nodo.id_sectores || []).map(sId => obtenerNombreSector(datos, sId));
-      const nombresAptitudes = (nodo.id_aptitudes || []).map(aId => obtenerNombreAptitud(datos, aId));
-      const nombresAreas = (nodo.id_areas || []).map(arId => obtenerNombreArea(datos, arId));
-
-      const coincideNodo = coincide(nodo.titulo, q) ||
-                           coincide(nodo.descripcion, q) ||
-                           coincide(nodo.entidades, q) ||
-                           coincide(nodo.periodo, q) ||
-                           coincide(nodo.tipo, q) ||
-                           coincide(nodo.palabras_clave, q) ||
-                           coincide(nombresSectores, q) ||
-                           coincide(nombresAptitudes, q) ||
-                           coincide(nombresAreas, q);
-
-      if (coincideNodo) {
-        agregarSinDuplicar(r.nodos, nodo);
-      }
-    });
-  }
-
-  return r;
-}
-
-/* ---------- 3. CONSTRUCCIÓN DEL ÁRBOL INTERACTIVO ---------- */
-
-function construirArbol(datos) {
-  const perfil = datos.perfil || {};
-  const areas = datos.areas_hr || [];
-  const nodos = datos.nodos_conocimiento || [];
-
-  const ramaArea = (area) => {
-    const nodosDelArea = nodos.filter(n => (n.id_areas || []).includes(area.id));
-    const hijosNodos = nodosDelArea.map(nodo => ({ content: nodo.titulo }));
-    return { content: area.nombre, children: hijosNodos };
-  };
-
-  const ramaAptitudes = () => {
-    if (!datos.aptitudes) return [];
-    const categorias = [
-      { key: 'operacion', nombre: 'Operación & Logística' },
-      { key: 'comercial', nombre: 'Comercial & Negocio' },
-      { key: 'liderazgo', nombre: 'Liderazgo & Personas' },
-      { key: 'tecnologia', nombre: 'Tecnología & IA' },
-      { key: 'administracion', nombre: 'Administración & Gestión' }
-    ];
-    return categorias.map(cat => ({
-      content: cat.nombre,
-      children: (datos.aptitudes[cat.key] || []).map(a => ({ content: a.nombre }))
-    }));
-  };
-
-  const ramaSectores = () => {
-    return (datos.sectores || []).map(s => ({ content: s.nombre }));
-  };
-
-  return {
-    content: perfil.nombre || 'Miguel Otero Cabaleiro',
-    children: [
-      {
-        content: perfil.identidad_profesional || 'ESTABILIZADOR OPERATIVO DE VALOR TRANSVERSAL',
-        children: [{ content: perfil.mision || '' }]
-      },
-      {
-        content: 'Áreas de Gestión (RRHH)',
-        children: areas.map(a => ramaArea(a))
-      },
-      {
-        content: 'Aptitudes Transversales',
-        children: ramaAptitudes()
-      },
-      {
-        content: 'Sectores de Aplicación (20+)',
-        children: ramaSectores()
-      }
-    ]
-  };
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { normalizar, coincide, buscar, construirArbol };
-}
-
-/* ============================================================
-   LÓGICA DE INTERFAZ Y NAVEGADOR
-   ============================================================ */
-
-if (typeof window !== 'undefined') {
+  const DURACION_ANIMACION = 260;
+  const NIVEL_ARBOL_BASE = 1;
 
   let DATOS = null;
   let markmapInstancia = null;
 
-  const DURACION_ANIMACION = 300;
+  function normalizar(texto) {
+    return String(texto ?? '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
 
-  const MENU = [
-    { id: 'hr_ope', etiqueta: 'Operaciones', tipo: 'area' },
-    { id: 'hr_com', etiqueta: 'Comercial', tipo: 'area' },
-    { id: 'hr_ges', etiqueta: 'Gestión y Org.', tipo: 'area' },
-    { id: 'hr_per', etiqueta: 'Personas', tipo: 'area' },
-    { id: 'hr_tec', etiqueta: 'Tecnología', tipo: 'area' },
-    { id: 'seccion_aptitudes', etiqueta: 'Aptitudes', tipo: 'seccion' },
-    { id: 'seccion_sectores', etiqueta: 'Sectores', tipo: 'seccion' },
-    { id: 'seccion_nodos', etiqueta: 'Conocimiento', tipo: 'seccion' }
-  ];
+  function escaparHTML(texto) {
+    return String(texto ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
-  async function iniciar() {
-    try {
-      const resp = await fetch('./knowledge-base.json');
-      DATOS = await resp.json();
-      actualizarMagnitudesCabecera();
-      renderMenu();
-      renderArbol(1);
-      conectarBotones();
-      conectarBuscador();
-      console.log('✓ Plataforma cargada correctamente. Base de conocimiento sincronizada.');
-    } catch (err) {
-      console.error('Error cargando knowledge-base.json:', err);
-      document.getElementById('contexto').innerHTML =
-        '<div class="contexto-vacio">No se pudo cargar knowledge-base.json. Comprueba que el archivo existe en la raíz del repositorio.</div>';
+  function escaparRegex(texto) {
+    return String(texto ?? '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function coincide(campo, queryNorm) {
+    if (!campo || !queryNorm) return false;
+
+    const patron = new RegExp(
+      '(^|[^\\p{L}\\p{N}])' + escaparRegex(queryNorm),
+      'u'
+    );
+
+    if (Array.isArray(campo)) {
+      return campo.some(item => patron.test(normalizar(item)));
+    }
+
+    return patron.test(normalizar(campo));
+  }
+
+  function agregarSinDuplicar(lista, item) {
+    if (item && !lista.some(x => x.id === item.id)) {
+      lista.push(item);
     }
   }
 
-  function actualizarMagnitudesCabecera() {
-    if (!DATOS || !DATOS.magnitudes) return;
-    
-    const elemExp = document.getElementById('m-exp');
-    const elemSec = document.getElementById('m-sec');
-    const elemEmp = document.getElementById('m-emp');
-
-    if (elemExp) elemExp.textContent = (DATOS.magnitudes.anos_experiencia || 35) + '+';
-    if (elemSec) elemSec.textContent = (DATOS.magnitudes.sectores || 20) + '+';
-    if (elemEmp) elemEmp.textContent = (DATOS.magnitudes.formaciones || DATOS.magnitudes.empresas || 30) + '+';
+  function obtenerArea(id) {
+    return (DATOS?.areas_hr || []).find(x => x.id === id) || null;
   }
 
-  function renderArbol(nivel) {
-    if (!window.markmap || !DATOS) return;
-    const { Markmap } = window.markmap;
-    document.getElementById('mapa').innerHTML = '';
-    const arbol = construirArbol(DATOS);
-    markmapInstancia = Markmap.create('#mapa', {
-      autoFit: true,
-      initialExpandLevel: nivel,
-      duration: DURACION_ANIMACION,
-      maxWidth: 280,
-      zoom: true,
-      pan: true
-    }, arbol);
+  function obtenerSector(id) {
+    return (DATOS?.sectores || []).find(x => x.id === id) || null;
   }
 
-  function irANodo(textoBuscado) {
-    const nodos = document.querySelectorAll('#mapa .markmap-node');
-    let encontrado = null;
-    nodos.forEach(n => {
-      n.classList.remove('nodo-activo');
-      const texto = n.querySelector('text')?.textContent || '';
-      if (!encontrado && texto.toLowerCase().includes(textoBuscado.toLowerCase())) {
-        encontrado = n;
+  function obtenerAptitud(id) {
+    if (!DATOS?.aptitudes) return null;
+
+    for (const categoria of Object.values(DATOS.aptitudes)) {
+      const encontrada = (categoria || []).find(x => x.id === id);
+      if (encontrada) return encontrada;
+    }
+
+    return null;
+  }
+
+  function obtenerNombreArea(id) {
+    return obtenerArea(id)?.nombre || id;
+  }
+
+  function obtenerNombreSector(id) {
+    return obtenerSector(id)?.nombre || id;
+  }
+
+  function obtenerNombreAptitud(id) {
+    return obtenerAptitud(id)?.nombre || id;
+  }
+
+  function obtenerNodosPorAptitud(idAptitud) {
+    return (DATOS?.nodos_conocimiento || []).filter(
+      nodo => (nodo.id_aptitudes || []).includes(idAptitud)
+    );
+  }
+
+  function obtenerNodosPorSector(idSector) {
+    return (DATOS?.nodos_conocimiento || []).filter(
+      nodo => (nodo.id_sectores || []).includes(idSector)
+    );
+  }
+
+  function obtenerNodosPorArea(idArea) {
+    return (DATOS?.nodos_conocimiento || []).filter(
+      nodo => (nodo.id_areas || []).includes(idArea)
+    );
+  }
+
+  function categoriaAptitudDeId(idAptitud) {
+    if (!DATOS?.aptitudes) return '';
+
+    for (const [categoria, lista] of Object.entries(DATOS.aptitudes)) {
+      if ((lista || []).some(a => a.id === idAptitud)) {
+        return categoria;
+      }
+    }
+
+    return '';
+  }
+
+  function buscar(query) {
+    const q = normalizar(query).trim();
+
+    const resultado = {
+      areas_hr: [],
+      sectores: [],
+      aptitudes: [],
+      nodos: []
+    };
+
+    if (!q || !DATOS) return resultado;
+
+    (DATOS.areas_hr || []).forEach(area => {
+      if (coincide(area.nombre, q)) {
+        agregarSinDuplicar(resultado.areas_hr, area);
       }
     });
-    if (encontrado) {
-      encontrado.classList.add('nodo-activo');
-      encontrado.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-    }
-    return !!encontrado;
-  }
 
-  function renderMenu() {
-    const cont = document.getElementById('menu');
-    if (!cont) return;
-    cont.innerHTML = MENU.map(m => `<button class="menu-btn" data-id="${m.id}" data-tipo="${m.tipo}">${m.etiqueta}</button>`).join('');
-    cont.querySelectorAll('.menu-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        cont.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('activo'));
-        btn.classList.add('activo');
-        irASeccion(btn.dataset.id, btn.dataset.tipo);
-      });
+    (DATOS.sectores || []).forEach(sector => {
+      if (coincide(sector.nombre, q)) {
+        agregarSinDuplicar(resultado.sectores, sector);
+      }
     });
-  }
 
-  function irASeccion(id, tipo) {
-    renderArbol(99);
-    setTimeout(() => {
-      if (tipo === 'area') {
-        const area = (DATOS.areas_hr || []).find(a => a.id === id);
-        if (area) {
-          irANodo(area.nombre);
-          mostrarContextoArea(area);
+    for (const lista of Object.values(DATOS.aptitudes || {})) {
+      (lista || []).forEach(aptitud => {
+        if (coincide(aptitud.nombre, q)) {
+          agregarSinDuplicar(resultado.aptitudes, aptitud);
         }
-      } else if (id === 'seccion_aptitudes') {
-        irANodo('Aptitudes Transversales');
-        mostrarContextoAptitudes();
-      } else if (id === 'seccion_sectores') {
-        irANodo('Sectores de Aplicación');
-        mostrarContextoSectores();
-      } else if (id === 'seccion_nodos') {
-        irANodo('Áreas de Gestión (RRHH)');
-        mostrarContextoTodosNodos();
+      });
+    }
+
+    (DATOS.nodos_conocimiento || []).forEach(nodo => {
+      const sectores = (nodo.id_sectores || []).map(obtenerNombreSector);
+      const aptitudes = (nodo.id_aptitudes || []).map(obtenerNombreAptitud);
+      const areas = (nodo.id_areas || []).map(obtenerNombreArea);
+
+      const encontrado =
+        coincide(nodo.titulo, q) ||
+        coincide(nodo.descripcion, q) ||
+        coincide(nodo.entidades, q) ||
+        coincide(nodo.periodo, q) ||
+        coincide(nodo.tipo, q) ||
+        coincide(nodo.palabras_clave, q) ||
+        coincide(sectores, q) ||
+        coincide(aptitudes, q) ||
+        coincide(areas, q);
+
+      if (encontrado) {
+        agregarSinDuplicar(resultado.nodos, nodo);
       }
-    }, DURACION_ANIMACION + 50);
+    });
+
+    return resultado;
+  }
+
+  function nodoArbol(content, children = [], opciones = {}) {
+    const nodo = {
+      content: escaparHTML(content),
+      children: children || []
+    };
+
+    if (opciones.fold !== undefined) {
+      nodo.payload = {
+        ...(opciones.payload || {}),
+        fold: opciones.fold
+      };
+    } else if (opciones.payload) {
+      nodo.payload = opciones.payload;
+    }
+
+    return nodo;
+  }
+
+  function construirRamaArea(area) {
+    const hijos = obtenerNodosPorArea(area.id).map(nodo =>
+      nodoArbol(nodo.titulo, [], {
+        fold: 1,
+        payload: {
+          refId: nodo.id,
+          tipo: 'conocimiento'
+        }
+      })
+    );
+
+    return nodoArbol(area.nombre, hijos, {
+      fold: 1,
+      payload: {
+        refId: area.id,
+        tipo: 'area'
+      }
+    });
+  }
+
+  function construirRamaAptitudes() {
+    const nombres = {
+      operacion: 'Operación & Logística',
+      comercial: 'Comercial & Negocio',
+      liderazgo: 'Liderazgo & Personas',
+      tecnologia: 'Tecnología & IA',
+      administracion: 'Administración & Gestión'
+    };
+
+    return Object.entries(DATOS.aptitudes || {}).map(([clave, lista]) => {
+      const hijos = (lista || []).map(aptitud =>
+        nodoArbol(aptitud.nombre, [], {
+          fold: 1,
+          payload: {
+            refId: aptitud.id,
+            tipo: 'aptitud'
+          }
+        })
+      );
+
+      return nodoArbol(
+        nombres[clave] || clave,
+        hijos,
+        {
+          fold: 1,
+          payload: {
+            tipo: 'categoria_aptitud',
+            refId: clave
+          }
+        }
+      );
+    });
+  }
+
+  function construirRamaSectores() {
+    return (DATOS.sectores || []).map(sector =>
+      nodoArbol(sector.nombre, [], {
+        fold: 1,
+        payload: {
+          refId: sector.id,
+          tipo: 'sector'
+        }
+      })
+    );
+  }
+
+  function construirArbol(opciones = {}) {
+    const perfil = DATOS?.perfil || {};
+    const foco = opciones.foco || null;
+
+    const ramaIdentidad = nodoArbol(
+      perfil.identidad_profesional ||
+        'Estabilizador operativo transversal',
+      [
+        nodoArbol(perfil.mision || '')
+      ],
+      {
+        fold: 1,
+        payload: { tipo: 'identidad' }
+      }
+    );
+
+    const ramasAreas = (DATOS?.areas_hr || []).map(construirRamaArea);
+
+    const ramaAreas = nodoArbol(
+      'Áreas de Gestión',
+      ramasAreas,
+      {
+        fold: 1,
+        payload: { tipo: 'areas' }
+      }
+    );
+
+    const ramasAptitudes = construirRamaAptitudes();
+
+    const ramaAptitudes = nodoArbol(
+      'Aptitudes Transversales',
+      ramasAptitudes,
+      {
+        fold: 1,
+        payload: { tipo: 'aptitudes' }
+      }
+    );
+
+    const ramasSectores = construirRamaSectores();
+
+    const ramaSectores = nodoArbol(
+      'Sectores de Aplicación',
+      ramasSectores,
+      {
+        fold: 1,
+        payload: { tipo: 'sectores' }
+      }
+    );
+
+    const raiz = nodoArbol(
+      perfil.nombre || 'Miguel Otero Cabaleiro',
+      [
+        ramaIdentidad,
+        ramaAreas,
+        ramaAptitudes,
+        ramaSectores
+      ],
+      {
+        payload: { tipo: 'raiz' }
+      }
+    );
+
+    if (foco) {
+      abrirCamino(raiz, foco);
+    }
+
+    return raiz;
+  }
+
+  function textoNodo(nodo) {
+    return normalizar(
+      String(nodo?.content || '').replace(/<[^>]*>/g, '')
+    );
+  }
+
+  function abrirCamino(raiz, foco) {
+    const objetivo = normalizar(foco.texto || '');
+    if (!objetivo) return false;
+
+    function recorrer(nodo, ancestros) {
+      if (textoNodo(nodo).includes(objetivo)) {
+        ancestros.forEach(x => {
+          x.payload = {
+            ...(x.payload || {}),
+            fold: 0
+          };
+        });
+
+        if (nodo.children?.length) {
+          nodo.payload = {
+            ...(nodo.payload || {}),
+            fold: 0
+          };
+        }
+
+        return true;
+      }
+
+      for (const hijo of nodo.children || []) {
+        if (recorrer(hijo, [...ancestros, nodo])) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    return recorrer(raiz, []);
+  }
+
+  function renderArbol(opciones = {}) {
+    if (!window.markmap?.Markmap || !DATOS) return;
+
+    const svg = document.getElementById('mapa');
+    if (!svg) return;
+
+    svg.innerHTML = '';
+
+    const arbol = construirArbol(opciones);
+
+    markmapInstancia = window.markmap.Markmap.create(
+      '#mapa',
+      {
+        autoFit: true,
+        initialExpandLevel: NIVEL_ARBOL_BASE,
+        duration: DURACION_ANIMACION,
+        maxWidth: 260,
+        spacingHorizontal: 55,
+        spacingVertical: 5,
+        zoom: true,
+        pan: true
+      },
+      arbol
+    );
+
+    if (opciones.foco?.texto) {
+      setTimeout(
+        () => resaltarNodo(opciones.foco.texto),
+        DURACION_ANIMACION + 80
+      );
+    }
+  }
+
+  function resaltarNodo(textoBuscado) {
+    const objetivo = normalizar(textoBuscado);
+    const nodos = document.querySelectorAll(
+      '#mapa .markmap-node'
+    );
+
+    let encontrado = null;
+
+    nodos.forEach(nodo => {
+      nodo.classList.remove('nodo-activo');
+
+      const texto = normalizar(
+        nodo.querySelector('text')?.textContent || ''
+      );
+
+      if (!encontrado && texto.includes(objetivo)) {
+        encontrado = nodo;
+      }
+    });
+
+    if (!encontrado) return false;
+
+    encontrado.classList.add('nodo-activo');
+
+    try {
+      encontrado.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
+      });
+    } catch (_) {}
+
+    return true;
+  }
+
+  function mostrarArbolConFoco(texto) {
+    activarVistaArbol();
+
+    renderArbol({
+      foco: {
+        texto
+      }
+    });
+  }
+
+  function obtenerElementosVista() {
+    return {
+      lateral: document.querySelector('.lateral'),
+      zonaArbol: document.querySelector('.zona-arbol'),
+      contexto: document.getElementById('contexto'),
+      menu: document.getElementById('menu')
+    };
+  }
+
+  function activarVistaContenido() {
+    const { lateral, zonaArbol } = obtenerElementosVista();
+
+    if (!lateral || !zonaArbol) return;
+
+    zonaArbol.style.display = 'none';
+
+    lateral.style.width = '100%';
+    lateral.style.minWidth = '0';
+    lateral.style.maxWidth = 'none';
+
+    document.body.classList.remove('vista-arbol');
+    document.body.classList.add('vista-contenido');
+  }
+
+  function activarVistaArbol() {
+    const { lateral, zonaArbol } = obtenerElementosVista();
+
+    if (!lateral || !zonaArbol) return;
+
+    zonaArbol.style.display = 'flex';
+
+    document.body.classList.remove('vista-contenido');
+    document.body.classList.add('vista-arbol');
+
+    if (window.innerWidth > 1024) {
+      lateral.style.width = '';
+      lateral.style.minWidth = '';
+      lateral.style.maxWidth = '';
+    }
+  }
+
+  function activarMenu(id) {
+    document.querySelectorAll('.menu-btn').forEach(btn => {
+      btn.classList.toggle(
+        'activo',
+        btn.dataset.id === id
+      );
+    });
   }
 
   function mostrarHTML(html) {
-    const c = document.getElementById('contexto');
-    if (c) c.innerHTML = html;
+    const contexto = document.getElementById('contexto');
+    if (contexto) contexto.innerHTML = html;
   }
 
-  /* Renders de tarjetas formateadas por categoría */
+  function mostrarMensaje(texto) {
+    mostrarHTML(
+      `<div class="contexto-vacio">${escaparHTML(texto)}</div>`
+    );
+  }
+
+  function renderBotonArbol(texto, id = '') {
+    return `
+      <button
+        type="button"
+        class="btn-herramienta btn-ver-arbol"
+        data-foco="${escaparHTML(texto)}"
+        data-ref-id="${escaparHTML(id)}">
+        Ver en árbol
+      </button>
+    `;
+  }
+
   function renderTarjetaNodo(nodo) {
-    const sectores = (nodo.id_sectores || []).map(s => obtenerNombreSector(DATOS, s)).join(', ');
-    const aptitudes = (nodo.id_aptitudes || []).map(a => obtenerNombreAptitud(DATOS, a)).join(', ');
-    const areas = (nodo.id_areas || []).map(ar => obtenerNombreArea(DATOS, ar)).join(', ');
+    const sectores = (nodo.id_sectores || [])
+      .map(obtenerNombreSector)
+      .join(', ');
+
+    const aptitudes = (nodo.id_aptitudes || [])
+      .map(obtenerNombreAptitud)
+      .join(', ');
+
+    const areas = (nodo.id_areas || [])
+      .map(obtenerNombreArea)
+      .join(', ');
+
     const entidades = (nodo.entidades || []).join(', ');
-    const kw = (nodo.palabras_clave || []).join(', ');
+    const keywords = (nodo.palabras_clave || []).join(', ');
 
-    let badgeColor = '#FF9900';
-    let badgeText = (nodo.tipo || 'Nodo').toUpperCase();
+    const tipo = normalizar(nodo.tipo);
 
-    if (nodo.tipo === 'experiencia') badgeColor = '#007185';
-    if (nodo.tipo === 'formacion') badgeColor = '#2e7d32';
-    if (nodo.tipo === 'capacitacion') badgeColor = '#d32f2f';
-    if (nodo.tipo === 'evidencia') badgeColor = '#6a1b9a';
+    let badge = '#FF9900';
 
-    let html = `<div class="item" style="border-left: 4px solid ${badgeColor};">`;
-    html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">`;
-    html += `<b>${nodo.titulo}</b>`;
-    html += `<span style="font-size:9px; background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:3px; font-weight:700;">${badgeText}</span>`;
-    html += `</div>`;
-    html += `<div style="font-size:11px; color:#565959; font-weight:600; margin-bottom:6px;">Periodo: ${nodo.periodo}</div>`;
-    html += `<div style="margin-top:4px; color:#232F3E; line-height:1.4;">${nodo.descripcion}</div>`;
-    
-    if (entidades) html += `<div class="ctx-label">Entidades / Empresas</div><div>${entidades}</div>`;
-    if (areas) html += `<div class="ctx-label">Áreas RRHH</div><div>${areas}</div>`;
-    if (sectores) html += `<div class="ctx-label">Sectores Directos</div><div>${sectores}</div>`;
-    if (aptitudes) html += `<div class="ctx-label">Aptitudes Clave</div><div>${aptitudes}</div>`;
-    if (kw) html += `<div class="ctx-label">Palabras Clave ATS</div><div style="font-style:italic; font-size:10px; color:#565959;">${kw}</div>`;
-    
-    html += `</div>`;
+    if (tipo === 'experiencia') badge = '#007185';
+    if (tipo === 'formacion') badge = '#2e7d32';
+    if (tipo === 'capacitacion') badge = '#d32f2f';
+    if (tipo === 'evidencia') badge = '#6a1b9a';
+
+    let html = `
+      <article class="item"
+        style="border-left:4px solid ${badge};">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:8px;
+          align-items:flex-start;
+          margin-bottom:5px;">
+
+          <b>${escaparHTML(nodo.titulo)}</b>
+
+          <span style="
+            font-size:9px;
+            background:${badge};
+            color:#fff;
+            padding:3px 6px;
+            border-radius:3px;
+            font-weight:700;
+            white-space:nowrap;">
+
+            ${escaparHTML(
+              (nodo.tipo || 'Nodo').toUpperCase()
+            )}
+
+          </span>
+        </div>
+    `;
+
+    if (nodo.periodo) {
+      html += `
+        <div style="
+          font-size:11px;
+          color:#565959;
+          font-weight:600;
+          margin-bottom:6px;">
+
+          ${escaparHTML(nodo.periodo)}
+
+        </div>
+      `;
+    }
+
+    if (nodo.descripcion) {
+      html += `
+        <div style="
+          color:#232F3E;
+          line-height:1.5;
+          margin-bottom:7px;">
+
+          ${escaparHTML(nodo.descripcion)}
+
+        </div>
+      `;
+    }
+
+    if (entidades) {
+      html += `
+        <div class="ctx-label">
+          Entidades / Empresas
+        </div>
+
+        <div>${escaparHTML(entidades)}</div>
+      `;
+    }
+
+    if (areas) {
+      html += `
+        <div class="ctx-label">
+          Áreas relacionadas
+        </div>
+
+        <div>${escaparHTML(areas)}</div>
+      `;
+    }
+
+    if (sectores) {
+      html += `
+        <div class="ctx-label">
+          Sectores relacionados
+        </div>
+
+        <div>${escaparHTML(sectores)}</div>
+      `;
+    }
+
+    if (aptitudes) {
+      html += `
+        <div class="ctx-label">
+          Aptitudes demostradas
+        </div>
+
+        <div>${escaparHTML(aptitudes)}</div>
+      `;
+    }
+
+    if (keywords) {
+      html += `
+        <div class="ctx-label">
+          Palabras clave
+        </div>
+
+        <div style="
+          font-style:italic;
+          font-size:10px;
+          color:#565959;">
+
+          ${escaparHTML(keywords)}
+
+        </div>
+      `;
+    }
+
+    html += `
+        <div style="margin-top:9px;">
+          ${renderBotonArbol(
+            nodo.titulo,
+            nodo.id
+          )}
+        </div>
+
+      </article>
+    `;
+
     return html;
   }
 
   function mostrarContextoArea(area) {
-    let html = `<div class="ctx-titulo">${area.nombre}</div>`;
-    html += `<div class="ctx-desc">Área de gestión estratégica y operativa.</div>`;
-    const nodosDelArea = (DATOS.nodos_conocimiento || []).filter(n => (n.id_areas || []).includes(area.id));
-    if (nodosDelArea.length) {
-      html += `<div class="ctx-label">Nodos de Conocimiento Relacionados</div>`;
-      nodosDelArea.forEach(n => {
-        html += renderTarjetaNodo(n);
+    activarVistaContenido();
+
+    const nodos = obtenerNodosPorArea(area.id);
+
+    let html = `
+      <div class="ctx-titulo">
+        ${escaparHTML(area.nombre)}
+      </div>
+
+      <div class="ctx-desc">
+        Experiencias, conocimientos y evidencias vinculadas
+        a esta área profesional.
+      </div>
+    `;
+
+    if (!nodos.length) {
+      html += `
+        <div class="contexto-vacio">
+          No hay referencias detalladas asociadas todavía.
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="ctx-label">
+          Referencias relacionadas · ${nodos.length}
+        </div>
+      `;
+
+      nodos.forEach(nodo => {
+        html += renderTarjetaNodo(nodo);
       });
     }
+
     mostrarHTML(html);
+  }
+
+  function descripcionAptitud(aptitud) {
+    const evidencias = obtenerNodosPorAptitud(
+      aptitud.id
+    );
+
+    if (!evidencias.length) {
+      return 'Aptitud declarada en la base profesional, pendiente de asociación documental adicional.';
+    }
+
+    const tipos = [
+      ...new Set(
+        evidencias
+          .map(n => n.tipo)
+          .filter(Boolean)
+      )
+    ].join(', ');
+
+    return `Capacidad demostrada mediante ${evidencias.length} referencia(s) de conocimiento (${tipos || 'experiencia y evidencia profesional'}), vinculadas directamente a la actividad desarrollada.`;
+  }
+
+  function renderTarjetaAptitud(aptitud) {
+    const evidencias = obtenerNodosPorAptitud(
+      aptitud.id
+    );
+
+    const categoria =
+      categoriaAptitudDeId(aptitud.id);
+
+    let html = `
+      <article class="item">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:8px;
+          align-items:flex-start;">
+
+          <b>${escaparHTML(aptitud.nombre)}</b>
+
+          <span style="
+            font-size:9px;
+            color:#565959;
+            text-transform:uppercase;">
+
+            ${escaparHTML(categoria)}
+
+          </span>
+        </div>
+
+        <div style="
+          margin-top:6px;
+          color:#232F3E;
+          line-height:1.5;">
+
+          ${escaparHTML(
+            descripcionAptitud(aptitud)
+          )}
+
+        </div>
+
+        <div class="ctx-label">
+          Referencias sólidas · ${evidencias.length}
+        </div>
+    `;
+
+    if (evidencias.length) {
+      evidencias.forEach(nodo => {
+        html += `
+          <div style="
+            padding:5px 0;
+            border-top:1px solid #E3E6E6;">
+
+            <b>${escaparHTML(nodo.titulo)}</b>
+
+            ${
+              nodo.periodo
+                ? `<div style="
+                    font-size:10px;
+                    color:#565959;">
+                    ${escaparHTML(nodo.periodo)}
+                   </div>`
+                : ''
+            }
+
+          </div>
+        `;
+      });
+    } else {
+      html += `
+        <div style="
+          font-size:11px;
+          color:#565959;">
+
+          Sin referencia de experiencia asociada
+          en la base actual.
+
+        </div>
+      `;
+    }
+
+    html += `
+        <div style="margin-top:9px;">
+          ${renderBotonArbol(
+            aptitud.nombre,
+            aptitud.id
+          )}
+        </div>
+
+      </article>
+    `;
+
+    return html;
   }
 
   function mostrarContextoAptitudes() {
-    let html = `<div class="ctx-titulo">Aptitudes Transversales</div>`;
-    html += `<div class="ctx-desc">Capacidades operativas, comerciales, de liderazgo y tecnológicas.</div>`;
-    if (DATOS.aptitudes) {
-      for (const cat in DATOS.aptitudes) {
-        const nombreCat = cat.toUpperCase();
-        html += `<div class="ctx-label">${nombreCat}</div>`;
-        DATOS.aptitudes[cat].forEach(a => {
-          html += `<div class="item"><b>${a.nombre}</b></div>`;
-        });
-      }
+    activarVistaContenido();
+
+    let html = `
+      <div class="ctx-titulo">
+        Aptitudes
+      </div>
+
+      <div class="ctx-desc">
+        Capacidades profesionales consultables y vinculadas
+        a referencias concretas de experiencia y conocimiento.
+      </div>
+    `;
+
+    for (
+      const [categoria, lista]
+      of Object.entries(DATOS.aptitudes || {})
+    ) {
+      html += `
+        <div class="ctx-label">
+          ${escaparHTML(categoria)}
+        </div>
+      `;
+
+      (lista || []).forEach(aptitud => {
+        html += renderTarjetaAptitud(
+          aptitud
+        );
+      });
     }
+
     mostrarHTML(html);
   }
 
-  function mostrarContextoSectores() {
-    let html = `<div class="ctx-titulo">Sectores de Aplicación (20+)</div>`;
-    html += `<div class="ctx-desc">Ámbitos profesionales donde se aplica la capacidad transversal de estabilización.</div>`;
-    if (DATOS.sectores) {
-      DATOS.sectores.forEach(s => {
-        html += `<div class="item"><b>${s.nombre}</b></div>`;
-      });
+  function renderTarjetaSector(sector) {
+    const nodos = obtenerNodosPorSector(
+      sector.id
+    );
+
+    let html = `
+      <article class="item">
+
+        <b>${escaparHTML(sector.nombre)}</b>
+
+        <div style="
+          margin-top:6px;
+          color:#565959;">
+
+          ${nodos.length}
+          referencia(s) profesional(es) asociada(s).
+
+        </div>
+    `;
+
+    if (nodos.length) {
+      html += `
+        <div class="ctx-label">
+          Referencias
+        </div>
+
+        <div>
+          ${nodos.map(n => `
+            <div style="
+              padding:4px 0;
+              border-top:1px solid #E3E6E6;">
+
+              ${escaparHTML(n.titulo)}
+
+            </div>
+          `).join('')}
+        </div>
+      `;
     }
+
+    html += `
+        <div style="margin-top:9px;">
+          ${renderBotonArbol(
+            sector.nombre,
+            sector.id
+          )}
+        </div>
+
+      </article>
+    `;
+
+    return html;
+  }
+
+  function mostrarContextoSectores() {
+    activarVistaContenido();
+
+    let html = `
+      <div class="ctx-titulo">
+        Sectores
+      </div>
+
+      <div class="ctx-desc">
+        Sectores en los que existe experiencia,
+        aplicación o conocimiento relacionado.
+      </div>
+    `;
+
+    (DATOS.sectores || []).forEach(sector => {
+      html += renderTarjetaSector(
+        sector
+      );
+    });
+
     mostrarHTML(html);
   }
 
   function mostrarContextoTodosNodos() {
-    let html = `<div class="ctx-titulo">Nodos de Conocimiento (Base Completa)</div>`;
-    html += `<div class="ctx-desc">Inventario completo de experiencias, formación reglada, licencias y evidencias registrales.</div>`;
-    if (DATOS.nodos_conocimiento) {
-      DATOS.nodos_conocimiento.forEach(n => {
-        html += renderTarjetaNodo(n);
+    activarVistaContenido();
+
+    const nodos =
+      DATOS.nodos_conocimiento || [];
+
+    let html = `
+      <div class="ctx-titulo">
+        Conocimiento
+      </div>
+
+      <div class="ctx-desc">
+        Inventario consultable de experiencias,
+        formación, capacitación y evidencias,
+        con sus relaciones profesionales.
+      </div>
+
+      <div class="ctx-label">
+        Referencias · ${nodos.length}
+      </div>
+    `;
+
+    nodos.forEach(nodo => {
+      html += renderTarjetaNodo(nodo);
+    });
+
+    mostrarHTML(html);
+  }
+
+  function renderResultadosBusqueda(
+    resultado,
+    query
+  ) {
+    const total =
+      resultado.areas_hr.length +
+      resultado.sectores.length +
+      resultado.aptitudes.length +
+      resultado.nodos.length;
+
+    activarVistaContenido();
+
+    if (!total) {
+      mostrarMensaje(
+        `Sin resultados para "${query}". Prueba con camión, IA, DOG, logística, carretillas, PEMP, ventas...`
+      );
+
+      return;
+    }
+
+    let html = `
+      <div class="ctx-titulo">
+        Resultados
+      </div>
+
+      <div class="ctx-desc">
+        ${total}
+        referencia(s) encontrada(s) para
+        «${escaparHTML(query)}».
+      </div>
+    `;
+
+    if (resultado.areas_hr.length) {
+      html += `
+        <div class="ctx-label">
+          Áreas
+        </div>
+      `;
+
+      resultado.areas_hr.forEach(area => {
+        html += `
+          <div class="item">
+            <b>${escaparHTML(area.nombre)}</b>
+
+            <div style="margin-top:7px;">
+              ${renderBotonArbol(
+                area.nombre,
+                area.id
+              )}
+            </div>
+          </div>
+        `;
       });
     }
+
+    if (resultado.aptitudes.length) {
+      html += `
+        <div class="ctx-label">
+          Aptitudes
+        </div>
+      `;
+
+      resultado.aptitudes.forEach(aptitud => {
+        html += renderTarjetaAptitud(
+          aptitud
+        );
+      });
+    }
+
+    if (resultado.sectores.length) {
+      html += `
+        <div class="ctx-label">
+          Sectores
+        </div>
+      `;
+
+      resultado.sectores.forEach(sector => {
+        html += renderTarjetaSector(
+          sector
+        );
+      });
+    }
+
+    if (resultado.nodos.length) {
+      html += `
+        <div class="ctx-label">
+          Conocimiento
+        </div>
+      `;
+
+      resultado.nodos.forEach(nodo => {
+        html += renderTarjetaNodo(
+          nodo
+        );
+      });
+    }
+
     mostrarHTML(html);
   }
 
   function conectarBuscador() {
-    const inputBuscador = document.getElementById('buscador');
-    if (!inputBuscador) return;
-    inputBuscador.addEventListener('input', (e) => {
-      const q = e.target.value;
-      if (!q.trim()) {
-        mostrarHTML('<div class="contexto-vacio">Selecciona una categoría o escribe una búsqueda</div>');
-        return;
+    const input =
+      document.getElementById('buscador');
+
+    if (!input) return;
+
+    input.addEventListener(
+      'input',
+      evento => {
+        const query =
+          evento.target.value.trim();
+
+        if (!query) {
+          activarVistaContenido();
+
+          mostrarMensaje(
+            'Selecciona una categoría o escribe una búsqueda.'
+          );
+
+          return;
+        }
+
+        renderResultadosBusqueda(
+          buscar(query),
+          query
+        );
       }
-      const r = buscar(q, DATOS);
-      renderResultadosBusqueda(r);
-    });
+    );
   }
 
-  function renderResultadosBusqueda(r) {
-    const total = r.areas_hr.length + r.sectores.length + r.aptitudes.length + r.nodos.length;
-    if (total === 0) {
-      mostrarHTML('<div class="contexto-vacio">Sin resultados para esa búsqueda. Intenta con palabras como "camión", "IA", "DOG", "carretillas" o "PEMP".</div>');
+  const MENU = [
+    {
+      id: 'hr_ope',
+      etiqueta: 'Operaciones',
+      tipo: 'area'
+    },
+    {
+      id: 'hr_com',
+      etiqueta: 'Comercial',
+      tipo: 'area'
+    },
+    {
+      id: 'hr_ges',
+      etiqueta: 'Gestión y organización',
+      tipo: 'area'
+    },
+    {
+      id: 'hr_per',
+      etiqueta: 'Personas',
+      tipo: 'area'
+    },
+    {
+      id: 'hr_tec',
+      etiqueta: 'Tecnología',
+      tipo: 'area'
+    },
+    {
+      id: 'seccion_aptitudes',
+      etiqueta: 'Aptitudes',
+      tipo: 'seccion'
+    },
+    {
+      id: 'seccion_sectores',
+      etiqueta: 'Sectores',
+      tipo: 'seccion'
+    },
+    {
+      id: 'seccion_nodos',
+      etiqueta: 'Conocimiento',
+      tipo: 'seccion'
+    },
+    {
+      id: 'seccion_arbol',
+      etiqueta: 'Árbol',
+      tipo: 'arbol'
+    }
+  ];
+
+  function renderMenu() {
+    const contenedor =
+      document.getElementById('menu');
+
+    if (!contenedor) return;
+
+    contenedor.innerHTML =
+      MENU.map(item => `
+        <button
+          type="button"
+          class="menu-btn"
+          data-id="${escaparHTML(item.id)}"
+          data-tipo="${escaparHTML(item.tipo)}">
+
+          ${escaparHTML(item.etiqueta)}
+
+        </button>
+      `).join('');
+
+    contenedor
+      .querySelectorAll('.menu-btn')
+      .forEach(btn => {
+        btn.addEventListener(
+          'click',
+          () => {
+            activarMenu(btn.dataset.id);
+
+            navegarMenu(
+              btn.dataset.id,
+              btn.dataset.tipo
+            );
+          }
+        );
+      });
+  }
+
+  function navegarMenu(id, tipo) {
+    if (tipo === 'arbol') {
+      mostrarVistaArbol();
       return;
     }
-    let html = '';
 
-    if (r.areas_hr.length) {
-      html += `<div class="ctx-label">Áreas RRHH</div>`;
-      r.areas_hr.forEach(a => {
-        html += `<div class="item"><b>${a.nombre}</b></div>`;
-      });
+    if (tipo === 'area') {
+      const area = obtenerArea(id);
+
+      if (area) {
+        mostrarContextoArea(area);
+      }
+
+      return;
     }
 
-    if (r.sectores.length) {
-      html += `<div class="ctx-label">Sectores</div>`;
-      r.sectores.forEach(s => {
-        html += `<div class="item"><b>${s.nombre}</b></div>`;
-      });
+    if (id === 'seccion_aptitudes') {
+      mostrarContextoAptitudes();
+      return;
     }
 
-    if (r.aptitudes.length) {
-      html += `<div class="ctx-label">Aptitudes</div>`;
-      r.aptitudes.forEach(ap => {
-        html += `<div class="item"><b>${ap.nombre}</b></div>`;
-      });
+    if (id === 'seccion_sectores') {
+      mostrarContextoSectores();
+      return;
     }
 
-    if (r.nodos.length) {
-      html += `<div class="ctx-label">Nodos de Conocimiento (${r.nodos.length})</div>`;
-      r.nodos.forEach(n => {
-        html += renderTarjetaNodo(n);
-      });
+    if (id === 'seccion_nodos') {
+      mostrarContextoTodosNodos();
     }
-
-    mostrarHTML(html);
   }
 
-  function conectarBotones() {
-    const btnExpandir = document.getElementById('btn-expandir');
-    const btnContraer = document.getElementById('btn-contraer');
-    const btnLimpiar = document.getElementById('btn-limpiar');
+  function mostrarVistaArbol() {
+    activarVistaArbol();
 
-    if (btnExpandir) btnExpandir.addEventListener('click', () => renderArbol(99));
-    if (btnContraer) btnContraer.addEventListener('click', () => renderArbol(1));
-    if (btnLimpiar) btnLimpiar.addEventListener('click', () => {
-      const buscador = document.getElementById('buscador');
-      if (buscador) buscador.value = '';
-      document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('activo'));
-      mostrarHTML('<div class="contexto-vacio">Selecciona una categoría o escribe una búsqueda</div>');
-      renderArbol(1);
+    renderArbol({
+      nivel: NIVEL_ARBOL_BASE
     });
+
+    mostrarHTML(`
+      <div class="contexto-vacio">
+
+        Árbol profesional.
+
+        <br><br>
+
+        Estado inicial:
+        4 ramas principales contraídas.
+
+        <br><br>
+
+        Pulsa un nodo para ampliar
+        su rama.
+
+      </div>
+    `);
   }
 
-  document.addEventListener('DOMContentLoaded', iniciar);
-}
+  function conectarBotonesArbol() {
+    const expandir =
+      document.getElementById(
+        'btn-expandir'
+      );
+
+    const contraer =
+      document.getElementById(
+        'btn-contraer'
+      );
+
+    const limpiar =
+      document.getElementById(
+        'btn-limpiar'
+      );
+
+    if (expandir) {
+      expandir.addEventListener(
+        'click',
+        () => {
+          activarVistaArbol();
+
+          renderArbol({
+            nivel: 99
+          });
+        }
+      );
+    }
+
+    if (contraer) {
+      contraer.addEventListener(
+        'click',
+        () => {
+          activarVistaArbol();
+
+          renderArbol({
+            nivel: NIVEL_ARBOL_BASE
+          });
+        }
+      );
+    }
+
+    if (limpiar) {
+      limpiar.addEventListener(
+        'click',
+        restablecerVista
+      );
+    }
+  }
+
+  function restablecerVista() {
+    const buscador =
+      document.getElementById(
+        'buscador'
+      );
+
+    if (buscador) {
+      buscador.value = '';
+    }
+
+    activarMenu(
+      'seccion_arbol'
+    );
+
+    mostrarVistaArbol();
+  }
+
+  function conectarReferenciasArbol() {
+    document.addEventListener(
+      'click',
+      evento => {
+        const boton =
+          evento.target.closest(
+            '.btn-ver-arbol'
+          );
+
+        if (!boton) return;
+
+        const foco =
+          boton.dataset.foco || '';
+
+        if (!foco) return;
+
+        activarMenu(
+          'seccion_arbol'
+        );
+
+        mostrarArbolConFoco(
+          foco
+        );
+      }
+    );
+  }
+
+  function conectarInteraccionArbol() {
+    const mapa =
+      document.getElementById(
+        'mapa'
+      );
+
+    if (!mapa) return;
+
+    mapa.addEventListener(
+      'click',
+      evento => {
+        const nodo =
+          evento.target.closest(
+            '.markmap-node'
+          );
+
+        if (!nodo) return;
+
+        const texto =
+          nodo
+            .querySelector('text')
+            ?.textContent
+            ?.trim();
+
+        if (!texto) return;
+
+        setTimeout(
+          () => resaltarNodo(texto),
+          DURACION_ANIMACION + 20
+        );
+      }
+    );
+  }
+
+  function actualizarCabecera() {
+    const perfil =
+      DATOS?.perfil || {};
+
+    const magnitudes =
+      DATOS?.magnitudes || {};
+
+    const nombre =
+      document.querySelector(
+        '.cabecera-nombre'
+      );
+
+    const titulo =
+      document.querySelector(
+        '.cabecera-titulo'
+      );
+
+    if (nombre) {
+      nombre.textContent =
+        perfil.nombre ||
+        'Miguel Otero Cabaleiro';
+    }
+
+    if (titulo) {
+      titulo.textContent =
+        'Estabilizador operativo transversal';
+    }
+
+    const exp =
+      document.getElementById(
+        'm-exp'
+      );
+
+    const hab =
+      document.getElementById(
+        'm-sec'
+      );
+
+    if (exp) {
+      exp.textContent =
+        `${Number(
+          magnitudes.anos_experiencia || 35
+        )}+`;
+    }
+
+    if (hab) {
+      hab.textContent =
+        `${Number(
+          magnitudes.habilidades || 20
+        )}+`;
+    }
+
+    const bloqueMagnitudes =
+      document.querySelector(
+        '.cabecera-magnitudes'
+      );
+
+    if (bloqueMagnitudes) {
+      const magnitudesDOM =
+        bloqueMagnitudes.querySelectorAll(
+          '.magnitud'
+        );
+
+      if (magnitudesDOM[0]) {
+        const etiqueta =
+          magnitudesDOM[0]
+            .querySelector('span');
+
+        if (etiqueta) {
+          etiqueta.textContent =
+            'años exp';
+        }
+      }
+
+      if (magnitudesDOM[1]) {
+        const etiqueta =
+          magnitudesDOM[1]
+            .querySelector('span');
+
+        if (etiqueta) {
+          etiqueta.textContent =
+            'habilidades';
+        }
+      }
+
+      if (magnitudesDOM[2]) {
+        magnitudesDOM[2].style.display =
+          'none';
+      }
+    }
+
+    const subtitulo =
+      document.querySelector(
+        '.cabecera-subtitulo'
+      );
+
+    if (subtitulo) {
+      subtitulo.style.display =
+        'none';
+    }
+  }
+
+  async function iniciar() {
+    try {
+      const respuesta =
+        await fetch(
+          './knowledge-base.json',
+          {
+            cache: 'no-store'
+          }
+        );
+
+      if (!respuesta.ok) {
+        throw new Error(
+          `HTTP ${respuesta.status}`
+        );
+      }
+
+      DATOS =
+        await respuesta.json();
+
+      actualizarCabecera();
+
+      renderMenu();
+
+      conectarBuscador();
+
+      conectarBotonesArbol();
+
+      conectarReferenciasArbol();
+
+      conectarInteraccionArbol();
+
+      activarVistaContenido();
+
+      mostrarHTML(`
+        <div class="contexto-vacio">
+
+          Selecciona una categoría
+          o utiliza el buscador para
+          explorar el mapa profesional.
+
+        </div>
+      `);
+
+      console.log(
+        '✓ Plataforma cargada. knowledge-base.json es la fuente única de verdad.'
+      );
+
+    } catch (error) {
+      console.error(
+        'Error cargando knowledge-base.json:',
+        error
+      );
+
+      const contexto =
+        document.getElementById(
+          'contexto'
+        );
+
+      if (contexto) {
+        contexto.innerHTML = `
+          <div class="contexto-vacio">
+
+            No se pudo cargar la base
+            de conocimiento.
+
+            Comprueba que
+            <b>knowledge-base.json</b>
+            está en la raíz del repositorio.
+
+          </div>
+        `;
+      }
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.MiguelMapa = {
+      buscar,
+      construirArbol,
+      renderArbol,
+      mostrarVistaArbol,
+      mostrarContextoAptitudes,
+      mostrarContextoSectores,
+      mostrarContextoTodosNodos,
+      restablecerVista
+    };
+  }
+
+  if (
+    typeof module !== 'undefined' &&
+    module.exports
+  ) {
+    module.exports = {
+      normalizar,
+      coincide,
+      buscar,
+      construirArbol
+    };
+  }
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    iniciar
+  );
+
+})();
