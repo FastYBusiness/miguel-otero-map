@@ -1,601 +1,379 @@
-/* ============================================================
-   styles.css — v4
-   Mobile: lectura desplazable + árbol a pantalla completa
-   ============================================================ */
-
-:root {
-  --color-primario: #FF9900;
-  --color-secundario: #FFD814;
-  --color-oscuro: #232F3E;
-  --color-texto: #111111;
-  --color-texto-secundario: #565959;
-  --color-fondo: #F3F3F3;
-  --color-blanco: #FFFFFF;
-  --color-borde: #E3E6E6;
-  --color-borde-input: #D5D9D9;
-  --color-activo: #007185;
-  --radio: 10px;
-  --radio-pequeno: 7px;
-  --sombra: 0 2px 10px rgba(0,0,0,.07);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background: var(--color-fondo);
-  color: var(--color-texto);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-button {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.app {
-  width: 100%;
-  height: 100dvh;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ================= CABECERA ================= */
-
-.cabecera {
-  flex: 0 0 auto;
-  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
-  padding: 9px 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
-  position: relative;
-  z-index: 5;
-}
-
-.cabecera-contenido {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.cabecera-izq {
-  width: 100%;
-  min-width: 0;
-  text-align: center;
-}
-
-.cabecera-nombre {
-  font-size: 18px;
-  line-height: 1.1;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-}
-
-.cabecera-titulo {
-  font-size: 17px;
-  line-height: 1.1;
-  font-weight: 700;
-  margin: 2px 0 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-}
-
-.cabecera-subtitulo {
-  display: none !important;
-}
-
-.cabecera-magnitudes {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: 24px;
-}
-
-.cabecera-magnitudes .magnitud:nth-child(3) {
-  display: none !important;
-}
-
-.magnitud {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
-  white-space: nowrap;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.magnitud b {
-  font-size: 21px;
-  line-height: 1;
-  font-weight: 700;
-}
-
-/* ================= CUERPO ================= */
-
-.cuerpo {
-  display: flex;
-  flex: 1 1 auto;
-  min-height: 0;
-  height: 0;
-  overflow: hidden;
-  gap: 8px;
-  padding: 7px;
-}
-
-/* ================= PANEL ================= */
-
-.lateral {
-  width: 260px;
-  min-width: 260px;
-  min-height: 0;
-  height: 100%;
-  background: var(--color-blanco);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex-shrink: 0;
-  box-shadow: var(--sombra);
-}
-
-.caja-buscador {
-  flex: 0 0 auto;
-  padding: 8px;
-  border-bottom: 1px solid var(--color-borde);
-}
-
-#buscador {
-  display: block;
-  width: 100%;
-  height: 46px;
-  min-height: 46px;
-  padding: 8px 11px;
-  border: 1px solid var(--color-borde-input);
-  border-radius: var(--radio-pequeno);
-  background: var(--color-blanco);
-  color: var(--color-texto);
-  font-size: 14px;
-}
-
-#buscador:focus {
-  outline: none;
-  border-color: var(--color-primario);
-  box-shadow: 0 0 0 3px rgba(255,153,0,.18);
-}
-
-#menu {
-  flex: 0 0 auto;
-  padding: 7px;
-  border-bottom: 1px solid var(--color-borde);
-  overflow-y: auto;
-  max-height: 260px;
-}
-
-.menu-btn {
-  display: block;
-  width: 100%;
-  min-height: 40px;
-  padding: 7px 10px;
-  margin-bottom: 5px;
-  background: #FAFAFA;
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-pequeno);
-  color: var(--color-oscuro);
-  font-size: 11px;
-  line-height: 1.15;
-  font-weight: 650;
-  text-align: left;
-  cursor: pointer;
-}
-
-.menu-btn.activo {
-  background: var(--color-primario);
-  border-color: var(--color-primario);
-  color: var(--color-blanco);
-}
-
-/* ================= CONTENIDO: AQUÍ ESTÁ EL SCROLL ================= */
-
-#contexto {
-  flex: 1 1 auto;
-  min-height: 0;
-  height: auto;
-  padding: 12px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.contexto-vacio {
-  color: var(--color-texto-secundario);
-  text-align: center;
-  padding: 20px 8px;
-}
-
-.ctx-titulo {
-  font-size: 16px;
-  line-height: 1.25;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.ctx-desc {
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--color-texto-secundario);
-  margin-bottom: 10px;
-}
-
-.ctx-label {
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-texto-secundario);
-  letter-spacing: .45px;
-  margin: 10px 0 4px;
-}
-
-.item {
-  background: #FAFAFA;
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-pequeno);
-  padding: 10px;
-  margin-bottom: 7px;
-  font-size: 11px;
-  line-height: 1.45;
-}
-
-/* ================= ÁRBOL ================= */
-
-.zona-arbol {
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--color-blanco);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio);
-  overflow: hidden;
-  box-shadow: var(--sombra);
-}
-
-.barra-herramientas {
-  flex: 0 0 auto;
-  padding: 6px 8px;
-  border-bottom: 1px solid var(--color-borde);
-  background: #FAFAFA;
-  display: flex;
-  gap: 5px;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  scrollbar-width: none;
-}
-
-.barra-herramientas::-webkit-scrollbar {
-  display: none;
-}
-
-.btn-herramienta {
-  flex: 0 0 auto;
-  min-height: 38px;
-  padding: 7px 10px;
-  background: var(--color-blanco);
-  border: 1px solid var(--color-borde-input);
-  border-radius: var(--radio-pequeno);
-  color: var(--color-oscuro);
-  font-size: 11px;
-  font-weight: 650;
-  white-space: nowrap;
-}
-
-.contenedor-mapa {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
-  padding: 1px;
-  position: relative;
-  touch-action: none;
-  overscroll-behavior: contain;
-}
-
-#mapa {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.markmap text {
-  fill: var(--color-texto) !important;
-  font-size: 11px !important;
-  font-weight: 500;
-}
-
-.markmap path {
-  stroke: #37475A !important;
-  stroke-width: 1.5px !important;
-  stroke-linecap: round;
-  opacity: .65;
-}
-
-.markmap circle {
-  fill: var(--color-primario) !important;
-  r: 3.5px;
-}
-
-.markmap-node.nodo-activo > circle {
-  fill: var(--color-activo) !important;
-  r: 6px;
-}
-
-.markmap-node.nodo-activo > text {
-  fill: var(--color-activo) !important;
-  font-weight: 700;
-}
-
-/* ================= PIE ================= */
-
-.pie {
-  flex: 0 0 auto;
-  text-align: center;
-  font-size: 10px;
-  padding: 6px 10px;
-  background: var(--color-blanco);
-  border-top: 1px solid var(--color-borde);
-}
-
-/* ============================================================
-   MÓVIL
-   ============================================================ */
-
-@media (max-width: 768px) {
-
-  .cabecera {
-    padding: 8px 10px 9px;
-  }
-
-  .cabecera-nombre {
-    font-size: 17px;
-  }
-
-  .cabecera-titulo {
-    font-size: 16px;
-    margin-bottom: 6px;
-  }
-
-  .cabecera-magnitudes {
-    gap: 20px;
-  }
-
-  .magnitud {
-    font-size: 10px;
-  }
-
-  .magnitud b {
-    font-size: 21px;
-  }
-
-  .cuerpo {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px;
-  }
-
-  .lateral {
-    width: 100%;
-    min-width: 0;
-    max-width: none;
-    height: 100%;
-  }
-
-  .caja-buscador {
-    padding: 6px;
-  }
-
-  #buscador {
-    height: 44px;
-    min-height: 44px;
-    font-size: 14px;
-  }
-
-  #menu {
-    flex: 0 0 auto;
-    display: flex;
-    width: 100%;
-    max-height: none;
-    padding: 5px;
-    gap: 5px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  #menu::-webkit-scrollbar {
-    display: none;
-  }
-
-  .menu-btn {
-    flex: 0 0 auto;
-    width: auto;
-    min-width: max-content;
-    min-height: 42px;
-    margin: 0;
-    padding: 7px 11px;
-    font-size: 11px;
-  }
-
-  /* El panel de información ocupa todo el espacio restante
-     y tiene su PROPIO scroll táctil. */
-  #contexto {
-    flex: 1 1 0;
-    min-height: 0;
-    height: 0;
-    padding: 10px;
-    overflow-y: auto !important;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-  }
-
-  /* Durante consulta no se muestra el árbol. */
-  body.vista-contenido .zona-arbol {
-    display: none !important;
-  }
-
-  body.vista-contenido .lateral {
-    display: flex !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-  }
-
-  /* Al entrar explícitamente en ÁRBOL:
-     el panel desaparece y el árbol ocupa todo el cuerpo. */
-  body.vista-arbol .lateral {
-    display: none !important;
-  }
-
-  body.vista-arbol .zona-arbol {
-    display: flex !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    flex: 1 1 auto !important;
-  }
-
-  body.vista-arbol .contenedor-mapa {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    height: auto !important;
-  }
-
-  body.vista-arbol #mapa {
-    width: 100%;
-    height: 100%;
-  }
-
-  .pie {
-    display: none;
-  }
-}
-
-/* ================= MÓVIL PEQUEÑO ================= */
-
-@media (max-width: 480px) {
-
-  .cabecera {
-    padding: 7px 8px 8px;
-  }
-
-  .cabecera-nombre {
-    font-size: 16px;
-  }
-
-  .cabecera-titulo {
-    font-size: 15px;
-  }
-
-  .cabecera-magnitudes {
-    gap: 16px;
-  }
-
-  .magnitud {
-    font-size: 9px;
-  }
-
-  .magnitud b {
-    font-size: 20px;
-  }
-
-  .cuerpo {
-    padding: 4px;
-  }
-
-  #contexto {
-    padding: 9px;
-  }
-}
-
-/* ================= PAISAJE ================= */
-
-@media (max-width: 768px) and (orientation: landscape) {
-
-  .cabecera {
-    padding: 5px 9px;
-  }
-
-  .cabecera-nombre {
-    font-size: 14px;
-  }
-
-  .cabecera-titulo {
-    font-size: 14px;
-  }
-
-  .cabecera-magnitudes {
-    gap: 10px;
-  }
-
-  .magnitud b {
-    font-size: 16px;
-  }
-
-  .cuerpo {
-    padding: 4px;
-  }
-}
-
-/* ================= ACCESIBILIDAD ================= */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
-  }
-}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Mapa profesional interactivo de Miguel Otero Cabaleiro. Estabilizador operativo transversal.">
+  <meta name="author" content="Miguel Otero Cabaleiro">
+  <meta name="theme-color" content="#FF9900">
+
+  <meta property="og:title" content="Miguel Otero Cabaleiro | Estabilizador operativo transversal">
+  <meta property="og:description" content="Mapa profesional interactivo de experiencia, aptitudes, sectores y conocimiento.">
+  <meta property="og:type" content="website">
+
+  <title>Miguel Otero Cabaleiro | Estabilizador operativo transversal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Ajustes estructurales mínimos para la nueva navegación móvil.
+       La apariencia principal continúa en styles.css. -->
+  <style>
+    .cabecera-contenido {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .cabecera-izq {
+      min-width: 0;
+      text-align: center;
+    }
+
+    .cabecera-nombre,
+    .cabecera-titulo {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cabecera-titulo {
+      font-size: clamp(24px, 4vw, 40px);
+      line-height: 1.05;
+    }
+
+    .cabecera-subtitulo {
+      display: none !important;
+    }
+
+    .cabecera-magnitudes {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 22px;
+      flex-shrink: 0;
+    }
+
+    .cabecera-magnitudes .magnitud:nth-child(3) {
+      display: none !important;
+    }
+
+    .magnitud {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .magnitud b {
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1;
+    }
+
+    .magnitud span {
+      font-size: clamp(13px, 2vw, 17px);
+    }
+
+    .caja-buscador input {
+      min-height: 54px;
+      height: 54px;
+    }
+
+    .menu-btn {
+      min-height: 58px;
+      height: auto;
+    }
+
+    .zona-arbol {
+      min-width: 0;
+    }
+
+    .contenedor-mapa {
+      min-width: 0;
+      min-height: 0;
+    }
+
+    @media (max-width: 700px) {
+      .cabecera {
+        padding: 13px 10px 12px;
+      }
+
+      .cabecera-contenido {
+        display: block;
+      }
+
+      .cabecera-izq {
+        width: 100%;
+      }
+
+      .cabecera-nombre {
+        font-size: 24px;
+        line-height: 1.15;
+      }
+
+      .cabecera-titulo {
+        font-size: 22px;
+        line-height: 1.12;
+        margin: 3px 0 9px;
+      }
+
+      .cabecera-magnitudes {
+        gap: 20px;
+      }
+
+      .magnitud {
+        justify-content: center;
+      }
+
+      .magnitud b {
+        font-size: 30px;
+      }
+
+      .magnitud span {
+        font-size: 14px;
+      }
+
+      .caja-buscador input {
+        height: 48px;
+        min-height: 48px;
+      }
+
+      .menu-btn {
+        min-height: 50px;
+      }
+
+      /* Contenido: lectura prioritaria; el árbol queda fuera de esta vista. */
+      body.vista-contenido .zona-arbol {
+        display: none !important;
+      }
+
+      body.vista-contenido .lateral {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+      }
+
+      /* Árbol: cuando se selecciona específicamente "Árbol",
+         desaparece la columna de lectura y el mapa usa todo el espacio. */
+      body.vista-arbol .lateral {
+        display: none !important;
+      }
+
+      body.vista-arbol .zona-arbol {
+        display: flex !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        flex: 1 1 auto !important;
+      }
+
+      body.vista-arbol .contenedor-mapa {
+        flex: 1 1 auto !important;
+        min-height: calc(100dvh - 170px);
+        height: calc(100dvh - 170px);
+      }
+
+      body.vista-arbol #mapa {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* En modo árbol, la barra de herramientas sigue accesible
+         sin consumir una cantidad excesiva de pantalla. */
+      body.vista-arbol .barra-herramientas {
+        flex: 0 0 auto;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="app">
+
+  <!-- =========================================================
+       CABECERA — exactamente 3 líneas conceptuales
+       1. Miguel Otero Cabaleiro
+       2. Estabilizador operativo transversal
+       3. +35 años exp       +20 habilidades
+       ========================================================= -->
+  <header class="cabecera">
+    <div class="cabecera-contenido">
+
+      <div class="cabecera-izq">
+        <div class="cabecera-nombre">
+          Miguel Otero Cabaleiro
+        </div>
+
+        <h1 class="cabecera-titulo">
+          Estabilizador operativo transversal
+        </h1>
+
+        <div class="cabecera-subtitulo" aria-hidden="true"></div>
+      </div>
+
+      <div class="cabecera-magnitudes"
+           aria-label="Magnitudes profesionales">
+
+        <div class="magnitud"
+             title="Más de 35 años de experiencia">
+          <b id="m-exp">35+</b>
+          <span>años exp</span>
+        </div>
+
+        <div class="magnitud"
+             title="Más de 20 habilidades profesionales">
+          <b id="m-sec">20+</b>
+          <span>habilidades</span>
+        </div>
+
+        <!-- Se conserva solo como compatibilidad con versiones antiguas;
+             se oculta visualmente. -->
+        <div class="magnitud" aria-hidden="true">
+          <b id="m-emp">30+</b>
+          <span>Entidades</span>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       CUERPO
+       Vista contenido:
+       buscador → menú → información principal.
+       Vista árbol:
+       árbol ocupa todo el espacio disponible.
+       ========================================================= -->
+  <main class="cuerpo">
+
+    <aside class="lateral">
+
+      <!-- BUSCADOR -->
+      <div class="caja-buscador">
+        <label for="buscador" class="sr-only">
+          Buscar en el mapa profesional
+        </label>
+
+        <input
+          type="search"
+          id="buscador"
+          placeholder="🔍 Buscar (ej. camión, IA, DOG...)"
+          autocomplete="off"
+          spellcheck="false"
+          enterkeyhint="search">
+      </div>
+
+      <!-- NAVEGACIÓN PRINCIPAL -->
+      <nav
+        id="menu"
+        aria-label="Navegación profesional">
+      </nav>
+
+      <!-- CONTENIDO PRINCIPAL DE CADA SECCIÓN -->
+      <section
+        id="contexto"
+        aria-live="polite"
+        aria-label="Información profesional">
+
+        <div class="contexto-vacio">
+          Selecciona una categoría o utiliza el buscador.
+        </div>
+
+      </section>
+
+    </aside>
+
+    <!-- =======================================================
+         ÁRBOL
+         No compite con la lectura de las secciones.
+         En móvil queda oculto durante la consulta de contenido.
+         Al pulsar "Árbol", app.js activa .vista-arbol y esta
+         zona pasa a ocupar toda la pantalla disponible.
+         ======================================================= -->
+    <section
+      class="zona-arbol"
+      aria-label="Mapa de conocimiento profesional">
+
+      <div class="barra-herramientas">
+
+        <button
+          type="button"
+          class="btn-herramienta"
+          id="btn-expandir">
+          ▼ Expandir árbol
+        </button>
+
+        <button
+          type="button"
+          class="btn-herramienta"
+          id="btn-contraer">
+          ▲ Contraer árbol
+        </button>
+
+        <button
+          type="button"
+          class="btn-herramienta"
+          id="btn-limpiar">
+          ✕ Restablecer vista
+        </button>
+
+      </div>
+
+      <div class="contenedor-mapa">
+        <svg
+          id="mapa"
+          role="img"
+          aria-label="Árbol interactivo de conocimiento profesional">
+        </svg>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PIE -->
+  <footer class="pie">
+    <span>
+      Plataforma Profesional de Conocimiento ·
+      <b>Miguel Otero Cabaleiro</b>
+    </span>
+    |
+    <span>Torrevieja (Alicante)</span>
+    |
+    <span>
+      Tel:
+      <a href="tel:+34669808392"
+         style="color:inherit;text-decoration:underline;">
+        +34 669 808 392
+      </a>
+    </span>
+    |
+    <span>
+      Email:
+      <a href="mailto:migueloterocabaleiro@gmail.com"
+         style="color:inherit;text-decoration:underline;">
+        migueloterocabaleiro@gmail.com
+      </a>
+    </span>
+    |
+    <span>
+      Respaldo Oficial:
+      <b>DOG nº 155 (18/08/2014)</b>
+    </span>
+  </footer>
+
+</div>
+
+<!-- Markmap -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
