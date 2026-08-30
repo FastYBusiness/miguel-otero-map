@@ -1,7 +1,6 @@
 /* ============================================================
-   styles.css — Sistema de Diseño Responsive
-   Plataforma Profesional de Conocimiento — Miguel Otero Cabaleiro
-   v2 · Optimización móvil + táctil · Sin cambios de contenido
+   styles.css — Plataforma Profesional de Conocimiento
+   v3 · Interfaz compacta · Mobile-first · preparada para navegación
    ============================================================ */
 
 :root {
@@ -18,10 +17,7 @@
 
   --radio: 10px;
   --radio-pequeno: 7px;
-  --sombra: 0 2px 10px rgba(0,0,0,0.07);
-  --sombra-fuerte: 0 4px 18px rgba(0,0,0,0.10);
-
-  /* Área táctil recomendada para controles */
+  --sombra: 0 2px 10px rgba(0,0,0,.07);
   --tactil: 44px;
 }
 
@@ -36,8 +32,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Arial, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background: var(--color-fondo);
   color: var(--color-texto);
   -webkit-font-smoothing: antialiased;
@@ -61,73 +56,82 @@ button {
 .app {
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100dvh;
   min-height: 100vh;
 }
 
 /* ============================================================
-   1. CABECERA
+   CABECERA — compacta, exactamente 3 niveles
    ============================================================ */
 
 .cabecera {
-  background: linear-gradient(
-    135deg,
-    var(--color-primario) 0%,
-    var(--color-secundario) 100%
-  );
-  padding: 16px 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  padding: 10px 18px 11px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
   position: relative;
   z-index: 5;
 }
 
 .cabecera-contenido {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 24px;
   align-items: center;
-  gap: 20px;
 }
 
 .cabecera-izq {
-  flex: 1;
   min-width: 0;
+  display: contents;
 }
 
 .cabecera-nombre {
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 14px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: .25px;
+  text-transform: none;
+  white-space: nowrap;
 }
 
 .cabecera-titulo {
-  font-size: 20px;
-  line-height: 1.2;
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 19px;
+  line-height: 1.12;
   font-weight: 700;
-  margin: 2px 0;
+  margin: 3px 0 0;
   color: var(--color-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cabecera-subtitulo {
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--color-oscuro);
-  font-weight: 500;
+  display: none;
 }
 
 .cabecera-magnitudes {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   display: flex;
+  align-items: center;
   gap: 18px;
   flex-shrink: 0;
 }
 
 .magnitud {
-  min-width: 58px;
+  min-width: 62px;
   text-align: center;
-  font-size: 11px;
+  font-size: 10px;
+  line-height: 1.15;
   font-weight: 600;
   color: var(--color-oscuro);
 }
@@ -135,13 +139,14 @@ button {
 .magnitud b {
   display: block;
   font-size: 18px;
-  line-height: 1.1;
+  line-height: 1;
   font-weight: 700;
   color: var(--color-texto);
+  margin-bottom: 2px;
 }
 
 /* ============================================================
-   2. CUERPO PRINCIPAL
+   CUERPO
    ============================================================ */
 
 .cuerpo {
@@ -154,12 +159,12 @@ button {
 }
 
 /* ============================================================
-   3. BARRA LATERAL
+   PANEL DE NAVEGACIÓN / CONTENIDO
    ============================================================ */
 
 .lateral {
-  width: 240px;
-  min-width: 240px;
+  width: 260px;
+  min-width: 260px;
   background: var(--color-blanco);
   border: 1px solid var(--color-borde);
   border-radius: var(--radio);
@@ -178,54 +183,48 @@ button {
 #buscador {
   width: 100%;
   min-height: var(--tactil);
-  padding: 10px 12px;
+  padding: 9px 11px;
   border: 1px solid var(--color-borde-input);
   border-radius: var(--radio-pequeno);
   font-size: 13px;
-  font-family: inherit;
   background: var(--color-blanco);
   color: var(--color-texto);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 #buscador::placeholder {
   color: var(--color-texto-secundario);
-  opacity: 0.9;
 }
 
 #buscador:focus {
   outline: none;
   border-color: var(--color-primario);
-  box-shadow: 0 0 0 3px rgba(255,153,0,0.18);
+  box-shadow: 0 0 0 3px rgba(255,153,0,.18);
 }
 
 #menu {
-  padding: 10px;
+  padding: 8px;
   border-bottom: 1px solid var(--color-borde);
   overflow-y: auto;
-  max-height: 220px;
-  scrollbar-width: thin;
+  max-height: 260px;
 }
 
 .menu-btn {
   display: block;
   width: 100%;
   min-height: 40px;
-  padding: 8px 10px;
+  padding: 7px 10px;
   margin-bottom: 5px;
   background: #FAFAFA;
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-pequeno);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.15;
+  font-weight: 650;
   color: var(--color-oscuro);
   cursor: pointer;
   text-align: left;
-  transition:
-    border-color 0.15s ease,
-    color 0.15s ease,
-    background 0.15s ease,
-    transform 0.1s ease;
+  transition: border-color .15s ease, color .15s ease, background .15s ease, transform .1s ease;
 }
 
 .menu-btn:hover {
@@ -235,7 +234,7 @@ button {
 }
 
 .menu-btn:active {
-  transform: scale(0.98);
+  transform: scale(.985);
 }
 
 .menu-btn.activo {
@@ -261,11 +260,10 @@ button {
 }
 
 .ctx-titulo {
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.25;
   font-weight: 700;
-  line-height: 1.3;
   margin-bottom: 5px;
-  color: var(--color-texto);
 }
 
 .ctx-desc {
@@ -277,10 +275,11 @@ button {
 
 .ctx-label {
   font-size: 10px;
+  line-height: 1.2;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-texto-secundario);
-  letter-spacing: 0.5px;
+  letter-spacing: .45px;
   margin: 9px 0 3px;
 }
 
@@ -289,13 +288,13 @@ button {
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-pequeno);
   padding: 9px;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   font-size: 11px;
   line-height: 1.45;
 }
 
 /* ============================================================
-   4. ZONA ÁRBOL INTERACTIVO
+   ÁRBOL
    ============================================================ */
 
 .zona-arbol {
@@ -312,30 +311,27 @@ button {
 }
 
 .barra-herramientas {
-  padding: 8px 12px;
+  flex: 0 0 auto;
+  padding: 6px 9px;
   border-bottom: 1px solid var(--color-borde);
   background: #FAFAFA;
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  flex-shrink: 0;
 }
 
 .btn-herramienta {
-  min-height: 36px;
-  padding: 7px 11px;
+  min-height: 38px;
+  padding: 7px 10px;
   background: var(--color-blanco);
   border: 1px solid var(--color-borde-input);
   border-radius: var(--radio-pequeno);
   font-size: 11px;
-  font-weight: 600;
+  line-height: 1;
+  font-weight: 650;
   color: var(--color-oscuro);
   cursor: pointer;
-  transition:
-    border-color 0.15s ease,
-    color 0.15s ease,
-    background 0.15s ease,
-    transform 0.1s ease;
+  transition: border-color .15s ease, color .15s ease, background .15s ease, transform .1s ease;
 }
 
 .btn-herramienta:hover {
@@ -344,12 +340,13 @@ button {
 }
 
 .btn-herramienta:active {
-  transform: scale(0.98);
+  transform: scale(.985);
 }
 
 .btn-herramienta:focus-visible,
-.menu-btn:focus-visible {
-  outline: 3px solid rgba(0,113,133,0.25);
+.menu-btn:focus-visible,
+#buscador:focus-visible {
+  outline: 3px solid rgba(0,113,133,.25);
   outline-offset: 1px;
 }
 
@@ -357,7 +354,7 @@ button {
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  padding: 6px;
+  padding: 4px;
   position: relative;
   touch-action: none;
   overscroll-behavior: contain;
@@ -370,7 +367,7 @@ button {
 }
 
 /* ============================================================
-   5. MARKMAP
+   MARKMAP
    ============================================================ */
 
 .markmap text {
@@ -383,7 +380,7 @@ button {
   stroke: #37475A !important;
   stroke-width: 1.5px !important;
   stroke-linecap: round;
-  opacity: 0.65;
+  opacity: .65;
 }
 
 .markmap circle {
@@ -413,58 +410,70 @@ button {
 }
 
 /* ============================================================
-   6. PIE
+   PIE
    ============================================================ */
 
 .pie {
+  flex: 0 0 auto;
   text-align: center;
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: 10px;
+  line-height: 1.35;
   color: var(--color-texto-secundario);
-  padding: 8px 12px;
+  padding: 6px 10px;
   background: var(--color-blanco);
   border-top: 1px solid var(--color-borde);
-  flex-shrink: 0;
 }
 
 .pie a {
   color: inherit;
   text-decoration: underline;
-  transition: color 0.15s ease;
-}
-
-.pie a:hover {
-  color: var(--color-primario);
 }
 
 /* ============================================================
-   7. TABLET — hasta 1024 px
+   TABLET
    ============================================================ */
 
 @media (max-width: 1024px) {
 
   .cabecera {
-    padding: 13px 16px;
+    padding: 9px 14px;
   }
 
   .cabecera-contenido {
-    gap: 12px;
+    column-gap: 14px;
   }
 
-  .cabecera-subtitulo {
-    display: none;
+  .cabecera-nombre {
+    font-size: 13px;
+  }
+
+  .cabecera-titulo {
+    font-size: 17px;
+  }
+
+  .cabecera-magnitudes {
+    gap: 10px;
+  }
+
+  .magnitud {
+    min-width: 54px;
+    font-size: 9px;
+  }
+
+  .magnitud b {
+    font-size: 16px;
   }
 
   .cuerpo {
     flex-direction: column;
-    gap: 7px;
-    padding: 7px;
+    gap: 6px;
+    padding: 6px;
   }
 
   .lateral {
     width: 100%;
     min-width: 0;
-    max-height: 235px;
+    max-height: none;
     flex-shrink: 0;
     flex-direction: row;
     flex-wrap: wrap;
@@ -472,7 +481,7 @@ button {
 
   .caja-buscador {
     width: 235px;
-    flex-shrink: 0;
+    flex: 0 0 235px;
     border-right: 1px solid var(--color-borde);
     border-bottom: none;
   }
@@ -480,86 +489,91 @@ button {
   #menu {
     flex: 1;
     min-width: 0;
+    max-height: none;
     overflow-x: auto;
     overflow-y: hidden;
     display: flex;
-    gap: 6px;
-    border-right: none;
-    border-bottom: none;
-    max-height: none;
     align-items: center;
-    scrollbar-width: thin;
+    gap: 5px;
+    border-bottom: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   .menu-btn {
     flex: 0 0 auto;
     width: auto;
-    min-width: 100px;
-    min-height: 40px;
+    min-width: 90px;
     margin: 0;
     white-space: nowrap;
   }
 
   #contexto {
     flex-basis: 100%;
-    max-height: 150px;
+    max-height: 180px;
     border-top: 1px solid var(--color-borde);
-    padding: 10px 12px;
   }
 
   .zona-arbol {
     min-height: 300px;
   }
-
-  .pie {
-    padding: 7px 10px;
-  }
 }
 
 /* ============================================================
-   8. MÓVIL — hasta 768 px
+   MÓVIL — 768 px
    ============================================================ */
 
 @media (max-width: 768px) {
 
-  html,
-  body {
-    overflow: hidden;
-  }
-
   .cabecera {
-    padding: 11px 12px;
+    padding: 8px 10px 9px;
   }
 
   .cabecera-contenido {
-    align-items: flex-start;
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
   }
 
+  /* Línea 1 */
   .cabecera-nombre {
-    font-size: 10px;
-    letter-spacing: 0.45px;
+    order: 1;
+    font-size: 13px;
+    line-height: 1.1;
   }
 
+  /* Línea 2 */
   .cabecera-titulo {
-    font-size: clamp(15px, 4.4vw, 19px);
-    line-height: 1.15;
-    margin-top: 3px;
+    order: 2;
+    font-size: clamp(16px, 5vw, 20px);
+    line-height: 1.1;
+    margin: 1px 0 2px;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
   }
 
+  /* Línea 3 */
   .cabecera-magnitudes {
-    gap: 7px;
-    margin-top: 1px;
+    order: 3;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+    margin: 0;
   }
 
   .magnitud {
-    min-width: 45px;
-    font-size: 8px;
-    line-height: 1.15;
+    min-width: auto;
+    font-size: 9px;
+    text-align: left;
   }
 
   .magnitud b {
-    font-size: 15px;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 3px;
+    vertical-align: baseline;
   }
 
   .cuerpo {
@@ -568,83 +582,112 @@ button {
   }
 
   .lateral {
-    max-height: none;
-    flex-direction: column;
     border-radius: 9px;
   }
 
   .caja-buscador {
     width: 100%;
-    padding: 7px;
+    flex-basis: auto;
+    padding: 6px;
     border-right: none;
     border-bottom: 1px solid var(--color-borde);
   }
 
   #buscador {
     min-height: 44px;
-    font-size: 14px;
-    padding: 10px 12px;
+    font-size: 15px;
+    padding: 9px 11px;
   }
 
   #menu {
     width: 100%;
     flex: 0 0 auto;
-    padding: 7px;
+    padding: 6px;
     gap: 5px;
     overflow-x: auto;
     overflow-y: hidden;
-    border-right: none;
     border-bottom: 1px solid var(--color-borde);
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .menu-btn {
-    min-width: max-content;
-    min-height: 42px;
-    padding: 8px 13px;
-    font-size: 11px;
-    border-radius: 8px;
-  }
-
-  #contexto {
+  #menu::-webkit-scrollbar {
     display: none;
   }
 
+  .menu-btn {
+    min-height: 44px;
+    min-width: max-content;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+  }
+
+  /*
+   * El contexto vuelve a ser visible en móvil.
+   * La lógica JS decidirá cuándo debe dominar la pantalla
+   * y cuándo debe mostrarse el árbol.
+   */
+  #contexto {
+    display: block;
+    flex: 1 1 auto;
+    min-height: 180px;
+    max-height: none;
+    padding: 10px;
+    overflow-y: auto;
+    border-top: 0;
+  }
+
+  .ctx-titulo {
+    font-size: 17px;
+  }
+
+  .ctx-desc {
+    font-size: 13px;
+  }
+
+  .item {
+    padding: 10px;
+    font-size: 12px;
+  }
+
   .zona-arbol {
-    min-height: 0;
+    flex: 0 0 34vh;
+    min-height: 190px;
+    max-height: 38vh;
     border-radius: 9px;
   }
 
   .barra-herramientas {
-    padding: 6px 7px;
+    padding: 5px;
     gap: 5px;
     overflow-x: auto;
     flex-wrap: nowrap;
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .barra-herramientas::-webkit-scrollbar {
+    display: none;
   }
 
   .btn-herramienta {
     flex: 0 0 auto;
     min-height: 40px;
-    padding: 8px 11px;
-    font-size: 11px;
+    padding: 8px 10px;
     white-space: nowrap;
   }
 
   .contenedor-mapa {
-    padding: 2px;
+    padding: 1px;
   }
 
   .markmap text {
-    font-size: 10px !important;
+    font-size: 9px !important;
   }
 
   .markmap circle {
     r: 4px;
-  }
-
-  .markmap-node:hover > circle {
-    r: 5px;
   }
 
   .markmap-node.nodo-activo > circle {
@@ -657,38 +700,33 @@ button {
 }
 
 /* ============================================================
-   9. MÓVIL PEQUEÑO — hasta 480 px
+   MÓVIL PEQUEÑO — 480 px
    ============================================================ */
 
 @media (max-width: 480px) {
 
   .cabecera {
-    padding: 9px 10px;
-  }
-
-  .cabecera-contenido {
-    align-items: center;
+    padding: 7px 9px 8px;
   }
 
   .cabecera-nombre {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .cabecera-titulo {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .cabecera-magnitudes {
-    gap: 4px;
+    gap: 17px;
   }
 
   .magnitud {
-    min-width: 39px;
-    font-size: 7px;
+    font-size: 8px;
   }
 
   .magnitud b {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .cuerpo {
@@ -696,36 +734,72 @@ button {
     gap: 4px;
   }
 
-  .menu-btn {
-    min-height: 44px;
-    padding: 8px 12px;
-  }
-
-  .barra-herramientas {
+  #menu {
     padding: 5px;
   }
 
-  .btn-herramienta {
-    min-height: 42px;
+  .menu-btn {
+    min-height: 44px;
+    padding: 8px 11px;
   }
 
-  .markmap text {
-    font-size: 9px !important;
+  #contexto {
+    min-height: 170px;
+    padding: 9px;
+  }
+
+  .zona-arbol {
+    flex-basis: 32vh;
+    min-height: 175px;
+  }
+
+  .btn-herramienta {
+    min-height: 40px;
+    padding: 8px 9px;
   }
 }
 
 /* ============================================================
-   10. PANTALLAS MUY PEQUEÑAS / PAISAJE
+   PAISAJE EN MÓVIL
    ============================================================ */
 
 @media (max-width: 768px) and (orientation: landscape) {
 
   .cabecera {
-    padding: 7px 10px;
+    padding: 5px 9px;
+  }
+
+  .cabecera-contenido {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+  }
+
+  .cabecera-nombre {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .cabecera-titulo {
+    grid-column: 1;
+    grid-row: 2;
     font-size: 15px;
+  }
+
+  .cabecera-magnitudes {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: auto;
+    gap: 8px;
+  }
+
+  .magnitud {
+    font-size: 7px;
+  }
+
+  .magnitud b {
+    font-size: 13px;
   }
 
   .cuerpo {
@@ -739,12 +813,12 @@ button {
 
   .caja-buscador {
     width: 190px;
+    flex: 0 0 190px;
     border-right: 1px solid var(--color-borde);
     border-bottom: none;
   }
 
   #menu {
-    flex: 1;
     border-bottom: none;
   }
 
@@ -753,12 +827,14 @@ button {
   }
 
   .zona-arbol {
+    flex: 1 1 auto;
+    max-height: none;
     min-height: 0;
   }
 }
 
 /* ============================================================
-   11. ACCESIBILIDAD
+   ACCESIBILIDAD
    ============================================================ */
 
 .sr-only {
@@ -768,7 +844,7 @@ button {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
 }
@@ -778,13 +854,13 @@ button {
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
   }
 }
 
 /* ============================================================
-   12. SCROLLBARS
+   SCROLLBARS
    ============================================================ */
 
 * {
