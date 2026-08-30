@@ -1,7 +1,7 @@
 # Plataforma Profesional de Conocimiento
 
 ## Miguel Otero Cabaleiro
-### Estabilizador Operativo de Valor Transversal
+### Estabilizador operativo transversal
 
 ---
 
@@ -9,58 +9,100 @@
 
 Esta plataforma no es un currículum tradicional ni un portafolio estático.
 
-Es la **base de conocimiento interactiva y navegable** que sirve como reflejo digital del **Documento Maestro de Posicionamiento Profesional (CV Extendido en 17 apartados)**. 
+Es una **base de conocimiento profesional interactiva y navegable**, construida como reflejo digital del Documento Maestro de Posicionamiento Profesional.
 
-Está diseñada para representar de forma estructurada, trazable y verificable una trayectoria profesional desarrollada durante más de 35 años en más de 20 sectores productivos, demostrando el despliegue de una única capacidad transversal de estabilización e integración aplicada a contextos diferentes.
+Su objetivo es permitir explorar de forma estructurada una trayectoria profesional de más de **35 años**, desarrollada en más de **20 sectores**, mostrando cómo distintas experiencias, conocimientos y capacidades se relacionan entre sí.
 
-La información está organizada mediante estándares web abiertos para facilitar su exploración fluida por seleccionadores humanos y su procesamiento por futuros sistemas de Inteligencia Artificial (LLMs / RAG).
-
----
-
-## Propuesta de Valor Estratégica
-
-**Integración práctica y directa de personas, procesos, recursos materiales, organización institucional y tecnologías aplicadas para resolver incidencias críticas, aportar continuidad operativa, eliminar fricciones en la cadena de producción y optimizar el rendimiento global de las organizaciones.**
-
-La diversidad de experiencias no representa profesiones independientes, sino una misma capacidad transversal de diagnóstico, resolución e integración adaptada al terreno.
+La plataforma permite consultar la información desde diferentes perspectivas y localizar visualmente sus relaciones dentro de un árbol profesional interactivo.
 
 ---
 
-## Áreas Profesionales de Gestión (RRHH)
+## Propuesta de Valor
 
-La información se vertebra en cinco grandes áreas estratégicas y operativas:
+**Integración práctica de personas, procesos, recursos materiales, organización y tecnología para diagnosticar situaciones, resolver incidencias, reducir fricciones y mantener la continuidad operativa.**
 
-- **Operaciones:** Obra civil, maquinaria pesada (hasta 64T), canteras, logística, transporte rígido (18T) con grúa (10T) y PRL.
-- **Comercial:** Desarrollo de negocio, redes MLM, venta consultiva, prospección y fidelización.
-- **Gestión y Organización:** Presidencia asociativa, interlocución pública, tramitación de subvenciones y expedientes.
-- **Personas:** Liderazgo carismático, mediación de conflictos, docencia reglada (Yoga 580h) y acompañamiento emocional.
-- **Tecnología:** Inteligencia Artificial Generativa (UTAMED 30 ECTS), automatización de procesos, Markdown, HTML5, JSON y Git/GitHub Pages.
-
-Estas áreas se relacionan dinámicamente con sectores, aptitudes, nodos de experiencia, formación y evidencias oficiales.
+La diversidad de experiencias no se presenta como una colección de profesiones independientes, sino como la aplicación de una **capacidad operativa transversal** a contextos diferentes.
 
 ---
 
-## Funcionalidades de la Plataforma
+## Áreas Profesionales
 
-- **Buscador Multicriterio Instantáneo:** Localiza cualquier experiencia, empresa, maquinaria o competencia clave por palabra.
-- **Navegación por Árbol Interactivo (Markmap):** Visualización jerárquica y expandible de toda la base de conocimiento.
-- **Exploración por Sectores (20+):** Filtro directo por ámbitos de aplicación productiva.
-- **Tarjetas de Contexto Enriquecidas:** Clasificación de nodos por tipo (*Experiencia*, *Formación Reglada*, *Capacitación / Licencias* y *Evidencia Registral*).
-- **Acceso a Evidencias Verificables:** Mención y trazabilidad de títulos, publicaciones oficiales (DOG) y habilitaciones DGT.
+La información se organiza en cinco grandes áreas:
 
-### Ejemplos de Búsqueda Directa en la Web
-- `camión` / `grúa`
-- `giratoria 64T` / `cantera`
-- `Mercadona` / `Carrefour`
-- `DOG` / `Diario Oficial de Galicia`
-- `UTAMED` / `IA`
-- `Planthispania` / `Frutas Víctor López`
-- `Yoga` / `El Campello` / `Arasti Barca`
-- `Permiso C` / `PEMP` / `carretillas`
-- `O.D.Í.N.E.` / `Ana GI`
-- `FP2 Mecánica` / `subvenciones`
+- **Operaciones:** obra civil, maquinaria, canteras, logística, transporte, PRL y continuidad operativa.
+- **Comercial:** desarrollo de negocio, venta consultiva, prospección, fidelización y redes comerciales.
+- **Gestión y organización:** coordinación, representación, interlocución pública, asociaciones, subvenciones y expedientes.
+- **Personas:** liderazgo, coordinación de equipos, mediación, docencia y acompañamiento.
+- **Tecnología:** Inteligencia Artificial, automatización, documentación estructurada, HTML, JSON, Markdown y Git/GitHub.
+
+Estas áreas se relacionan con experiencias, formación, capacitación, aptitudes, sectores y evidencias.
 
 ---
 
-## Arquitectura del Proyecto
+## Cómo funciona
 
-El proyecto utiliza una arquitectura *serverless* ligera, limpia y compatible al 100% con **GitHub Pages**.
+### Buscador
+
+El buscador permite localizar rápidamente información relacionada con:
+
+- experiencias profesionales;
+- empresas y entidades;
+- maquinaria;
+- sectores;
+- aptitudes;
+- formación;
+- capacitación;
+- evidencias;
+- tecnologías y herramientas.
+
+Los resultados muestran la información disponible y permiten acceder directamente a su localización dentro del árbol.
+
+---
+
+### Navegación por categorías
+
+La plataforma permite consultar directamente:
+
+- Operaciones
+- Comercial
+- Gestión y organización
+- Personas
+- Tecnología
+- Aptitudes
+- Sectores
+- Conocimiento
+- Árbol
+
+Cada categoría muestra primero la información relevante en formato de lectura.
+
+---
+
+### Localización visual en el árbol
+
+Las referencias profesionales mantienen relaciones estructuradas mediante:
+
+- áreas;
+- aptitudes;
+- sectores.
+
+Al seleccionar **Ver en árbol**, la plataforma utiliza esas relaciones para localizar visualmente la información.
+
+Cuando una referencia pertenece a varias áreas, aptitudes o sectores, pueden mostrarse simultáneamente las relaciones correspondientes.
+
+El árbol evita mantener abiertas innecesariamente ramas ajenas a la información que se está consultando.
+
+---
+
+## Árbol Profesional Interactivo
+
+La visualización utiliza **Markmap** para representar jerárquicamente la estructura profesional.
+
+El árbol parte de cuatro ramas principales:
+
+```text
+Miguel Otero Cabaleiro
+│
+├── Estabilizador operativo transversal
+├── Áreas de Gestión
+├── Aptitudes Transversales
+└── Sectores de Aplicación
